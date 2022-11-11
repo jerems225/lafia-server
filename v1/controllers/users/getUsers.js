@@ -4,11 +4,11 @@ async function getUsers(req,res, next){
     //if true send datas
     const users = [];
 
-    res.json({
+    res.status(200).json({
         status: 200,
         message: "Success",
         data: users
-    })
+    });
 }
 
 module.exports = {
