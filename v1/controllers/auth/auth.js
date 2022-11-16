@@ -1,4 +1,6 @@
 const bcrypt = require('bcrypt');
+const userModel = require('../../models/user-model');
+const { randomString } = require('../businessLogic/registration');
 
 async function generatePassword(plainTextPassword)
 {
@@ -7,8 +9,21 @@ async function generatePassword(plainTextPassword)
     return await bcrypt.hash(plainTextPassword, salt);
 }
 
+async function generateReferalCode(){
+    let referalCode = randomString(6);
+    let existReferalCode = await userModel.findOne({referalCode: referalCode});
+    //generate the new code if is exist
+    while(existReferalCode != null){
+        referalCode = randomString(6)
+        existReferalCode = await userModel.findOne({referalCode: referalCode});
+    }
+
+    return referalCode;
+}
+
 
 module.exports = {
-    generatePassword : generatePassword
+    generatePassword : generatePassword,
+    generateReferalCode : generateReferalCode
 }
   

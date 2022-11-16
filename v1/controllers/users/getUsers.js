@@ -1,4 +1,4 @@
-const userModel = require('../../models/user-models');
+const userModel = require('../../models/user-model');
 
 async function getUsers(req,res, next){
     const uuid = req.uuid;
