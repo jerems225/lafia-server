@@ -1,33 +1,41 @@
 const uuid = require('uuid');
-const { check,validationResult } = require('express-validator');
-
-function userValidator() {
-    const checkName = check('name').not().isEmpty();
-
-    return new Array(checkName);
-}
+const userModel = require('../../models/user-models');
+const { generatePassword } = require('../auth/auth');
 
 async function createUser(req,res,next){
-    validationResult(req);
 
-    const { name } = req.body
+    const { email,password } = req.body
 
     const user = {
-        id: uuid.v4(),
-        name: name
+        email: email,
+        password: await generatePassword(password)
     }
 
     //add data in database
-    //if true send response
+    const data = new userModel(user);
 
-    res.status(201).json({
-        status : 201,
-        message : "user created successfully",
-        data : user
+    data.save((err,result)=>{
+            if(err)
+            {
+                res.status(500).json({
+                    status : 500,
+                    message : "Somethings wrong, try again or check the error message",
+                    data : err.message
+                });
+            }
+            else
+            {
+                res.status(201).json({
+                    status : 201,
+                    message : "user created successfully",
+                    data : result
+                });
+            } 
     });
+
+
 }
 
 module.exports = {
-    createUser : createUser,
-    userValidator : userValidator
+    createUser : createUser
 }
