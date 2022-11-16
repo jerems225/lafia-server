@@ -15,11 +15,10 @@ async function generatePassword(plainTextPassword)
 
 //generate jwt token
 async function generateJWT(user) {
-    console.log(JWT_SECRET_APP)
     return await jwt.sign(JSON.stringify(user), JWT_SECRET_APP);
 }
 
-//verify password and return boolean, ex: true for exact passowrd
+//verify password and return boolean, ex: true for exact password
 async function comparePasswords(plainTextPassword,hash)
 {
     return await bcrypt.compare(plainTextPassword, hash);
