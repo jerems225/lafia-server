@@ -21,6 +21,7 @@ async function createUser(req,res){
             phone: phone,
             roles: roles,
             referalCode: await generateReferalCode(),
+            secretCode: null,
             createdAt: new Date(),
         }
     

@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema(
     {
         email:{
             type:String,
-            required:true
+            required:false
         },
         password:{
             type: String,
@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema(
         },
         phone:{
             type:String,
-            require:true,
+            require:false,
         },
         roles:{
             type:Array,
@@ -21,6 +21,14 @@ const userSchema = new mongoose.Schema(
         referalCode: {
             type:String,
             require:true
+        },
+        verifyCode: {
+            type:Number,
+            require:false
+        },
+        secretCode: {
+            type:Number,
+            require:false
         },
         createdAt:{
             type:Date,
