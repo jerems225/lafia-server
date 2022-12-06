@@ -10,7 +10,7 @@ router.get('/customers',requireAuth,getCustomers); //get all customers
 router.get('/customer/:customer_uuid',requireAuth,getCustomer); //get customer
 router.post('/customer/create', requireAuth,createCustomer); //create new customer
 router.put('/customer/modify/:uuid',requireAuth,updateCustomer); //edit customer
-router.delete('customer/delete/:uuid',requireAuth,deleteCustomer); //remove customer
+router.delete('/customer/delete/:uuid',requireAuth,deleteCustomer); //remove customer
 
 
 module.exports = router;
