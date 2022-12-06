@@ -1,8 +1,14 @@
+async function getOwners(req,res)
+{
+
+}
+
 async function getOwner(req,res)
 {
 
 }
 
 module.exports = {
-    getOwner : getOwner
+    getOwner : getOwner,
+    getOwners : getOwners
 }
