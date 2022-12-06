@@ -1,23 +1,15 @@
 const mongoose = require('mongoose');
 
-const ownerSchema = new mongoose.Schema({
-    lastName:{
+const orderSchema = new mongoose.Schema({
+    libelle:{
         type:String,
         require:true
     },
-    firstName:{
-        type:String,
+    orderNum:{
+        type:Number,
         require:true
     },
-    idCard:{
-        type:String,
-        require:true
-    },
-    referer: {
-        type:String,
-        require:false
-    },
-    userId:{
+    customerId:{
         type:String,
         require:true
     },
@@ -31,4 +23,4 @@ const ownerSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('owners',ownerSchema);
+module.exports = mongoose.model('orders',orderSchema);

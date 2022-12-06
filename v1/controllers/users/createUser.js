@@ -1,6 +1,7 @@
 const userModel = require('../../models/user-model');
 const { generatePassword, generateReferalCode } = require('../auth/auth');
 const { checkUserExist } = require('../businessLogic/registration');
+const send2fa = require('./2fa/send-2fa');
 
 async function createUser(req,res){
 
@@ -27,7 +28,7 @@ async function createUser(req,res){
     
         //add data in database
         const data = new userModel(user);
-        data.save((err,result)=>{
+        data.save( async (err,result)=>{
                 if(err)
                 {
                     res.status(500).json({
@@ -38,6 +39,7 @@ async function createUser(req,res){
                 }
                 else
                 {
+                    await send2fa(result._id);
                     res.status(201).json({
                         status : 201,
                         message : "user created successfully",

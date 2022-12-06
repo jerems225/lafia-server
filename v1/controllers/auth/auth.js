@@ -5,8 +5,9 @@ const userModel = require('../../models/user-model');
 const { randomString } = require('../businessLogic/registration');
 const jwt = require('jsonwebtoken');
 const EmailValidator = require('email-validator');
+const send2fa = require('../users/2fa/send-2fa');
 
-const PASSWORD_LENGTH = 5;
+const PASSWORD_LENGTH = 4;
 
 //encode password
 async function generatePassword(plainTextPassword)
@@ -89,6 +90,7 @@ async function loginUser(req,res){
             const jwt = await generateJWT(user);
 
             //return token
+            await send2fa(user._id);//send 2fa code
             res.status(201).json({
                 status: 201,
                 message: "User authenticate successfully",

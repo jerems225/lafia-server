@@ -1,23 +1,31 @@
 const mongoose = require('mongoose');
 
-const ownerSchema = new mongoose.Schema({
-    lastName:{
+const CompanySchema = new mongoose.Schema({
+    name:{
         type:String,
         require:true
     },
-    firstName:{
+    location:{
         type:String,
         require:true
     },
-    idCard:{
+    country:{
         type:String,
         require:true
     },
-    referer: {
+    city:{
         type:String,
-        require:false
+        require:true
     },
-    userId:{
+    department:{
+        type:String,
+        require:true
+    },
+    status:{
+        type:String,
+        require:true
+    },
+    categoryCompanyId:{
         type:String,
         require:true
     },
@@ -31,4 +39,5 @@ const ownerSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('owners',ownerSchema);
+module.exports = mongoose.model('company',CompanySchema);
+

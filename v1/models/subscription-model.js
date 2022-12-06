@@ -1,23 +1,23 @@
 const mongoose = require('mongoose');
 
-const ownerSchema = new mongoose.Schema({
-    lastName:{
+const SubscriptionSchema = new mongoose.Schema({
+    name:{
         type:String,
         require:true
     },
-    firstName:{
-        type:String,
+    dateExpired:{
+        type:Date,
         require:true
     },
-    idCard:{
-        type:String,
+    amount:{
+        type:Number,
         require:true
     },
-    referer: {
+    customerId: {
         type:String,
         require:false
     },
-    userId:{
+    ownerId:{
         type:String,
         require:true
     },
@@ -31,4 +31,4 @@ const ownerSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('owners',ownerSchema);
+module.exports = mongoose.model('subscriptions',SubscriptionSchema);

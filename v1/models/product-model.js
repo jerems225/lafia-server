@@ -1,23 +1,23 @@
 const mongoose = require('mongoose');
 
-const ownerSchema = new mongoose.Schema({
-    lastName:{
+const productSchema = new mongoose.Schema({
+    name:{
         type:String,
         require:true
     },
-    firstName:{
+    description:{
         type:String,
         require:true
     },
-    idCard:{
+    image:{
         type:String,
         require:true
     },
-    referer: {
+    price: {
         type:String,
         require:false
     },
-    userId:{
+    categoryProductId:{
         type:String,
         require:true
     },
@@ -31,4 +31,4 @@ const ownerSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('owners',ownerSchema);
+module.exports = mongoose.model('products',productSchema);

@@ -1,0 +1,29 @@
+const userModel = require('../../../models/user-model');
+const { generate2FACode } = require('../../businessLogic/2fa');
+const sendMail = require('../../businessLogic/emails/send');
+const sendSms = require('../../businessLogic/sms/send');
+
+async function send2fa(uuid)
+{
+    const user = await userModel.findOne({_id: uuid});
+    if(user)
+    {
+        const doubleFactor_code = generate2FACode(1000,9999);
+        if(user.email)
+        {
+            //send with email
+            const subject = "Your verification Code !";
+            const content = `Your verification code : ${doubleFactor_code}`;
+            // sendMail(user,subject,content);
+        }
+
+        if(user.phone)
+        {
+            const phone = "2250701959933";
+            const content = `Your verification code : ${doubleFactor_code}`;
+            await sendSms(phone,content);
+        }
+    }
+}
+
+module.exports = send2fa;

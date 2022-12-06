@@ -1,25 +1,21 @@
 const mongoose = require('mongoose');
 
-const ownerSchema = new mongoose.Schema({
-    lastName:{
+const AvisSchema = new mongoose.Schema({
+    mark:{
+        type:Number,
+        require:true
+    },
+    comment:{
         type:String,
         require:true
     },
-    firstName:{
+    customerId:{
         type:String,
         require:true
     },
-    idCard:{
-        type:String,
-        require:true
-    },
-    referer: {
+    riderId: {
         type:String,
         require:false
-    },
-    userId:{
-        type:String,
-        require:true
     },
     createdAt:{
         type:Date,
@@ -31,4 +27,4 @@ const ownerSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('owners',ownerSchema);
+module.exports = mongoose.model('avis',AvisSchema);
