@@ -134,6 +134,106 @@
               }
             }
           }
+        },
+        "/user/add/secretcode/{uuid}": {
+          "put": {
+            "tags": [
+              "Register & Authentification"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Modify user secret code",
+            "description": "",
+            "operationId": "userSecretCode",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "uuid",
+                "in": "path",
+                "description": "user uuid need to be add in the url request",
+                "required": true,
+                "type": "string",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "in": "body",
+                "name": "body",
+                "description": "body for you query",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/user-secret-code"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/2fa-verify-response"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/user/verify/secretcode/{uuid}": {
+          "post": {
+            "tags": [
+              "Register & Authentification"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Verify user secret code",
+            "description": "",
+            "operationId": "userVerifySecretCode",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "uuid",
+                "in": "path",
+                "description": "user uuid need to be add in the url request",
+                "required": true,
+                "type": "string",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "in": "body",
+                "name": "body",
+                "description": "body for you query",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/user-secret-code"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/2fa-verify-response"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
         }
     },
 
@@ -291,6 +391,15 @@
           "doubleFactorCode": {
             "type": "integer",
             "example": 1234
+          }
+        }
+      },
+      "user-secret-code": {
+        "type": "object",
+        "properties": {
+          "secret_code": {
+            "type": "integer",
+            "example": 3453
           }
         }
       }
