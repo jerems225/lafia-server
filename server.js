@@ -12,6 +12,9 @@ const mongodburl = `mongodb+srv://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@lafiac
 //routes
 const userRoutes = require('./v1/routes/user-routes');
 const authRoutes = require('./v1/routes/auth-routes');
+const customerRoutes = require('./v1/routes/customer-routes');
+const riderRoutes = require('./v1/routes/rider-routes');
+const ownerRoutes = require('./v1/routes/owner-routes');
 
 const app = express();
 
@@ -47,6 +50,15 @@ app.use('/api/v1/', userRoutes);
 
 //login routes
 app.use('/api/v1/', authRoutes);
+
+//customers routes
+app.use('/api/v1/', customerRoutes);
+
+//rider routes
+app.use('/api/v1/', riderRoutes);
+
+//owner routes
+app.use('/api/v1/', ownerRoutes);
 
 const port = 5000;
 app.listen(port);
