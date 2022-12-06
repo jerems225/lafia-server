@@ -11,7 +11,15 @@
       "http",
       "https"
     ],
-
+    "securityDefinitions": {
+      "BearerAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "scheme":"bearer",
+      "in": "header",
+      "description": "Authentication token"
+    }
+  },
     "paths": {
         "/register": {
             "post": {
@@ -86,7 +94,47 @@
                 }
               }
             }
+          },
+        "/user/2fa/verify": {
+          "post": {
+            "tags": [
+              "Register & Authentification"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "verifiy double factor code for a specific user",
+            "description": "",
+            "operationId": "doublefactor1",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "in": "body",
+                "name": "body",
+                "description": "body for you query",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/2fa-verify"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/2fa-verify-response"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
           }
+        }
     },
 
     "definitions": {
@@ -204,6 +252,45 @@
               },
               "token": "1djnfkjfbjhbjfhbgjhbjhbjbjbh"
             }
+          }
+        }
+      },
+      "2fa-verify-response": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 201
+          },
+          "message":{
+            "type": "string",
+            "example" : "successfully"
+          },
+          "data": {
+            "type" : "object",
+            "example" : {
+              "users": {
+                  "email" : "user@example.com",
+                  "password" : "sbjdhbfjdjfhgvdjhdbiuhrigf",
+                  "phone" : "000000000000",
+                  "roles" : ["ROLE_USER"],
+                  "referalCode" : "dhbdf3",
+                  "createdAt" : "2022-11-16T11:16:04.641Z"
+              }
+            }
+          }
+        }
+      },
+      "2fa-verify": {
+        "type": "object",
+        "properties": {
+          "uuid": {
+            "type": "string",
+            "example": "bdgvjfijhfbjgvfjgh"
+          },
+          "doubleFactorCode": {
+            "type": "integer",
+            "example": 1234
           }
         }
       }
