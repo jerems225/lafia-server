@@ -5,7 +5,7 @@ const send2fa = require('./2fa/send-2fa');
 
 async function createUser(req,res){
 
-    const { email,password, phone, roles} = req.body
+    const { email,password, phone, roles, referrer} = req.body
     const UserExist = await checkUserExist(req.body);
 
     if(UserExist)
@@ -23,6 +23,7 @@ async function createUser(req,res){
             roles: roles,
             referalCode: await generateReferalCode(),
             secretCode: null,
+            referrer: referrer,
             createdAt: new Date(),
         }
     

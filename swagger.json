@@ -308,6 +308,10 @@
           "roles": {
             "type": "array",
             "example": ["ROLE_USER"]
+          },
+          "referrer": {
+            "type": "string",
+            "example": "54FG"
           }
         }
       },
@@ -348,6 +352,7 @@
                   "phone" : "000000000000",
                   "roles" : ["ROLE_USER"],
                   "referalCode" : "dhbdf3",
+                  "referrer": "54FG",
                   "createdAt" : "2022-11-16T11:16:04.641Z"
               },
               "token": "1djnfkjfbjhbjfhbgjhbjhbjbjbh"

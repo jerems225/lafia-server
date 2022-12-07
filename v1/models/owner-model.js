@@ -21,10 +21,6 @@ const ownerSchema = new mongoose.Schema({
         type:String,
         require:false
     },
-    referer: {
-        type:String,
-        require:false
-    },
     status:{
         type:String,
         require:true

@@ -1,0 +1,50 @@
+const userModel = require('../../models/user-model');
+const { validateId } = require('../businessLogic/validObjectId');
+
+async function getUsers(req,res){
+    const users = await userModel.find();
+    res.status(201).json({
+        status: 201,
+        message: "Success",
+        data: users
+    });
+}
+
+async function getUser(req,res)
+{
+    const uuid = req.params.uuid;
+    const validId = validateId(uuid);
+    if(validId)
+    {
+        const user = await userModel.findById(uuid);
+        if(user)
+        {
+            res.status(201).json({
+                status: 201,
+                message: "User found !",
+                data: user
+            });
+        }
+        else
+        {
+            res.status(401).json({
+                status: 401,
+                message: "User not found !",
+                data: null
+            });
+        }
+    }
+    else
+    {
+        res.status(500).json({
+            status: 500,
+            message: "Invalid ID",
+            data: null
+        });
+    }
+}
+
+module.exports = {
+    getUsers : getUsers,
+    getUser : getUser
+}

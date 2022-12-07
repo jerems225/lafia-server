@@ -30,6 +30,10 @@ const userSchema = new mongoose.Schema(
             type:Number,
             require:false
         },
+        referer: {
+            type:String,
+            require:false
+        },
         createdAt:{
             type:Date,
             require:true
