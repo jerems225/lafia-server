@@ -38,7 +38,6 @@ async function send2fa(uuid)
         }
         else
         {
-            console.log(doubleFactorObject)
             await updateUser2Fa(doubleFactorObject);
         }
     }

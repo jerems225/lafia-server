@@ -9,13 +9,25 @@ const ownerSchema = new mongoose.Schema({
         type:String,
         require:true
     },
-    idCard:{
+    address:{
         type:String,
         require:true
+    },
+    idCard:{
+        type:String,
+        require:false
+    },
+    license:{
+        type:String,
+        require:false
     },
     referer: {
         type:String,
         require:false
+    },
+    status:{
+        type:String,
+        require:true
     },
     userId:{
         type:String,

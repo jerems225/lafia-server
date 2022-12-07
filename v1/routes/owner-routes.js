@@ -9,8 +9,8 @@ const router = express.Router();
 router.get('/owners',requireAuth,getOwners); //get all owners
 router.get('/owner/:owner_uuid',requireAuth,getOwner); //get owner
 router.post('/owner/create', requireAuth,createOwner); //create new owner
-router.put('/owner/modify/:uuid',requireAuth,updateCustomer); //edit owner
-router.delete('/owner/delete/:uuid',requireAuth,deleteCustomer); //remove owner
+router.put('/owner/modify/:owner_uuid',requireAuth,updateCustomer); //edit owner
+router.delete('/owner/delete/:owner_uuid',requireAuth,deleteCustomer); //remove owner
 
 
 module.exports = router;

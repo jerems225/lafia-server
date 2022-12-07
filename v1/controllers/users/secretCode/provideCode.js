@@ -39,7 +39,7 @@ async function provideCode(req,res)
                 res.status(201).json({
                     status : 201,
                     message : "User secret code created successfully!",
-                    data : await userModel.findOne({_id: uuid})
+                    data : await userModel.findById(uuid)
                 });
             }
             else

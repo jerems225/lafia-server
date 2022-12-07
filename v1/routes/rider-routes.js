@@ -9,8 +9,8 @@ const router = express.Router();
 router.get('/riders',requireAuth, getRiders); //get all customers
 router.get('/rider/:rider_uuid',requireAuth,getRider) //get rider
 router.post('/rider/create', requireAuth, createRider); //create new customer
-router.put('/rider/modify/:uuid',requireAuth, updateRider); //edit customer
-router.delete('/rider/delete/:uuid',requireAuth,deleteRider); //remove customer
+router.put('/rider/modify/:rider_uuid',requireAuth, updateRider); //edit customer
+router.delete('/rider/delete/:rider_uuid',requireAuth,deleteRider); //remove customer
 
 
 module.exports = router;
