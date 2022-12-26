@@ -531,7 +531,7 @@
             }],
             "summary": "Remove user customer by uuid customer",
             "description": "",
-            "operationId": "getusercustomer",
+            "operationId": "deleteusercustomer",
             "produces": [
               "application/json"
             ],
@@ -642,7 +642,7 @@
             "security": [{
               "BearerAuth" : []
             }],
-            "summary": "Get user customer by uuid owner",
+            "summary": "Get user owner by uuid owner",
             "description": "",
             "operationId": "getuserowner",
             "produces": [
@@ -715,7 +715,7 @@
                 "description": "successful operation",
                 "schema": {
                   "items": {
-                    "$ref": "#/definitions/getusercustomer"
+                    "$ref": "#/definitions/getuserowner"
                   }
                 }
               },
@@ -735,7 +735,7 @@
             }],
             "summary": "Remove user owner by uuid owner",
             "description": "",
-            "operationId": "getusercustomer",
+            "operationId": "deleteuserowner",
             "produces": [
               "application/json"
             ],
@@ -757,6 +757,210 @@
                 "schema": {
                   "items": {
                     "$ref": "#/definitions/deleteuserowner"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/rider/create": {
+          "post": {
+            "tags": [
+              "Riders"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Create new user rider",
+            "description": "",
+            "operationId": "createuserrider",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "in": "body",
+                "name": "body",
+                "description": "body for you query",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/createuserrider"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/getuserrider"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/riders": {
+          "get": {
+            "tags": [
+              "Riders"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Get all users riders",
+            "description": "",
+            "operationId": "allusersriders",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/getusersriders"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/rider/{rider_uuid}": {
+          "get": {
+            "tags": [
+              "Riders"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Get user rider by uuid rider",
+            "description": "",
+            "operationId": "getuserrider",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "rider_uuid",
+                "in": "path",
+                "description": "rider uuid need to be add in the url request",
+                "required": true,
+                "type": "string",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/getuserrider"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/rider/modify/{rider_uuid}": {
+          "put": {
+            "tags": [
+              "Riders"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Modify user owner by uuid riders",
+            "description": "",
+            "operationId": "updateuserrider",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "rider_uuid",
+                "in": "path",
+                "description": "rider uuid need to be add in the url request",
+                "required": true,
+                "type": "string",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "in": "body",
+                "name": "body",
+                "description": "body for you query",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/createuserrider"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/getuserrider"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/rider/delete/{rider_uuid}": {
+          "delete": {
+            "tags": [
+              "Riders"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Remove user rider by uuid rider",
+            "description": "",
+            "operationId": "deleteuserrider",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "rider_uuid",
+                "in": "path",
+                "description": "rider uuid need to be add in the url request",
+                "required": true,
+                "type": "string",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/deleteuserrider"
                   }
                 }
               },
@@ -1064,6 +1268,107 @@
         }
       },
       "deleteuserowner": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": null
+        }
+      },
+      "createuserrider": {
+        "type": "object",
+        "properties": {
+          "firstname": {
+            "type": "string",
+            "example": "Jeremy"
+          },
+          "lastname": {
+            "type": "string",
+            "example": "Niondo"
+          },
+          "address": {
+            "type": "string",
+            "example": "Bamako, rue 23"
+          },
+          "userId": {
+            "type": "string",
+            "example": "dfddkhjbjbfjgfg"
+          }
+        }
+      },
+      "getusersriders": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "type": "array",
+            "example":
+              [              {
+                "_id": "t7457457t5*****",
+                "firstName":"Jeremy",
+                "lastName": "Niondo",
+                "address": "Bamako, Nord-ouest, rue 23",
+                "idCard": "https://file-image-idCard.png",
+                "driverLicense": "https://file-document-license.pdf",
+                "profilImage": "https://file-image-profilImage.png",
+                "cvFile": "https://file-document-cvFile.pdf",
+                "letterFile": "https://file-document-letter.pdf",
+                "status": "pending",
+                "userId": "t7457457t5*****",
+                "createdAt": "2022-11-29T14:32:04.681Z",
+                "updatedAt": "2022-11-29T14:32:04.681Z",
+                "__v": 0
+              }]
+          }
+        }
+      },
+      "getuserrider": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "type": "object",
+            "example":
+              {
+                "_id": "t7457457t5*****",
+                "firstName":"Jeremy",
+                "lastName": "Niondo",
+                "address": "Bamako, Nord-ouest, rue 23",
+                "idCard": "https://file-image-idCard.png",
+                "driverLicense": "https://file-document-license.pdf",
+                "profilImage": "https://file-image-profilImage.png",
+                "cvFile": "https://file-document-cvFile.pdf",
+                "letterFile": "https://file-document-letter.pdf",
+                "status": "pending",
+                "userId": "t7457457t5*****",
+                "createdAt": "2022-11-29T14:32:04.681Z",
+                "updatedAt": "2022-11-29T14:32:04.681Z",
+                "__v": 0
+              }
+          }
+        }
+      },
+      "deleteuserrider": {
         "type": "object",
         "properties": {
           "status": {

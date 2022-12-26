@@ -23,7 +23,7 @@ async function getRider(req,res)
             res.status(201).json({
                 status: 201,
                 message: "Rider found successfully !",
-                data: Rider
+                data: rider
             })
         }
         else
