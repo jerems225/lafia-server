@@ -4,7 +4,7 @@ const { validateId } = require("../businessLogic/validObjectId");
 async function updateRider(req,res)
 {
     const rider_uuid = req.params.rider_uuid;
-    const { lastname, firstname, status, userId} = req.body;
+    const { lastname, firstname, status,  userId} = req.body;
     const validId = validateId(rider_uuid);
     if(validId)
     {
@@ -12,8 +12,8 @@ async function updateRider(req,res)
         if(rider)
         {
             const updateRider = await riderModel.updateOne({_id: rider_uuid, $set: {
-                        lastname : lastname,
-                        fisrtname : firstname,
+                        lastName : lastname,
+                        firstName : firstname,
                         status: status,
                         userId : userId,
                         updatedAt : new Date()

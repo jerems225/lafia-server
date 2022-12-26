@@ -10,6 +10,10 @@ async function deleteRider(req,res)
         const deleteRider = await riderModel.remove({_id: rider_uuid});
         if(deleteRider)
         {
+            const rider = await riderModel.findById(rider_uuid);
+            //remove user
+            await removeUser(rider.userId);
+
             res.status(201).json({
                 status:201,
                 message: "Rider delete successfully !",

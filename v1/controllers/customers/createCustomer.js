@@ -10,8 +10,8 @@ async function createCustomer(req, res) {
         const user = await userModel.findById(userId);
         if (user) {
             const customerObjet = {
-                lastname: lastname,
-                fisrtname: firstname,
+                lastName: lastname,
+                firstName: firstname,
                 address: address,
                 userId: userId,
                 createdAt: new Date()

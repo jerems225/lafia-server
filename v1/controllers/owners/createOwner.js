@@ -12,8 +12,8 @@ async function createOwner(req,res)
         if(user)
         {
             const ownerObjet = {
-                lastname : lastname,
-                fisrtname : firstname,
+                lastName : lastname,
+                firstName : firstname,
                 address : address,
                 status: "pending",
                 userId : userId,

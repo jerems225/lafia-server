@@ -12,8 +12,8 @@ async function updateOwner(req,res)
         if(owner)
         {
             const updateOwner = await ownerModel.updateOne({_id: owner_uuid, $set: {
-                        lastname : lastname,
-                        fisrtname : firstname,
+                        lastName : lastname,
+                        firstName : firstname,
                         address : address,
                         status: status,
                         userId : userId,

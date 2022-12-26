@@ -234,6 +234,333 @@
               }
             }
           }
+        },
+        "/users": {
+          "get": {
+            "tags": [
+              "Users"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Get all users",
+            "description": "",
+            "operationId": "allusers",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/getusers"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/user/{uuid}": {
+          "get": {
+            "tags": [
+              "Users"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Get user by uuid",
+            "description": "",
+            "operationId": "getuser",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "uuid",
+                "in": "path",
+                "description": "user uuid need to be add in the url request",
+                "required": true,
+                "type": "string",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/getuser"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/user/modify/{uuid}": {
+          "put": {
+            "tags": [
+              "Users"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Edit user by uuid",
+            "description": "",
+            "operationId": "updateuser",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "uuid",
+                "in": "path",
+                "description": "user uuid need to be add in the url request",
+                "required": true,
+                "type": "string",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "in": "body",
+                "name": "body",
+                "description": "body for you query",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/updateusers"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/getuser"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/customer/create": {
+          "post": {
+            "tags": [
+              "Customers"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Create new user customers",
+            "description": "",
+            "operationId": "createusercustomer",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "in": "body",
+                "name": "body",
+                "description": "body for you query",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/createusercustomer"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/getusercustomer"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/customers": {
+          "get": {
+            "tags": [
+              "Customers"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Get all users customers",
+            "description": "",
+            "operationId": "alluserscustomers",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/getuserscustomers"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/customer/{customer_uuid}": {
+          "get": {
+            "tags": [
+              "Customers"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Get user customer by uuid customers",
+            "description": "",
+            "operationId": "getusercustomer",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "customer_uuid",
+                "in": "path",
+                "description": "customer uuid need to be add in the url request",
+                "required": true,
+                "type": "string",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/getusercustomer"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/customer/modify/{customer_uuid}": {
+          "put": {
+            "tags": [
+              "Customers"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Modify user customer by uuid customer",
+            "description": "",
+            "operationId": "updateusercustomer",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "customer_uuid",
+                "in": "path",
+                "description": "customer uuid need to be add in the url request",
+                "required": true,
+                "type": "string",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "in": "body",
+                "name": "body",
+                "description": "body for you query",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/createusercustomer"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/getusercustomer"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/customer/delete/{customer_uuid}": {
+          "delete": {
+            "tags": [
+              "Customers"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Remove user customer by uuid customer",
+            "description": "",
+            "operationId": "getusercustomer",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "customer_uuid",
+                "in": "path",
+                "description": "customer uuid need to be add in the url request",
+                "required": true,
+                "type": "string",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/deleteusercustomer"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
         }
     },
 
@@ -252,14 +579,34 @@
           "data": {
             "type": "array",
             "example":
-          [
+            [
               {
-                "id": "djhfbdjbgjf-fghfjhgb-gfg",
-                "name": "User Name"
+                "_id": "t7457457t5*****",
+                "email": "jer*****@gmail.com",
+                "password": "$2b*******",
+                "phone": "070*********",
+                "roles": [
+                  "ROLE_***"
+                ],
+                "referalCode": "***RT",
+                "secretCode": null,
+                "referrer":"445GH",
+                "createdAt": "2022-11-29T14:32:04.681Z",
+                "__v": 0
               },
               {
-                "id": "dfbjdhbfjhbd-dfhdbjg-fgfg",
-                "name": "User Name"
+                "_id": "t7457457t5*****",
+                "email": "jer*****@gmail.com",
+                "password": "$2b*******",
+                "phone": "070*********",
+                "roles": [
+                  "ROLE_***"
+                ],
+                "referalCode": "***RT",
+                "secretCode": null,
+                "referrer":"445GH",
+                "createdAt": "2022-11-29T14:32:04.681Z",
+                "__v": 0
               }
             ]
           }
@@ -277,15 +624,21 @@
             "example": "success"
           },
           "data": {
-            "type": "object",
+            "type": "array",
             "example":
               {
-                "_id": "djhfbdjbgjf-fghfjhgb-gfg",
-                "email": "user@example.com",
-                "password": "sbjdhbfjdjfhgvdjhdbiuhrigf",
-                "phone": "000000000000",
-                "roles": ["ROLE_USER"],
-                "createdAt" :"2022-11-16T11:16:04.641Z"
+                "_id": "t7457457t5*****",
+                "email": "jer*****@gmail.com",
+                "password": "$2b*******",
+                "phone": "070*********",
+                "roles": [
+                  "ROLE_***"
+                ],
+                "referalCode": "***RT",
+                "secretCode": null,
+                "referrer":"445GH",
+                "createdAt": "2022-11-29T14:32:04.681Z",
+                "__v": 0
               }
           }
         }
@@ -313,6 +666,116 @@
             "type": "string",
             "example": "54FG"
           }
+        }
+      },
+      "updateusers": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "email@example.com"
+          },
+          "phone": {
+            "type": "string",
+            "example": "+00 0000 000"
+          },
+          "roles": {
+            "type": "array",
+            "example": ["ROLE_USER"]
+          },
+          "referrer": {
+            "type": "string",
+            "example": "54FG"
+          }
+        }
+      },
+      "createusercustomer": {
+        "type": "object",
+        "properties": {
+          "firstname": {
+            "type": "string",
+            "example": "Jeremy"
+          },
+          "lastname": {
+            "type": "string",
+            "example": "Niondo"
+          },
+          "address": {
+            "type": "string",
+            "example": "Bamako, rue 23"
+          },
+          "userId": {
+            "type": "string",
+            "example": "dfddkhjbjbfjgfg"
+          }
+        }
+      },
+      "getuserscustomers": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "type": "array",
+            "example":
+              [{
+                "_id": "t7457457t5*****",
+                "firstname":"Jeremy",
+                "lastname": "Niondo",
+                "address": "Bamako, Nord-ouest, rue 23",
+                "userId": "t7457457t5*****",
+                "createdAt": "2022-11-29T14:32:04.681Z",
+                "updatedAt": "2022-11-29T14:32:04.681Z",
+                "__v": 0
+              }]
+          }
+        }
+      },
+      "getusercustomer": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "type": "object",
+            "example":
+              {
+                "_id": "t7457457t5*****",
+                "firstname":"Jeremy",
+                "lastname": "Niondo",
+                "address": "Bamako, Nord-ouest, rue 23",
+                "userId": "t7457457t5*****",
+                "createdAt": "2022-11-29T14:32:04.681Z",
+                "updatedAt": "2022-11-29T14:32:04.681Z",
+                "__v": 0
+              }
+          }
+        }
+      },
+      "deleteusercustomer": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": null
         }
       },
       "authuser": {
@@ -380,6 +843,8 @@
                   "phone" : "000000000000",
                   "roles" : ["ROLE_USER"],
                   "referalCode" : "dhbdf3",
+                  "secretCode": null,
+                  "referrer":"445GH",
                   "createdAt" : "2022-11-16T11:16:04.641Z"
               }
             }

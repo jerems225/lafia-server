@@ -1,23 +1,24 @@
 const customerModel = require("../../models/customer-model");
+const removeUser = require("../businessLogic/users/remove-user");
 const { validateId } = require("../businessLogic/validObjectId");
 
-async function deleteCustomer(req,res)
-{
+async function deleteCustomer(req, res) {
     const customer_uuid = req.params.customer_uuid;
     const validId = validateId(customer_uuid);
-    if(validId)
-    {
-        const deleteCustomer = await customerModel.remove({_id: customer_uuid});
-        if(deleteCustomer)
-        {
+    if (validId) {
+        const deleteCustomer = await customerModel.remove({ _id: customer_uuid });
+        if (deleteCustomer) {
+            const customer = await customerModel.findById(customer_uuid);
+            //remove user
+            await removeUser(customer.userId);
+
             res.status(201).json({
-                status:201,
+                status: 201,
                 message: "Customer delete successfully !",
                 data: null
             });
         }
-        else
-        {
+        else {
             res.status(401).json({
                 status: 401,
                 message: "Customer not found !",
@@ -25,8 +26,7 @@ async function deleteCustomer(req,res)
             })
         }
     }
-    else
-    {
+    else {
         res.status(500).json({
             status: 500,
             message: "Invalid ID",
@@ -37,5 +37,5 @@ async function deleteCustomer(req,res)
 }
 
 module.exports = {
-    deleteCustomer : deleteCustomer
+    deleteCustomer: deleteCustomer
 }

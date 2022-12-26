@@ -6,6 +6,7 @@ async function updateUser(req,res)
 {
     const uuid = req.params.uuid;
     const { email, phone, referalCode, secretCode, referrer } = req.body;
+    console.log(req.body)
     const validId = validateId(uuid);
     if(validId)
     {
@@ -18,7 +19,7 @@ async function updateUser(req,res)
                         referalCode: referalCode,
                         secretCode: secretCode,
                         referrer: referrer,
-                        createdAt: new Date(),
+                        updatedAt: new Date(),
                     }}
                 );
             if(updateUser)

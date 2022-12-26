@@ -1,23 +1,23 @@
 const ownerModel = require("../../models/owner-model");
 const { validateId } = require("../businessLogic/validObjectId");
 
-async function deleteOwner(req,res)
-{
+async function deleteOwner(req, res) {
     const owner_uuid = req.params.owner_uuid;
     const validId = validateId(owner_uuid);
-    if(validId)
-    {
-        const deleteOwner = await ownerModel.remove({_id: owner_uuid});
-        if(deleteOwner)
-        {
+    if (validId) {
+        const deleteOwner = await ownerModel.remove({ _id: owner_uuid });
+        if (deleteOwner) {
+            const owner = await ownerModel.findById(owner_uuid);
+            //remove user
+            await removeUser(owner.userId);
+
             res.status(201).json({
-                status:201,
+                status: 201,
                 message: "Owner delete successfully !",
                 data: null
             });
         }
-        else
-        {
+        else {
             res.status(401).json({
                 status: 401,
                 message: "Owner not found !",
@@ -25,8 +25,7 @@ async function deleteOwner(req,res)
             })
         }
     }
-    else
-    {
+    else {
         res.status(500).json({
             status: 500,
             message: "Invalid ID",
@@ -37,5 +36,5 @@ async function deleteOwner(req,res)
 }
 
 module.exports = {
-    deleteOwner : deleteOwner
+    deleteOwner: deleteOwner
 }

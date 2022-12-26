@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema(
             type:Number,
             require:false
         },
-        referer: {
+        referrer: {
             type:String,
             require:false
         },

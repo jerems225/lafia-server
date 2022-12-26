@@ -12,8 +12,8 @@ async function createRider(req,res)
         if(user)
         {
             const riderObjet = {
-                lastname : lastname,
-                fisrtname : firstname,
+                lastName : lastname,
+                firstName : firstname,
                 status: "pending",
                 userId : userId,
                 createdAt : new Date()

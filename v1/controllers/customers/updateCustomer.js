@@ -12,8 +12,8 @@ async function updateCustomer(req,res)
         if(customer)
         {
             const updateCustomer = await customerModel.updateOne({_id: customer_uuid, $set: {
-                        lastname : lastname,
-                        fisrtname : firstname,
+                        lastName : lastname,
+                        firstName : firstname,
                         address : address,
                         userId : userId,
                         updatedAt : new Date()
