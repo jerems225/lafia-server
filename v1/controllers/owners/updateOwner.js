@@ -1,4 +1,4 @@
-const ownerModel = require("../../models/Owner-model");
+const ownerModel = require("../../models/owner-model");
 const { validateId } = require("../businessLogic/validObjectId");
 
 async function updateOwner(req,res)

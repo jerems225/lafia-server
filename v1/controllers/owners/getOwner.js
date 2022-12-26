@@ -3,7 +3,7 @@ const { validateId } = require("../businessLogic/validObjectId");
 
 async function getOwners(req,res)
 {
-    const owner = await customerModel.find();
+    const owner = await ownerModel.find();
     res.status(201).json({
         status: 201,
         message: "Successfull get all owner",
@@ -14,7 +14,8 @@ async function getOwners(req,res)
 async function getOwner(req,res)
 {
     const owner_uuid = req.params.owner_uuid;
-    const validId = validateId(userId);
+    console.log(owner_uuid)
+    const validId = validateId(owner_uuid);
     if(validId)
     {
         const owner = await ownerModel.findById(owner_uuid);

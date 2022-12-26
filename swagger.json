@@ -561,6 +561,210 @@
               }
             }
           }
+        },
+        "/owner/create": {
+          "post": {
+            "tags": [
+              "Owners"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Create new user owner",
+            "description": "",
+            "operationId": "createuserowner",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "in": "body",
+                "name": "body",
+                "description": "body for you query",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/createuserowner"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/getuserowner"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/owners": {
+          "get": {
+            "tags": [
+              "Owners"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Get all users owners",
+            "description": "",
+            "operationId": "allusersowners",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/getusersowners"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/owner/{owner_uuid}": {
+          "get": {
+            "tags": [
+              "Owners"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Get user customer by uuid owner",
+            "description": "",
+            "operationId": "getuserowner",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "owner_uuid",
+                "in": "path",
+                "description": "owner uuid need to be add in the url request",
+                "required": true,
+                "type": "string",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/getuserowner"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/owner/modify/{owner_uuid}": {
+          "put": {
+            "tags": [
+              "Owners"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Modify user owner by uuid owners",
+            "description": "",
+            "operationId": "updateuserowner",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "owner_uuid",
+                "in": "path",
+                "description": "owner uuid need to be add in the url request",
+                "required": true,
+                "type": "string",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "in": "body",
+                "name": "body",
+                "description": "body for you query",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/createuserowner"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/getusercustomer"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/owner/delete/{owner_uuid}": {
+          "delete": {
+            "tags": [
+              "Owners"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Remove user owner by uuid owner",
+            "description": "",
+            "operationId": "getusercustomer",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "owner_uuid",
+                "in": "path",
+                "description": "owner uuid need to be add in the url request",
+                "required": true,
+                "type": "string",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/deleteuserowner"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
         }
     },
 
@@ -765,6 +969,101 @@
         }
       },
       "deleteusercustomer": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": null
+        }
+      },
+      "createuserowner": {
+        "type": "object",
+        "properties": {
+          "firstname": {
+            "type": "string",
+            "example": "Jeremy"
+          },
+          "lastname": {
+            "type": "string",
+            "example": "Niondo"
+          },
+          "address": {
+            "type": "string",
+            "example": "Bamako, rue 23"
+          },
+          "userId": {
+            "type": "string",
+            "example": "dfddkhjbjbfjgfg"
+          }
+        }
+      },
+      "getusersowners": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "type": "array",
+            "example":
+              [{
+                "_id": "t7457457t5*****",
+                "firstName":"Jeremy",
+                "lastName": "Niondo",
+                "address": "Bamako, Nord-ouest, rue 23",
+                "idCard": "https://file-image-idCard.png",
+                "license": "https://file-document-license.pdf",
+                "status": "pending",
+                "userId": "t7457457t5*****",
+                "createdAt": "2022-11-29T14:32:04.681Z",
+                "updatedAt": "2022-11-29T14:32:04.681Z",
+                "__v": 0
+              }]
+          }
+        }
+      },
+      "getuserowner": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "type": "object",
+            "example":
+              {
+                "_id": "t7457457t5*****",
+                "firstName":"Jeremy",
+                "lastName": "Niondo",
+                "address": "Bamako, Nord-ouest, rue 23",
+                "idCard": "https://file-image-idCard.png",
+                "license": "https://file-document-license.pdf",
+                "status": "pending",
+                "userId": "t7457457t5*****",
+                "createdAt": "2022-11-29T14:32:04.681Z",
+                "updatedAt": "2022-11-29T14:32:04.681Z",
+                "__v": 0
+              }
+          }
+        }
+      },
+      "deleteuserowner": {
         "type": "object",
         "properties": {
           "status": {

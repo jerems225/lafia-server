@@ -1,12 +1,10 @@
 const userModel = require("../../models/user-model");
-const { generatePassword } = require("../auth/auth");
 const { validateId } = require("../businessLogic/validObjectId");
 
 async function updateUser(req,res)
 {
     const uuid = req.params.uuid;
     const { email, phone, referalCode, secretCode, referrer } = req.body;
-    console.log(req.body)
     const validId = validateId(uuid);
     if(validId)
     {
