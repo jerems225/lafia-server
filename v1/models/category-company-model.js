@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const companyModel = require('./company-model');
 
 const CategoryCompanySchema = new mongoose.Schema({
     name:{
@@ -13,10 +14,6 @@ const CategoryCompanySchema = new mongoose.Schema({
         type:String,
         require:true
     },
-    ownerId:{
-        type:String,
-        require:true
-    },
     createdAt:{
         type:Date,
         require:true
@@ -26,6 +23,7 @@ const CategoryCompanySchema = new mongoose.Schema({
         require:false
     }
 });
+
 
 module.exports = mongoose.model('categoryCompany',CategoryCompanySchema);
 

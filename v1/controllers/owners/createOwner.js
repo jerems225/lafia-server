@@ -2,9 +2,8 @@ const ownerModel = require("../../models/owner-model");
 const userModel = require("../../models/user-model");
 const { validateId } = require("../businessLogic/validObjectId");
 
-async function createOwner(req,res)
+async function createOwner(userId)
 {
-    const { lastname, firstname, address, userId  } = req.body;
     const validId = validateId(userId);
     if(validId)
     {
@@ -12,9 +11,6 @@ async function createOwner(req,res)
         if(user)
         {
             const ownerObjet = {
-                lastName : lastname,
-                firstName : firstname,
-                address : address,
                 status: "pending",
                 userId : userId,
                 createdAt : new Date()
@@ -22,7 +18,7 @@ async function createOwner(req,res)
             const data = new ownerModel(ownerObjet);
             data.save(async (err,result) => {
                 if(err){
-                    res.status(500).json({
+                    console.log({
                         status: 500,
                         message: "Somethings wrong, try again or check the error message",
                         data: err.message
@@ -30,29 +26,21 @@ async function createOwner(req,res)
                 }
                 else
                 {
-                    res.status(201).json({
-                        status: 201,
-                        message: "owner created successfully !",
-                        data: result
-                    })
+                   console.log('Owner Created succesfully !!')
                 }
             })
         }
         else
         {
-            res.status(401).json({
-                status: 401,
+            console.log({
                 message: "User not found !",
-                data: null
             })
         }
     }
     else
     {
-        res.status(500).json({
-            status: 500,
+        console.log({
             message: "Invalid ID",
-            data: null
         });
     }
 

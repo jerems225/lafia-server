@@ -22,6 +22,7 @@ async function createUser(req,res){
             phone: phone,
             roles: roles,
             referalCode: await generateReferalCode(),
+            roles : roles === null ? ["ROLE_USER"] : roles,
             secretCode: null,
             referrer: referrer,
             createdAt: new Date(),
@@ -46,7 +47,7 @@ async function createUser(req,res){
                         message : "user created successfully",
                         data : result
                     });
-                } 
+                }
         });
     }
 
