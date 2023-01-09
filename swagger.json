@@ -1252,9 +1252,19 @@
             ],
             "parameters": [
               {
-                "name": "company_uuid",
+                "name": "category_uuid",
                 "in": "path",
                 "description": "company uuid need to be add in the url request",
+                "required": true,
+                "type": "string",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "user_uuid",
+                "in": "path",
+                "description": "user uuid need to be add in the url request",
                 "required": true,
                 "type": "string",
                 "items": {
