@@ -14,9 +14,8 @@ async function createCompany(req, res) {
         if (user) {
             const categoryCompany = await categoryCompanyModel.findById(categoryCompanyId);
             if (categoryCompany) {
-                const company = await companyModel.findOne({ name: name})
-                if(!company)
-                {
+                const company = await companyModel.findOne({ name: name })
+                if (!company) {
                     const companyObjet = {
                         name: name,
                         location: location,
@@ -38,9 +37,8 @@ async function createCompany(req, res) {
                             })
                         }
                         else {
-                            const owner = await ownerModel.findOne({userId: userId});
-                            if(!owner)
-                            {
+                            const owner = await ownerModel.findOne({ userId: userId });
+                            if (!owner) {
                                 await createOwner(userId);
                             }
                             res.status(201).json({
@@ -51,8 +49,7 @@ async function createCompany(req, res) {
                         }
                     })
                 }
-                else
-                {
+                else {
                     res.status(401).json({
                         status: 401,
                         message: "Company name already Exist, try to change the name!",

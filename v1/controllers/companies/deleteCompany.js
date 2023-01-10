@@ -6,8 +6,7 @@ async function deleteCompany(req, res) {
     const validId = validateId(company_uuid);
     if (validId) {
         const company = await companyModel.findById(company_uuid);
-        if(company)
-        {
+        if (company) {
             const deleteCompany = await companyModel.deleteOne({ _id: company_uuid });
             if (deleteCompany) {
                 res.status(201).json({
@@ -24,15 +23,14 @@ async function deleteCompany(req, res) {
                 })
             }
         }
-        else
-        {
+        else {
             res.status(401).json({
                 status: 401,
                 message: "Company not found !",
                 data: null
             })
         }
-        
+
     }
     else {
         res.status(500).json({

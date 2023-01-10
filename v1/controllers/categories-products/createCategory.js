@@ -2,20 +2,15 @@ const companyModel = require("../../models/company-model");
 const categoryProductModel = require("../../models/category-product-model");
 const { validateId } = require("../businessLogic/validObjectId")
 
-async function createCategory(req,res)
-{
+async function createCategory(req, res) {
     const { name, description, companyId, userId } = req.body;
     const validId = validateId(companyId);
-    if(validId)
-    {
+    if (validId) {
         const company = await companyModel.findById(companyId);
-        if(company)
-        {
-            if(company.ownerId == userId)
-            {
-                const categoryProduct = await categoryProductModel.findOne({ name : name });
-                if(!categoryProduct)
-                {
+        if (company) {
+            if (company.ownerId == userId) {
+                const categoryProduct = await categoryProductModel.findOne({ name: name });
+                if (!categoryProduct) {
                     const categoryObjet = {
                         name: name,
                         description: description,
@@ -40,8 +35,7 @@ async function createCategory(req,res)
                         }
                     })
                 }
-                else
-                {
+                else {
                     res.status(401).json({
                         status: 401,
                         message: "This category product is already exist, try to change the name !",
@@ -49,18 +43,16 @@ async function createCategory(req,res)
                     });
                 }
             }
-            else
-            {
+            else {
                 res.status(401).json({
                     status: 401,
                     message: "This user is not allow to perform this endpoint, you needs to be the owner of this company",
                     data: null
                 });
             }
-            
+
         }
-        else
-        {
+        else {
             res.status(401).json({
                 status: 401,
                 message: "Company not found !",
@@ -68,8 +60,7 @@ async function createCategory(req,res)
             });
         }
     }
-    else
-    {
+    else {
         res.status(500).json({
             status: 500,
             message: "Invalid ID",
@@ -79,5 +70,5 @@ async function createCategory(req,res)
 }
 
 module.exports = {
-    createCategory : createCategory
+    createCategory: createCategory
 }

@@ -8,10 +8,8 @@ async function createCategory(req, res) {
     const validId = validateId(userId);
     if (validId) {
         const user = await userModel.findById(userId);
-        if(user)
-        {
-            if(user.roles[0] === "ROLE_ADMIN" || user.roles[0] === "ROLE_SUPERADMIN")
-            {
+        if (user) {
+            if (user.roles[0] === "ROLE_ADMIN" || user.roles[0] === "ROLE_SUPERADMIN") {
                 const categoryCompany = await categoryCompanyModel.findOne({ name: name });
                 if (!categoryCompany) {
                     const categoryObjet = {
@@ -45,18 +43,16 @@ async function createCategory(req, res) {
                     })
                 }
             }
-            else
-            {
+            else {
                 res.status(401).json({
                     status: 401,
                     message: "User not authorized to perform this endpoint.",
                     data: null
                 })
             }
-            
+
         }
-        else
-        {
+        else {
             res.status(401).json({
                 status: 401,
                 message: "User not found!",

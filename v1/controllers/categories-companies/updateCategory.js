@@ -9,10 +9,8 @@ async function updateCategory(req, res) {
     const validId = validateId(category_uuid);
     if (validId) {
         const user = await userModel.findById(userId);
-        if(user)
-        {
-            if(user.roles[0] === "ROLE_ADMIN" || user.roles[0] === "ROLE_SUPERADMIN")
-            {
+        if (user) {
+            if (user.roles[0] === "ROLE_ADMIN" || user.roles[0] === "ROLE_SUPERADMIN") {
                 const categoryCompany = await categoryCompanyModel.findById(category_uuid);
                 if (categoryCompany) {
                     const updateCategory = await categoryCompanyModel.updateOne({
@@ -20,8 +18,8 @@ async function updateCategory(req, res) {
                             name: name,
                             description: description,
                             updatedAt: new Date(),
-                            }
                         }
+                    }
                     );
                     if (updateCategory) {
                         res.status(201).json({
@@ -46,8 +44,7 @@ async function updateCategory(req, res) {
                     })
                 }
             }
-            else
-            {
+            else {
                 res.status(401).json({
                     status: 401,
                     message: "User not authorized to perform this endpoint.",
@@ -55,8 +52,7 @@ async function updateCategory(req, res) {
                 })
             }
         }
-        else
-        {
+        else {
             res.status(401).json({
                 status: 401,
                 message: "User not found!",

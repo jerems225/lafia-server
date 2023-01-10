@@ -7,23 +7,19 @@ const swaggerDocument = require('./swagger.json');
 const mongoose = require('mongoose');
 let mongodburl = "";
 
-if(MONGODB_ENV == "dev")
-{
+if (MONGODB_ENV == "dev") {
     mongodburl = LOCAL_CONNECTION_STRING;
 }
-else if(MONGODB_ENV == "prod")
-{
+else if (MONGODB_ENV == "prod") {
     mongodburl = PROD_CONNECTION_STRING;
 }
 
 // connect database
-mongoose.connect(mongodburl,{useNewUrlParser:true},(err)=>{
-    if(err)
-    {
-        console.log('db connection failed...',err);
+mongoose.connect(mongodburl, { useNewUrlParser: true }, (err) => {
+    if (err) {
+        console.log('db connection failed...', err);
     }
-    else
-    {
+    else {
         console.log('db connection success...');
     }
 });
@@ -37,6 +33,9 @@ const riderRoutes = require('./v1/routes/rider-routes');
 const ownerRoutes = require('./v1/routes/owner-routes');
 const companyRoutes = require('./v1/routes/company-routes');
 const categoryCompanyRoutes = require('./v1/routes/category-company-routes');
+const categoryProductRoutes = require('./v1/routes/category-product-routes');
+const productRoutes = require('./v1/routes/product-routes');
+
 
 const app = express();
 
@@ -45,12 +44,12 @@ app.use(bodyParser.json());
 
 
 //register error logic
-app.use((error,req,res,next) => {
-    if(res.headerSent){
+app.use((error, req, res, next) => {
+    if (res.headerSent) {
         return next(error);
     }
     res.status(error.code || 500).json({
-        message : error.message || 'An unknown error occurred!'
+        message: error.message || 'An unknown error occurred!'
     })
 })
 //register documentation endpoint
@@ -74,8 +73,14 @@ app.use('/api/v1/', ownerRoutes);
 //company routes
 app.use('/api/v1/', companyRoutes);
 
-//company routes
+//category company routes
 app.use('/api/v1/', categoryCompanyRoutes);
+
+//category product routes
+app.use('/api/v1/', categoryProductRoutes);
+
+//product routes
+app.use('/api/v1/', productRoutes);
 
 const port = 5000;
 app.listen(port);

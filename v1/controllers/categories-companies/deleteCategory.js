@@ -8,11 +8,9 @@ async function deleteCategory(req, res) {
     const validId = validateId(category_uuid);
     if (validId) {
         const category = await companyModel.findById(category_uuid);
-        if(category)
-        {
+        if (category) {
             const user = await userModel.findById(user_uuid);
-            if(user && user.roles[0] == "ROLE_ADMIN" || user.roles[0] == "ROLE_SUPERADMIN")
-            {
+            if (user && user.roles[0] == "ROLE_ADMIN" || user.roles[0] == "ROLE_SUPERADMIN") {
                 const deleteCategoryCompany = await categoryCompanyModel.deleteOne({ _id: category_uuid });
                 if (deleteCategoryCompany) {
                     res.status(201).json({
@@ -29,24 +27,22 @@ async function deleteCategory(req, res) {
                     })
                 }
             }
-            else
-            {
+            else {
                 res.status(401).json({
                     status: 401,
-                    message: "This cannot perform this endpoint!",
+                    message: "This user cannot perform this endpoint!",
                     data: null
                 })
             }
         }
-        else
-        {
+        else {
             res.status(401).json({
                 status: 401,
                 message: "Category Company not found !",
                 data: null
             })
         }
-        
+
     }
     else {
         res.status(500).json({

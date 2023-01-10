@@ -6,11 +6,11 @@ const { updateComapny } = require('../controllers/companies/updateCompany');
 const { deleteCompany } = require('../controllers/companies/deleteCompany');
 const router = express.Router();
 
-router.get('/companies',requireAuth,getCompanies); //get all companies
-router.get('/company/:company_uuid',requireAuth,getCompany); //get company
-router.post('/company/create', requireAuth,createCompany); //create new company
-router.put('/company/modify/:company_uuid',requireAuth,updateComapny); //edit company
-router.delete('/company/delete/:company_uuid',requireAuth,deleteCompany); //remove company
+router.get('/companies', requireAuth, getCompanies); //get all companies
+router.get('/company/:company_uuid', requireAuth, getCompany); //get company
+router.post('/company/create', requireAuth, createCompany); //create new company
+router.put('/company/modify/:company_uuid', requireAuth, updateComapny); //edit company
+router.delete('/company/delete/:company_uuid', requireAuth, deleteCompany); //remove company
 
 
 module.exports = router;

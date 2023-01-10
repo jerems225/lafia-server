@@ -2,8 +2,7 @@ const categoryCompanyModel = require("../../models/category-company-model");
 const companyModel = require("../../models/company-model");
 const { validateId } = require("../businessLogic/validObjectId");
 
-async function getCategories(req,res)
-{
+async function getCategories(req, res) {
     const categories = await categoryCompanyModel.find();
     res.status(201).json({
         status: 201,
@@ -12,28 +11,24 @@ async function getCategories(req,res)
     });
 }
 
-async function getCategory(req,res)
-{
+async function getCategory(req, res) {
     const category_uuid = req.params.category_uuid;
     console.log(category_uuid)
     const validId = validateId(category_uuid);
-    if (validId)
-    {
+    if (validId) {
         const category = await categoryCompanyModel.findById(category_uuid);
-        if(category)
-        {
-            const companies = await companyModel.find({categoryCompanyId : category_uuid});
+        if (category) {
+            const companies = await companyModel.find({ categoryCompanyId: category_uuid });
             res.status(201).json({
                 status: 201,
                 message: "Category found successfully !",
                 data: {
-                    category : category,
-                    companies : companies
+                    category: category,
+                    companies: companies
                 }
             });
         }
-        else
-        {
+        else {
             res.status(401).json({
                 status: 401,
                 message: "Category not found !",
@@ -41,8 +36,7 @@ async function getCategory(req,res)
             });
         }
     }
-    else
-    {
+    else {
         res.status(500).json({
             status: 500,
             message: "Invalid ID",
@@ -52,6 +46,6 @@ async function getCategory(req,res)
 }
 
 module.exports = {
-    getCategories : getCategories,
-    getCategory : getCategory
+    getCategories: getCategories,
+    getCategory: getCategory
 }

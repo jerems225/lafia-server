@@ -5,49 +5,41 @@ const sendMail = require('../../businessLogic/emails/send');
 const sendSms = require('../../businessLogic/sms/send');
 const { validateId } = require('../../businessLogic/validObjectId');
 
-async function send2fa(uuid)
-{
+async function send2fa(uuid) {
     const validId = validateId(uuid);
-    if(validId)
-    {
-        const user = await userModel.findOne({_id: uuid});
-        if(user)
-        {
-            const doubleFactor_code = generate2FACode(1000,9999);
-            if(user.email)
-            {
+    if (validId) {
+        const user = await userModel.findOne({ _id: uuid });
+        if (user) {
+            const doubleFactor_code = generate2FACode(1000, 9999);
+            if (user.email) {
                 //send with email
                 const subject = "Your verification Code !";
                 const content = `Your verification code : ${doubleFactor_code}`;
-                sendMail(user,subject,content);
+                sendMail(user, subject, content);
             }
-    
-            if(user.phone)
-            {
+
+            if (user.phone) {
                 const phone = "2250701959933";
                 const content = `Your verification code : ${doubleFactor_code}`;
                 //await sendSms(phone,content);
             }
-    
-            const user2fa = await doubleFactorModel.findOne({userId: uuid});
+
+            const user2fa = await doubleFactorModel.findOne({ userId: uuid });
             const doubleFactorObject = {
                 doubleFactorCode: doubleFactor_code,
                 dateExpired: new Date(),
                 userId: uuid,
                 createdAt: new Date()
             }
-            if(!user2fa)
-            {
+            if (!user2fa) {
                 await saveUser2Fa(doubleFactorObject);
             }
-            else
-            {
+            else {
                 await updateUser2Fa(doubleFactorObject);
             }
         }
     }
-    else
-    {
+    else {
         res.status(500).json({
             status: 500,
             message: "Invalid ID",
