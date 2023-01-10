@@ -1,9 +1,9 @@
 const ownerModel = require("../../models/owner-model");
+const userModel = require("../../models/user-model");
 const { validateId } = require("../businessLogic/validObjectId");
 
-async function getOwners(req,res)
-{
-    const owner = await customerModel.find();
+async function getOwners(req, res) {
+    const owner = await ownerModel.find();
     res.status(201).json({
         status: 201,
         message: "Successfull get all owner",
@@ -11,32 +11,31 @@ async function getOwners(req,res)
     });
 }
 
-async function getOwner(req,res)
-{
-    const owner_uuid = req.params.owner_uuid;
-    const validId = validateId(userId);
-    if(validId)
-    {
-        const owner = await ownerModel.findById(owner_uuid);
-        if(owner)
-        {
+async function getOwner(req, res) {
+    const user_uuid = req.params.user_uuid;
+    const validId = validateId(user_uuid);
+    if (validId) {
+        const owner = await ownerModel.findOne({ userId: user_uuid });
+        if (owner) {
+            const user = await userModel.findById(owner.userId);
             res.status(201).json({
                 status: 201,
                 message: "Owner found successfully !",
-                data: owner
+                data: {
+                    owner: owner,
+                    user: user
+                }
             })
         }
-        else
-        {
+        else {
             res.status(401).json({
                 status: 401,
-                message: "Owner not found !",
+                message: "This user is not a Owner!",
                 data: null
             })
         }
     }
-    else
-    {
+    else {
         res.status(500).json({
             status: 500,
             message: "Invalid ID",
@@ -47,6 +46,6 @@ async function getOwner(req,res)
 }
 
 module.exports = {
-    getOwners : getOwners,
-    getOwner : getOwner
+    getOwners: getOwners,
+    getOwner: getOwner
 }

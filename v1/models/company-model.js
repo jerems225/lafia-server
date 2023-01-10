@@ -25,6 +25,10 @@ const CompanySchema = new mongoose.Schema({
         type:String,
         require:true
     },
+    ownerId:{
+        type:String,
+        require:true
+    },
     categoryCompanyId:{
         type:String,
         require:true

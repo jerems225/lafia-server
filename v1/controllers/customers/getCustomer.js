@@ -1,8 +1,7 @@
 const customerModel = require("../../models/customer-model");
 const { validateId } = require("../businessLogic/validObjectId");
 
-async function getCustomers(req,res)
-{
+async function getCustomers(req, res) {
     const customers = await customerModel.find();
     res.status(201).json({
         status: 201,
@@ -11,23 +10,19 @@ async function getCustomers(req,res)
     });
 }
 
-async function getCustomer(req,res)
-{
+async function getCustomer(req, res) {
     const customer_uuid = req.params.customer_uuid;
     const validId = validateId(customer_uuid);
-    if (validId)
-    {
+    if (validId) {
         const customer = await customerModel.findById(customer_uuid);
-        if(customer)
-        {
+        if (customer) {
             res.status(201).json({
                 status: 201,
                 message: "Customer found successfully !",
                 data: customer
             });
         }
-        else
-        {
+        else {
             res.status(401).json({
                 status: 401,
                 message: "Customer not found !",
@@ -35,8 +30,7 @@ async function getCustomer(req,res)
             });
         }
     }
-    else
-    {
+    else {
         res.status(500).json({
             status: 500,
             message: "Invalid ID",
@@ -47,6 +41,6 @@ async function getCustomer(req,res)
 }
 
 module.exports = {
-    getCustomer : getCustomer,
-    getCustomers : getCustomers
+    getCustomer: getCustomer,
+    getCustomers: getCustomers
 }

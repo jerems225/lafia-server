@@ -41,8 +41,7 @@ async function createCustomer(req, res) {
                 data: null
             })
         }
-    }else
-    {
+    } else {
         res.status(500).json({
             status: 500,
             message: "Invalid ID",

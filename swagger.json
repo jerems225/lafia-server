@@ -531,7 +531,7 @@
             }],
             "summary": "Remove user customer by uuid customer",
             "description": "",
-            "operationId": "getusercustomer",
+            "operationId": "deleteusercustomer",
             "produces": [
               "application/json"
             ],
@@ -553,6 +553,731 @@
                 "schema": {
                   "items": {
                     "$ref": "#/definitions/deleteusercustomer"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/owners": {
+          "get": {
+            "tags": [
+              "Owners"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Get all users owners",
+            "description": "",
+            "operationId": "allusersowners",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/getusersowners"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/owner/{user_uuid}": {
+          "get": {
+            "tags": [
+              "Owners"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Get user owner by uuid owner",
+            "description": "",
+            "operationId": "getuserowner",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "user_uuid",
+                "in": "path",
+                "description": "owner uuid need to be add in the url request",
+                "required": true,
+                "type": "string",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/getuserowner"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/owner/modify/{user_uuid}": {
+          "put": {
+            "tags": [
+              "Owners"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Modify user owner by uuid owners",
+            "description": "",
+            "operationId": "updateuserowner",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "user_uuid",
+                "in": "path",
+                "description": "owner uuid need to be add in the url request",
+                "required": true,
+                "type": "string",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "in": "body",
+                "name": "body",
+                "description": "body for you query",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/updateuserowner"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/getuserowner"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/rider/create": {
+          "post": {
+            "tags": [
+              "Riders"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Create new user rider",
+            "description": "",
+            "operationId": "createuserrider",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "in": "body",
+                "name": "body",
+                "description": "body for you query",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/createuserrider"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/getuserrider"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/riders": {
+          "get": {
+            "tags": [
+              "Riders"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Get all users riders",
+            "description": "",
+            "operationId": "allusersriders",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/getusersriders"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/rider/{rider_uuid}": {
+          "get": {
+            "tags": [
+              "Riders"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Get user rider by uuid rider",
+            "description": "",
+            "operationId": "getuserrider",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "rider_uuid",
+                "in": "path",
+                "description": "rider uuid need to be add in the url request",
+                "required": true,
+                "type": "string",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/getuserrider"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/rider/modify/{rider_uuid}": {
+          "put": {
+            "tags": [
+              "Riders"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Modify user owner by uuid riders",
+            "description": "",
+            "operationId": "updateuserrider",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "rider_uuid",
+                "in": "path",
+                "description": "rider uuid need to be add in the url request",
+                "required": true,
+                "type": "string",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "in": "body",
+                "name": "body",
+                "description": "body for you query",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/updateuserrider"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/getuserrider"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/rider/delete/{rider_uuid}": {
+          "delete": {
+            "tags": [
+              "Riders"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Remove user rider by uuid rider",
+            "description": "",
+            "operationId": "deleteuserrider",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "rider_uuid",
+                "in": "path",
+                "description": "rider uuid need to be add in the url request",
+                "required": true,
+                "type": "string",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/deleteuserrider"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/company/create": {
+          "post": {
+            "tags": [
+              "Companies"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Create new company",
+            "description": "",
+            "operationId": "createcompany",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "in": "body",
+                "name": "body",
+                "description": "body for you query",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/createcompany"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/getcompany"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/companies": {
+          "get": {
+            "tags": [
+              "Companies"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Get all companies",
+            "description": "",
+            "operationId": "allcoma=oany",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/getcompanies"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/company/{company_uuid}": {
+          "get": {
+            "tags": [
+              "Companies"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Get company by uuid",
+            "description": "",
+            "operationId": "getcompany",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "company_uuid",
+                "in": "path",
+                "description": "rider uuid need to be add in the url request",
+                "required": true,
+                "type": "string",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/getcompany"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/company/modify/{company_uuid}": {
+          "put": {
+            "tags": [
+              "Companies"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Update company",
+            "description": "",
+            "operationId": "updatecompany",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "in": "body",
+                "name": "body",
+                "description": "body for you query",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/updatecompany"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/getcompany"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/company/delete/{company_uuid}": {
+          "delete": {
+            "tags": [
+              "Companies"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Remove company by uuid",
+            "description": "",
+            "operationId": "deletecompany",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "company_uuid",
+                "in": "path",
+                "description": "company uuid need to be add in the url request",
+                "required": true,
+                "type": "string",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/deletecompany"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/category-company/create": {
+          "post": {
+            "tags": [
+              "Categories Companies"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Create new company",
+            "description": "",
+            "operationId": "createcategorycompany",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "in": "body",
+                "name": "body",
+                "description": "body for you query",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/createcategorycompany"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/getcompany"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/categories-companies": {
+          "get": {
+            "tags": [
+              "Categories Companies"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Get all companies",
+            "description": "",
+            "operationId": "allcompanycategory",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/getcategoriescompanies"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/category-company/{category_uuid}": {
+          "get": {
+            "tags": [
+              "Categories Companies"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Get company by uuid",
+            "description": "",
+            "operationId": "getcategorycompany",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "category_uuid",
+                "in": "path",
+                "description": "rider uuid need to be add in the url request",
+                "required": true,
+                "type": "string",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/getcategorycompany"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/category-company/modify/{category_uuid}": {
+          "put": {
+            "tags": [
+              "Categories Companies"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Update company",
+            "description": "",
+            "operationId": "updatecompany",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "in": "body",
+                "name": "body",
+                "description": "body for you query",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/updatecompany"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/getcompany"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/category-company/delete/{category_uuid}": {
+          "delete": {
+            "tags": [
+              "Categories Companies"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Remove company by uuid",
+            "description": "",
+            "operationId": "deletecompany",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "category_uuid",
+                "in": "path",
+                "description": "company uuid need to be add in the url request",
+                "required": true,
+                "type": "string",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "user_uuid",
+                "in": "path",
+                "description": "user uuid need to be add in the url request",
+                "required": true,
+                "type": "string",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/deletecompany"
                   }
                 }
               },
@@ -776,6 +1501,431 @@
             "example": "success"
           },
           "data": null
+        }
+      },
+      "updateuserowner": {
+        "type": "object",
+        "properties": {
+          "firstname": {
+            "type": "string",
+            "example": "Jeremy"
+          },
+          "lastname": {
+            "type": "string",
+            "example": "Niondo"
+          },
+          "address": {
+            "type": "string",
+            "example": "Bamako, rue 23"
+          }
+        }
+      },
+      "getusersowners": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "type": "array",
+            "example":
+              [{
+                "_id": "t7457457t5*****",
+                "firstName":"Jeremy",
+                "lastName": "Niondo",
+                "address": "Bamako, Nord-ouest, rue 23",
+                "idCard": "https://file-image-idCard.png",
+                "license": "https://file-document-license.pdf",
+                "status": "pending",
+                "userId": "t7457457t5*****",
+                "createdAt": "2022-11-29T14:32:04.681Z",
+                "updatedAt": "2022-11-29T14:32:04.681Z",
+                "__v": 0
+              }]
+          }
+        }
+      },
+      "getuserowner": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "type": "object",
+            "example":
+              {
+                "_id": "t7457457t5*****",
+                "firstName":"Jeremy",
+                "lastName": "Niondo",
+                "address": "Bamako, Nord-ouest, rue 23",
+                "idCard": "https://file-image-idCard.png",
+                "license": "https://file-document-license.pdf",
+                "status": "pending",
+                "userId": "t7457457t5*****",
+                "createdAt": "2022-11-29T14:32:04.681Z",
+                "updatedAt": "2022-11-29T14:32:04.681Z",
+                "__v": 0
+              }
+          }
+        }
+      },
+      "createuserrider": {
+        "type": "object",
+        "properties": {
+          "firstname": {
+            "type": "string",
+            "example": "Jeremy"
+          },
+          "lastname": {
+            "type": "string",
+            "example": "Niondo"
+          },
+          "address": {
+            "type": "string",
+            "example": "Bamako, rue 23"
+          },
+          "userId": {
+            "type": "string",
+            "example": "dfddkhjbjbfjgfg"
+          }
+        }
+      },
+      "updateuserrider": {
+        "type": "object",
+        "properties": {
+          "firstname": {
+            "type": "string",
+            "example": "Jeremy"
+          },
+          "lastname": {
+            "type": "string",
+            "example": "Niondo"
+          },
+          "status": {
+            "type": "string",
+            "example": "canceled or accepted"
+          },
+          "userId": {
+            "type": "string",
+            "example": "dfddkhjbjbfjgfg"
+          }
+        }
+      },
+      "getusersriders": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "type": "array",
+            "example":
+              [              {
+                "_id": "t7457457t5*****",
+                "firstName":"Jeremy",
+                "lastName": "Niondo",
+                "address": "Bamako, Nord-ouest, rue 23",
+                "idCard": "https://file-image-idCard.png",
+                "driverLicense": "https://file-document-license.pdf",
+                "profilImage": "https://file-image-profilImage.png",
+                "cvFile": "https://file-document-cvFile.pdf",
+                "letterFile": "https://file-document-letter.pdf",
+                "status": "pending",
+                "userId": "t7457457t5*****",
+                "createdAt": "2022-11-29T14:32:04.681Z",
+                "updatedAt": "2022-11-29T14:32:04.681Z",
+                "__v": 0
+              }]
+          }
+        }
+      },
+      "getuserrider": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "type": "object",
+            "example":
+              {
+                "_id": "t7457457t5*****",
+                "firstName":"Jeremy",
+                "lastName": "Niondo",
+                "address": "Bamako, Nord-ouest, rue 23",
+                "idCard": "https://file-image-idCard.png",
+                "driverLicense": "https://file-document-license.pdf",
+                "profilImage": "https://file-image-profilImage.png",
+                "cvFile": "https://file-document-cvFile.pdf",
+                "letterFile": "https://file-document-letter.pdf",
+                "status": "pending",
+                "userId": "t7457457t5*****",
+                "createdAt": "2022-11-29T14:32:04.681Z",
+                "updatedAt": "2022-11-29T14:32:04.681Z",
+                "__v": 0
+              }
+          }
+        }
+      },
+      "deleteuserrider": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": null
+        }
+      },
+      "createcompany": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Lafia boutik"
+          },
+          "location": {
+            "type": "string",
+            "example": "Bamako, rue 22"
+          },
+          "country": {
+            "type": "string",
+            "example": "Mali"
+          },
+          "city": {
+            "type": "string",
+            "example": "Bamako"
+          },
+          "departement": {
+            "type": "string",
+            "example": "ville basse"
+          },
+          "categoryCompanyId": {
+            "type": "string",
+            "example": "233jdhfbjdfhbhhje*******"
+          },
+          "userId": {
+            "type":"string",
+            "example": "12ehj990********"
+          }
+        }
+      },
+      "getcompanies": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "type": "array",
+            "example":
+              [{
+                "_id": "t7457457t5*****",
+                "name":"Lafia boutik",
+                "location": "Bamako rue 22",
+                "country": "Mali",
+                "city": "Bamako",
+                "departement": "ville basse",
+                "categoryCompanyId": "t7457457t5*****",
+                "status": "pending",
+                "createdAt": "2022-11-29T14:32:04.681Z",
+                "updatedAt": "2022-11-29T14:32:04.681Z",
+                "__v": 0
+              }]
+          }
+        }
+      },
+      "getcompany": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "type": "object",
+            "example":
+            {
+              "_id": "t7457457t5*****",
+              "name":"Lafia boutik",
+              "location": "Bamako rue 22",
+              "country": "Mali",
+              "city": "Bamako",
+              "departement": "ville basse",
+              "categoryCompanyId": "t7457457t5*****",
+              "status": "pending",
+              "createdAt": "2022-11-29T14:32:04.681Z",
+              "updatedAt": "2022-11-29T14:32:04.681Z",
+              "__v": 0
+            }
+          }
+        }
+      },
+      "updatecompany": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Lafia boutik"
+          },
+          "location": {
+            "type": "string",
+            "example": "Bamako, rue 22"
+          },
+          "country": {
+            "type": "string",
+            "example": "Mali"
+          },
+          "city": {
+            "type": "string",
+            "example": "Bamako"
+          },
+          "departement": {
+            "type": "string",
+            "example": "ville basse"
+          },
+          "status":{
+            "type": "string",
+            "example": "pending"
+          },
+          "categoryCompanyId": {
+            "type": "string",
+            "example": "233jdhfbjdfhbhhje*******"
+          }
+        }
+      },
+      "deletecompany": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": null
+        }
+      },
+      "createcategorycompany": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Food Factory"
+          },
+          "description": {
+            "type": "string",
+            "example": "food activity in the world"
+          },
+          "userId": {
+            "type": "string",
+            "example": "12ehj990********"
+          }
+        }
+      },
+      "getcategoriescompanies": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "type": "array",
+            "example":
+              [{
+                "_id": "t7457457t5*****",
+                "name":"Food Factory",
+                "description": "is category companies",
+                "image": "https://image-cover.png",
+                "createdAt": "2022-11-29T14:32:04.681Z",
+                "updatedAt": "2022-11-29T14:32:04.681Z",
+                "__v": 0
+              }]
+          }
+        }
+      },
+      "getcategorycompany": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "type": "object",
+            "example":
+            {
+              "category": {
+                "_id": "63bc0e6a50bfefcde630550f",
+                "name": "Food Factory",
+                "description": "food activity in the world",
+                "image": "https://image-cover.png",
+                "createdAt": "2023-01-09T12:54:02.172Z",
+                "updatedAt": "2023-01-09T12:54:02.172Z",
+                "__v": 0
+              },
+              "companies": [
+                {
+                  "_id": "63bc123b160b3e05de8298b0",
+                  "name": "Lafia boutik",
+                  "location": "Bamako, rue 22",
+                  "country": "Mali",
+                  "city": "Bamako",
+                  "status": "pending",
+                  "ownerId": "63bc063529688e02b5ed629c",
+                  "categoryCompanyId": "63bc0e6a50bfefcde630550f",
+                  "createdAt": "2023-01-09T13:10:19.842Z",
+                  "updatedAt": "2023-01-09T12:54:02.172Z",
+                  "__v": 0
+                }
+              ]
+            }
+          }
         }
       },
       "authuser": {

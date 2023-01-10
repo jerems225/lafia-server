@@ -13,10 +13,6 @@ const CategoryProductSchema = new mongoose.Schema({
         type:String,
         require:true
     },
-    referer: {
-        type:String,
-        require:false
-    },
     companyId:{
         type:String,
         require:true
