@@ -3,7 +3,7 @@ const productModel = require("../../models/product-model");
 const { validateId } = require("../businessLogic/validObjectId");
 
 async function getProducts(req, res) {
-    const category_uuid = req.param.category_uuid;
+    const category_uuid = req.params.category_uuid;
     const validId = validateId(category_uuid);
     if (validId) {
         const category = await categoryProductModel.findById(category_uuid);
@@ -33,7 +33,7 @@ async function getProducts(req, res) {
 
 async function getProduct(req, res)
 {
-    const product_uuid = req.param.product_uuid;
+    const product_uuid = req.params.product_uuid;
     const validId = validateId(product_uuid);
     if(validId)
     {

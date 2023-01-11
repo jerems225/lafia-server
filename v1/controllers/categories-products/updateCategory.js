@@ -1,8 +1,9 @@
 const categoryProductModel = require("../../models/category-product-model");
+const companyModel = require("../../models/company-model");
 const { validateId } = require("../businessLogic/validObjectId");
 
 async function updateCategory(req, res) {
-    const category_uuid = req.param.category_uuid;
+    const category_uuid = req.params.category_uuid;
     const { name, description, companyId, userId } = req.body;
     const validId = validateId(companyId);
     if (validId) {

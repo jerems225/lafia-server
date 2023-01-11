@@ -21,6 +21,10 @@ const CompanySchema = new mongoose.Schema({
         type:String,
         require:true
     },
+    image: {
+        type:String,
+        require:false
+    },
     status:{
         type:String,
         require:true

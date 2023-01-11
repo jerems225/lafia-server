@@ -9,12 +9,12 @@ const productSchema = new mongoose.Schema({
         type:String,
         require:true
     },
-    image:{
-        type:String,
-        require:true
+    images:{
+        type:Array,
+        require:false
     },
     price: {
-        type:String,
+        type:Number,
         require:false
     },
     categoryProductId:{

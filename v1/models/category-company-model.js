@@ -12,7 +12,7 @@ const CategoryCompanySchema = new mongoose.Schema({
     },
     image:{
         type:String,
-        require:true
+        require:false
     },
     createdAt:{
         type:Date,

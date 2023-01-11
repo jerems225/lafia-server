@@ -11,7 +11,7 @@ const CategoryProductSchema = new mongoose.Schema({
     },
     image:{
         type:String,
-        require:true
+        require:false
     },
     companyId:{
         type:String,
