@@ -25,7 +25,7 @@ async function updateProduct(req, res) {
                         }
 
                         const updateProduct = await productModel.updateOne({
-                            _id: product_uuid, $set: productObject
+                            _id: product_uuid}, {$set: productObject
                         }
                         );
                         if (updateProduct) {

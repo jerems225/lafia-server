@@ -9,7 +9,7 @@ async function updateCustomer(req, res) {
         const customer = await customerModel.findById(customer_uuid);
         if (customer) {
             const updateCustomer = await customerModel.updateOne({
-                _id: customer_uuid, $set: {
+                _id: customer_uuid}, {$set: {
                     lastName: lastname,
                     firstName: firstname,
                     address: address,

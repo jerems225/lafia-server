@@ -9,23 +9,23 @@ const riderSchema = new mongoose.Schema({
         type:String,
         require:true
     },
-    idCard:{
+    idCardFront:{
+        type:String,
+        require:false
+    },
+    idCardBack:{
+        type:String,
+        require:false
+    },
+    driverLicenseFront:{
         type:String,
         require:true
     },
-    driverLicense:{
+    driverLicenseBack:{
         type:String,
         require:true
     },
     profilImage:{
-        type:String,
-        require:true
-    },
-    cvFile:{
-        type:String,
-        require:true
-    },
-    letterFile:{
         type:String,
         require:true
     },

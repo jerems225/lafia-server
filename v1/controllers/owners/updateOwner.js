@@ -9,7 +9,7 @@ async function updateOwner(req, res) {
         const owner = await ownerModel.findOne({ userId: user_uuid });
         if (owner) {
             const updateOwner = await ownerModel.updateOne({
-                _id: owner._id, $set: {
+                _id: owner._id}, {$set: {
                     lastName: lastname,
                     firstName: firstname,
                     address: address,

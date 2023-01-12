@@ -10,7 +10,7 @@ async function updateCompany(req, res) {
         const company = await companyModel.findById(company_uuid);
         if (company) {
             const updateCompany = await companyModel.updateOne({
-                _id: company_uuid, $set: {
+                _id: company_uuid}, {$set: {
                     name: name,
                     location: location,
                     country: country,

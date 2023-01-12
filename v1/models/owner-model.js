@@ -13,11 +13,11 @@ const ownerSchema = new mongoose.Schema({
         type:String,
         require:true
     },
-    idCard:{
+    idCardFront:{
         type:String,
         require:false
     },
-    license:{
+    idCardBack:{
         type:String,
         require:false
     },

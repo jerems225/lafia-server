@@ -25,6 +25,10 @@ const CompanySchema = new mongoose.Schema({
         type:String,
         require:false
     },
+    registrationLicense:{
+        type:String,
+        require:false
+    },
     status:{
         type:String,
         require:true

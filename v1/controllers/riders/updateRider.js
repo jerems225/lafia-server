@@ -9,7 +9,7 @@ async function updateRider(req, res) {
         const rider = await riderModel.findById(rider_uuid);
         if (rider) {
             const updateRider = await riderModel.updateOne({
-                _id: rider_uuid, $set: {
+                _id: rider_uuid}, {$set: {
                     lastName: lastname,
                     firstName: firstname,
                     status: status,

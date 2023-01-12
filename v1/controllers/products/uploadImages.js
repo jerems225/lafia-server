@@ -34,7 +34,7 @@ async function uploadImages(req, res) {
                                     const productImages = product.images;
                                     productImages.push(BASE_URL + savePath + image.name);
                                     const updateProduct = await productModel.updateOne({
-                                        _id: product_uuid, $set: {
+                                        _id: product_uuid}, {$set: {
                                             images: productImages
                                         }
                                     });

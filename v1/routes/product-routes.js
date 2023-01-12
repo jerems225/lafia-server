@@ -13,7 +13,7 @@ router.post('/product/create', requireAuth, createProduct); //create new product
 router.put('/product/modify/:product_uuid', requireAuth, updateProduct); //edit product
 router.delete('/product/delete/:product_uuid/:user_uuid', requireAuth, deleteProduct); //remove product
 
-router.post('/product/images/upload/:product_uuid/:user_uuid', requireAuth, uploadImages);
+router.post('/product/images/upload/:product_uuid', requireAuth, uploadImages); //upload file
 
 
 module.exports = router;

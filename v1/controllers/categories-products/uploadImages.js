@@ -31,7 +31,7 @@ async function uploadImages(req, res) {
                         }
                         else {
                             const updateCategory = await  categoryProductModel.updateOne({
-                                _id: category_uuid, $set: {
+                                _id: category_uuid}, {$set: {
                                     image: BASE_URL + savePath + image.name
                                 }
                             });
@@ -57,7 +57,7 @@ async function uploadImages(req, res) {
                     res.status(401).json({
                         status: 401,
                         message: "Bad Files Extension, only png/jpg/jpeg/webp are available !",
-                        data: mainImage.mimetype
+                        data: image.mimetype
                     })
                 }
         }

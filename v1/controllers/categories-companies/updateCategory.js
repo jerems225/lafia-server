@@ -14,7 +14,7 @@ async function updateCategory(req, res) {
                 const categoryCompany = await categoryCompanyModel.findById(category_uuid);
                 if (categoryCompany) {
                     const updateCategory = await categoryCompanyModel.updateOne({
-                        _id: company_uuid, $set: {
+                        _id: company_uuid}, {$set: {
                             name: name,
                             description: description,
                             updatedAt: new Date(),

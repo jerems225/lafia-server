@@ -1093,6 +1093,57 @@
             }
           }
         },
+        "/category-company/images/upload/{category_uuid}": {
+          "post": {
+            "tags": [
+              "Categories Companies"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Upload Category Company Cover",
+            "description": "",
+            "operationId": "uploadcatcompanyimages",
+            "produces": [
+              "application/json"
+            ],
+            "consumes":[
+              "multipart/form-data"
+            ],
+            "parameters": [
+              {
+                "name": "category_uuid",
+                "in": "path",
+                "description": "category uuid need to be add in the url request",
+                "required": true,
+                "type": "string",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "image",
+                "in": "formData",
+                "description": "upload files parameter",
+                "required": true,
+                "type": "file"
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/deletecompany"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
         "/company/create": {
           "post": {
             "tags": [
@@ -1280,6 +1331,64 @@
                 "items": {
                   "type": "string"
                 }
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/deletecompany"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/company/files/upload/{company_uuid}": {
+          "post": {
+            "tags": [
+              "Companies"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Upload Company Files",
+            "description": "",
+            "operationId": "uploadcompanyimages",
+            "produces": [
+              "application/json"
+            ],
+            "consumes":[
+              "multipart/form-data"
+            ],
+            "parameters": [
+              {
+                "name": "company_uuid",
+                "in": "path",
+                "description": "company uuid need to be add in the url request",
+                "required": true,
+                "type": "string",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "image",
+                "in": "formData",
+                "description": "Company cover image (.jpg, .jpeg, .png, .webp)",
+                "required": true,
+                "type": "file"
+              },
+              {
+                "name": "registrationLicense",
+                "in": "formData",
+                "description": "A document for legal company like rccm (.pdf)",
+                "required": true,
+                "type": "file"
               }
             ],
             "responses": {
@@ -1520,6 +1629,57 @@
             }
           }
         },
+        "/category-product/images/upload/{category_uuid}": {
+          "post": {
+            "tags": [
+              "Categories Products"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Upload Category Product Cover",
+            "description": "",
+            "operationId": "uploadcatproductimages",
+            "produces": [
+              "application/json"
+            ],
+            "consumes":[
+              "multipart/form-data"
+            ],
+            "parameters": [
+              {
+                "name": "category_uuid",
+                "in": "path",
+                "description": "category uuid need to be add in the url request",
+                "required": true,
+                "type": "string",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "image",
+                "in": "formData",
+                "description": "upload files parameter",
+                "required": true,
+                "type": "file"
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/deletecompany"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
         "/product/create": {
           "post": {
             "tags": [
@@ -1733,7 +1893,7 @@
             }
           }
         },
-        "/product/images/upload/{product_uuid}/{user_uuid}": {
+        "/product/images/upload/{product_uuid}": {
           "post": {
             "tags": [
               "Products"

@@ -9,7 +9,7 @@ async function updateUser(req, res) {
         const user = await userModel.findById(uuid);
         if (user) {
             const updateUser = await userModel.updateOne({
-                _id: uuid, $set: {
+                _id: uuid}, {$set: {
                     email: email,
                     phone: phone,
                     referalCode: referalCode,
