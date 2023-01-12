@@ -11,10 +11,10 @@ async function getRiders(req, res) {
 }
 
 async function getRider(req, res) {
-    const rider_uuid = req.params.rider_uuid;
-    const validId = validateId(rider_uuid);
+    const user_uuid = req.params.user_uuid;
+    const validId = validateId(user_uuid);
     if (validId) {
-        const rider = await riderModel.findById(rider_uuid);
+        const rider = await riderModel.findOne({ userId: user_uuid });
         if (rider) {
             res.status(201).json({
                 status: 201,

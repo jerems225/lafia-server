@@ -685,6 +685,64 @@
             }
           }
         },
+        "/owner/files/upload/{user_uuid}": {
+          "post": {
+            "tags": [
+              "Owners"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Upload Owner Files",
+            "description": "",
+            "operationId": "uploadownerfiles",
+            "produces": [
+              "application/json"
+            ],
+            "consumes":[
+              "multipart/form-data"
+            ],
+            "parameters": [
+              {
+                "name": "user_uuid",
+                "in": "path",
+                "description": "user uuid need to be add in the url request",
+                "required": true,
+                "type": "string",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "idCardFront",
+                "in": "formData",
+                "description": "Id card or Passport front image (.jpg, .jpeg, .png, .webp)",
+                "required": true,
+                "type": "file"
+              },
+              {
+                "name": "idCardBack",
+                "in": "formData",
+                "description": "Id card or Passport back image (.jpg, .jpeg, .png, .webp)",
+                "required": true,
+                "type": "file"
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/deletecompany"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
         "/rider/create": {
           "post": {
             "tags": [
@@ -757,7 +815,7 @@
             }
           }
         },
-        "/rider/{rider_uuid}": {
+        "/rider/{user_uuid}": {
           "get": {
             "tags": [
               "Riders"
@@ -773,9 +831,9 @@
             ],
             "parameters": [
               {
-                "name": "rider_uuid",
+                "name": "user_uuid",
                 "in": "path",
-                "description": "rider uuid need to be add in the url request",
+                "description": "user uuid need to be add in the url request",
                 "required": true,
                 "type": "string",
                 "items": {
@@ -798,7 +856,7 @@
             }
           }
         },
-        "/rider/modify/{rider_uuid}": {
+        "/rider/modify/{user_uuid}": {
           "put": {
             "tags": [
               "Riders"
@@ -814,9 +872,9 @@
             ],
             "parameters": [
               {
-                "name": "rider_uuid",
+                "name": "user_uuid",
                 "in": "path",
-                "description": "rider uuid need to be add in the url request",
+                "description": "user uuid need to be add in the url request",
                 "required": true,
                 "type": "string",
                 "items": {
@@ -848,7 +906,7 @@
             }
           }
         },
-        "/rider/delete/{rider_uuid}": {
+        "/rider/delete/{user_uuid}": {
           "delete": {
             "tags": [
               "Riders"
@@ -864,9 +922,9 @@
             ],
             "parameters": [
               {
-                "name": "rider_uuid",
+                "name": "user_uuid",
                 "in": "path",
-                "description": "rider uuid need to be add in the url request",
+                "description": "user uuid need to be add in the url request",
                 "required": true,
                 "type": "string",
                 "items": {
@@ -880,6 +938,86 @@
                 "schema": {
                   "items": {
                     "$ref": "#/definitions/deleteuserrider"
+                  }
+                }
+              },
+              "401": {
+                "description": "Invalid status value"
+              }
+            }
+          }
+        },
+        "/rider/files/upload/{user_uuid}": {
+          "post": {
+            "tags": [
+              "Riders"
+            ],
+            "security": [{
+              "BearerAuth" : []
+            }],
+            "summary": "Upload Owner Files",
+            "description": "",
+            "operationId": "uploadriderfiles",
+            "produces": [
+              "application/json"
+            ],
+            "consumes":[
+              "multipart/form-data"
+            ],
+            "parameters": [
+              {
+                "name": "user_uuid",
+                "in": "path",
+                "description": "user uuid need to be add in the url request",
+                "required": true,
+                "type": "string",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "idCardFront",
+                "in": "formData",
+                "description": "Id card or Passport front image (.jpg, .jpeg, .png, .webp)",
+                "required": true,
+                "type": "file"
+              },
+              {
+                "name": "idCardBack",
+                "in": "formData",
+                "description": "Id card or Passport back image (.jpg, .jpeg, .png, .webp)",
+                "required": true,
+                "type": "file"
+              },
+              {
+                "name": "driverLicenseFront",
+                "in": "formData",
+                "description": "Driver license front image (.jpg, .jpeg, .png, .webp)",
+                "required": true,
+                "type": "file"
+              },
+              {
+                "name": "driverLicenseBack",
+                "in": "formData",
+                "description": "Driver license back image (.jpg, .jpeg, .png, .webp)",
+                "required": true,
+                "type": "file"
+              }
+              ,
+              {
+                "name": "profileImage",
+                "in": "formData",
+                "description": "Rider profil image (.jpg, .jpeg, .png, .webp)",
+                "required": true,
+                "type": "file"
+              }
+            ],
+            "responses": {
+              "201": {
+                "description": "successful operation",
+                "schema": {
+                  "items": {
+                    "$ref": "#/definitions/deletecompany"
                   }
                 }
               },
@@ -2061,10 +2199,6 @@
             "type": "string",
             "example": "+00 0000 000"
           },
-          "roles": {
-            "type": "array",
-            "example": ["ROLE_USER"]
-          },
           "referrer": {
             "type": "string",
             "example": "54FG"
@@ -2293,10 +2427,6 @@
           "status": {
             "type": "string",
             "example": "canceled or accepted"
-          },
-          "userId": {
-            "type": "string",
-            "example": "dfddkhjbjbfjgfg"
           }
         }
       },

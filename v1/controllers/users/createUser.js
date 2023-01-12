@@ -20,7 +20,7 @@ async function createUser(req, res) {
             phone: phone,
             roles: roles,
             referalCode: await generateReferalCode(),
-            roles: roles === null ? ["ROLE_USER"] : roles,
+            roles: ["ROLE_USER"],
             secretCode: null,
             referrer: referrer,
             createdAt: new Date(),

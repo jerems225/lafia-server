@@ -25,7 +25,7 @@ const riderSchema = new mongoose.Schema({
         type:String,
         require:true
     },
-    profilImage:{
+    profileImage:{
         type:String,
         require:true
     },

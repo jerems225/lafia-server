@@ -3,12 +3,12 @@ const { removeUser } = require("../businessLogic/users/remove-user");
 const { validateId } = require("../businessLogic/validObjectId");
 
 async function deleteRider(req, res) {
-    const rider_uuid = req.params.rider_uuid;
-    const validId = validateId(rider_uuid);
+    const user_uuid = req.params.user_uuid;
+    const validId = validateId(user_uuid);
     if (validId) {
-        const rider = await riderModel.findById(rider_uuid);
+        const rider = await riderModel.findOne({ userId: user_uuid });
         if (rider) {
-            const deleteRider = await riderModel.deleteOne({ _id: rider_uuid });
+            const deleteRider = await riderModel.deleteOne({ _id: user_uuid });
             if (deleteRider) {
                 //remove user
                 await removeUser(rider.userId);
@@ -30,7 +30,7 @@ async function deleteRider(req, res) {
         else {
             res.status(401).json({
                 status: 401,
-                message: "Rider not found !",
+                message: "This user is not a rider !",
                 data: null
             })
         }

@@ -2,18 +2,17 @@ const riderModel = require("../../models/rider-model");
 const { validateId } = require("../businessLogic/validObjectId");
 
 async function updateRider(req, res) {
-    const rider_uuid = req.params.rider_uuid;
-    const { lastname, firstname, status, userId } = req.body;
-    const validId = validateId(rider_uuid);
+    const user_uuid = req.params.user_uuid;
+    const { lastname, firstname, status } = req.body;
+    const validId = validateId(user_uuid);
     if (validId) {
-        const rider = await riderModel.findById(rider_uuid);
+        const rider = await riderModel.findOne({ userId: user_uuid });
         if (rider) {
             const updateRider = await riderModel.updateOne({
                 _id: rider_uuid}, {$set: {
                     lastName: lastname,
                     firstName: firstname,
                     status: status,
-                    userId: userId,
                     updatedAt: new Date()
                 }
             }
@@ -22,7 +21,7 @@ async function updateRider(req, res) {
                 res.status(201).json({
                     status: 201,
                     message: "Rider updated successfully !",
-                    data: await riderModel.findById(rider_uuid)
+                    data: await riderModel.findOne({ userId: user_uuid })
                 });
             }
             else {
