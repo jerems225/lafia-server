@@ -15,7 +15,7 @@ async function send2fa(uuid) {
                 //send with email
                 const subject = "Your verification Code !";
                 const content = `Your verification code : ${doubleFactor_code}`;
-                sendMail(user, subject, content);
+                sendMail(user.email, subject, content);
             }
 
             if (user.phone) {

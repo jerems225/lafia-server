@@ -10,27 +10,18 @@ async function deleteCategory(req, res) {
         const category = await companyModel.findById(category_uuid);
         if (category) {
             const user = await userModel.findById(user_uuid);
-            if (user && user.roles[0] == "ROLE_ADMIN" || user.roles[0] == "ROLE_SUPERADMIN") {
-                const deleteCategoryCompany = await categoryCompanyModel.deleteOne({ _id: category_uuid });
-                if (deleteCategoryCompany) {
-                    res.status(201).json({
-                        status: 201,
-                        message: "Category Company delete successfully !",
-                        data: null
-                    });
-                }
-                else {
-                    res.status(401).json({
-                        status: 401,
-                        message: "Category Company not found !",
-                        data: null
-                    })
-                }
+            const deleteCategoryCompany = await categoryCompanyModel.deleteOne({ _id: category_uuid });
+            if (deleteCategoryCompany) {
+                res.status(201).json({
+                    status: 201,
+                    message: "Category Company delete successfully !",
+                    data: null
+                });
             }
             else {
                 res.status(401).json({
                     status: 401,
-                    message: "This user cannot perform this endpoint!",
+                    message: "Category Company not found !",
                     data: null
                 })
             }
@@ -38,19 +29,19 @@ async function deleteCategory(req, res) {
         else {
             res.status(401).json({
                 status: 401,
-                message: "Category Company not found !",
+                message: "This user cannot perform this endpoint!",
                 data: null
             })
         }
-
     }
     else {
-        res.status(500).json({
-            status: 500,
-            message: "Invalid ID",
+        res.status(401).json({
+            status: 401,
+            message: "Category Company not found !",
             data: null
-        });
+        })
     }
+
 
 }
 

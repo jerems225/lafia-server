@@ -1,14 +1,6 @@
 const mongoose = require('mongoose');
 
 const riderSchema = new mongoose.Schema({
-    lastName:{
-        type:String,
-        require:true
-    },
-    firstName:{
-        type:String,
-        require:true
-    },
     idCardFront:{
         type:String,
         require:false

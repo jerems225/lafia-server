@@ -22,6 +22,9 @@ async function createOwner(userId) {
                     })
                 }
                 else {
+                    await userModel.updateOne({ _id : userId}, {$set : {
+                        role : "owner"
+                    }})
                     console.log('Owner Created succesfully !!')
                 }
             })

@@ -5,7 +5,7 @@ const { validateId } = require("../businessLogic/validObjectId")
 
 async function updateProduct(req, res) {
     const product_uuid = req.params.product_uuid;
-    const { name, description, price, categoryProductId, userId } = req.body
+    const { name, description, price, deliveryCost, makingTime, categoryProductId, userId } = req.body
     const validId = validateId(product_uuid);
     if (validId) {
         const product = await productModel.findById(product_uuid);
@@ -20,6 +20,8 @@ async function updateProduct(req, res) {
                             name: name,
                             description: description,
                             price: price,
+                            deliveryCost: deliveryCost,
+                            makingTime: makingTime,
                             categoryProductId: categoryProductId,
                             updatedAt: new Date()
                         }

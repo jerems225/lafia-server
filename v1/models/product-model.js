@@ -17,6 +17,14 @@ const productSchema = new mongoose.Schema({
         type:Number,
         require:false
     },
+    deliveryCost: {
+        type:Number,
+        require: false
+    },
+    makingTime:{
+        type:String,
+        require:true
+    },
     categoryProductId:{
         type:String,
         require:true

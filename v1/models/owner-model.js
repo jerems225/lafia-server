@@ -1,18 +1,6 @@
 const mongoose = require('mongoose');
 
 const ownerSchema = new mongoose.Schema({
-    lastName:{
-        type:String,
-        require:true
-    },
-    firstName:{
-        type:String,
-        require:true
-    },
-    address:{
-        type:String,
-        require:true
-    },
     idCardFront:{
         type:String,
         require:false

@@ -2,15 +2,12 @@ const riderModel = require("../../models/rider-model");
 const userModel = require("../../models/user-model");
 const { validateId } = require("../businessLogic/validObjectId");
 
-async function createRider(req, res) {
-    const { lastname, firstname, userId } = req.body;
+async function createRider(userId) {
     const validId = validateId(userId);
     if (validId) {
         const user = await userModel.findById(userId);
         if (user) {
             const riderObjet = {
-                lastName: lastname,
-                firstName: firstname,
                 status: "pending",
                 userId: userId,
                 createdAt: new Date()
@@ -25,11 +22,10 @@ async function createRider(req, res) {
                     })
                 }
                 else {
-                    res.status(201).json({
-                        status: 201,
-                        message: "Rider created successfully !",
-                        data: result
-                    })
+                    await userModel.updateOne({ _id : userId}, {$set : {
+                        role : "rider"
+                    }})
+                    return true;
                 }
             })
         }

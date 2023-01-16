@@ -11,7 +11,7 @@ const router = express.Router();
 router.get('/users', requireAuth, getUsers);
 router.get('/user/:uuid', requireAuth, getUser);
 router.put('/user/modify/:uuid', requireAuth, updateUser);
-router.post('/register', createUser);
+router.post('/user/register', createUser);
 
 router.put('/user/add/secretcode/:uuid', requireAuth, provideCode);
 router.post('/user/verify/secretcode/:uuid', requireAuth, verify);

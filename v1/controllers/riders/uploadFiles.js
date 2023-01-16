@@ -4,6 +4,7 @@ const { v4: uuidv4 } = require('uuid');
 const { validateId } = require("../businessLogic/validObjectId");
 const path = require('path');
 const riderModel = require('../../models/rider-model');
+const { createRider } = require('./createRider');
 
 async function uploadFiles(req, res) {
     const user_uuid = req.params.user_uuid;
@@ -172,6 +173,7 @@ async function uploadFiles(req, res) {
                     }
                 });
                 if (updateRider) {
+                    await createRider(user_uuid);
                     res.status(201).json({
                         status: 201,
                         message: "Files upload successfully !",

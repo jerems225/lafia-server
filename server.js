@@ -57,14 +57,14 @@ mongoose.connect(mongodburl, { useNewUrlParser: true }, (err) => {
 //routes
 const userRoutes = require('./v1/routes/user-routes');
 const authRoutes = require('./v1/routes/auth-routes');
-const customerRoutes = require('./v1/routes/customer-routes');
 const riderRoutes = require('./v1/routes/rider-routes');
 const ownerRoutes = require('./v1/routes/owner-routes');
 const companyRoutes = require('./v1/routes/company-routes');
 const categoryCompanyRoutes = require('./v1/routes/category-company-routes');
 const categoryProductRoutes = require('./v1/routes/category-product-routes');
 const productRoutes = require('./v1/routes/product-routes');
-
+const cartRoutes = require('./v1/routes/cart-routes');
+const orderRoutes = require('./v1/routes/order-routes');
 
 //register documentation endpoint
 app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
@@ -74,9 +74,6 @@ app.use('/api/v1/', userRoutes);
 
 //login routes
 app.use('/api/v1/', authRoutes);
-
-//customers routes
-app.use('/api/v1/', customerRoutes);
 
 //rider routes
 app.use('/api/v1/', riderRoutes);
@@ -95,6 +92,12 @@ app.use('/api/v1/', categoryProductRoutes);
 
 //product routes
 app.use('/api/v1/', productRoutes);
+
+//cart routes
+app.use('/api/v1/', cartRoutes);
+
+//order routes
+app.use('/api/v1/', orderRoutes);
 
 const port = 5000;
 app.listen(port, () => console.log(`Lafia Server is listening on port ${port}.`));

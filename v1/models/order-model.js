@@ -1,17 +1,53 @@
 const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
-    libelle:{
+    orderRef:{
         type:String,
-        require:true
-    },
-    orderNum:{
-        type:Number,
         require:true
     },
     customerId:{
         type:String,
         require:true
+    },
+    products: {
+        type: Array,
+        require: true
+    },
+    amount: {
+        type: Number,
+        require: true
+    },
+    orderPromoCode: {
+        type: String,
+        require: true
+    },
+    deliveryCode:{
+        type:String,
+        require:true
+    },
+    deliveryLocation:{
+        type:String,
+        require:true
+    },
+    deliveryMark:{
+        type:Number,
+        require:false
+    },
+    driverCollectOrder:{
+        type:Boolean,
+        require:true
+    },
+    status:{
+        type:String,
+        require:true
+    },
+    companyId:{
+        type:String,
+        require:true
+    },
+    riderId:{
+        type:String,
+        require:false
     },
     createdAt:{
         type:Date,
