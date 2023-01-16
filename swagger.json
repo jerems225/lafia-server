@@ -1,2321 +1,2355 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "description": "lafia nodejs server api",
-      "version": "v1",
-      "title": "LAFIA API"
-    },
-    "host": "127.0.0.1:5000",
-    "basePath": "/api/v1",
-    "schemes": [
-      "http",
-      "https"
-    ],
-    "securityDefinitions": {
-      "BearerAuth": {
+  "swagger": "2.0",
+  "info": {
+    "description": "lafia nodejs server api",
+    "version": "v1",
+    "title": "LAFIA API"
+  },
+  "host": "127.0.0.1:5000",
+  "basePath": "/api/v1",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {
+    "BearerAuth": {
       "type": "apiKey",
       "name": "Authorization",
-      "scheme":"bearer",
+      "scheme": "bearer",
       "in": "header",
       "description": "Authentication token"
     }
   },
-    "paths": {
-        "/user/register": {
-            "post": {
-              "tags": [
-                "Register & Authentification"
-              ],
-              "summary": "create new user",
-              "description": "",
-              "operationId": "createusers",
-              "produces": [
-                "application/json"
-              ],
-              "parameters": [
-                {
-                  "in": "body",
-                  "name": "body",
-                  "description": "body for your query",
-                  "required": true,
-                  "schema": {
-                    "$ref": "#/definitions/createusers"
-                  }
-                }
-              ],
-              "responses": {
-                "201": {
-                  "description": "successful operation",
-                  "schema": {
-                    "items": {
-                      "$ref": "#/definitions/getuser"
-                    }
-                  }
-                },
-                "401": {
-                  "description": "Invalid status value"
-                }
+  "paths": {
+    "/user/register": {
+      "post": {
+        "tags": [
+          "Register & Authentification"
+        ],
+        "summary": "create new user",
+        "description": "",
+        "operationId": "createusers",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "body for your query",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/createusers"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/getuser"
               }
             }
           },
-        "/user/auth": {
-            "post": {
-              "tags": [
-                "Register & Authentification"
-              ],
-              "summary": "Autenticate user, user can be authenticate by email or phone",
-              "description": "",
-              "operationId": "authuser",
-              "produces": [
-                "application/json"
-              ],
-              "parameters": [
-                {
-                  "in": "body",
-                  "name": "body",
-                  "description": "body for your query",
-                  "required": true,
-                  "schema": {
-                    "$ref": "#/definitions/authuser"
-                  }
-                }
-              ],
-              "responses": {
-                "201": {
-                  "description": "successful operation",
-                  "schema": {
-                    "items": {
-                      "$ref": "#/definitions/authResponse"
-                    }
-                  }
-                },
-                "401": {
-                  "description": "Invalid status value"
-                }
-              }
-            }
-          },
-        "/user/2fa/verify": {
-          "post": {
-            "tags": [
-              "Register & Authentification"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "verifiy double factor code for a specific user",
-            "description": "",
-            "operationId": "doublefactor1",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "in": "body",
-                "name": "body",
-                "description": "body for your query",
-                "required": true,
-                "schema": {
-                  "$ref": "#/definitions/2fa-verify"
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/2fa-verify-response"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/user/add/secretcode/{uuid}": {
-          "put": {
-            "tags": [
-              "Register & Authentification"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Modify user secret code",
-            "description": "",
-            "operationId": "userSecretCode",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "name": "uuid",
-                "in": "path",
-                "description": "user uuid need to be add in the url request",
-                "required": true,
-                "type": "string",
-                "items": {
-                  "type": "string"
-                }
-              },
-              {
-                "in": "body",
-                "name": "body",
-                "description": "body for your query",
-                "required": true,
-                "schema": {
-                  "$ref": "#/definitions/user-secret-code"
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/2fa-verify-response"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/user/verify/secretcode/{uuid}": {
-          "post": {
-            "tags": [
-              "Register & Authentification"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Verify user secret code",
-            "description": "",
-            "operationId": "userVerifySecretCode",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "name": "uuid",
-                "in": "path",
-                "description": "user uuid need to be add in the url request",
-                "required": true,
-                "type": "string",
-                "items": {
-                  "type": "string"
-                }
-              },
-              {
-                "in": "body",
-                "name": "body",
-                "description": "body for your query",
-                "required": true,
-                "schema": {
-                  "$ref": "#/definitions/user-secret-code"
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/2fa-verify-response"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/users": {
-          "get": {
-            "tags": [
-              "Users"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Get all users",
-            "description": "",
-            "operationId": "allusers",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/getusers"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/user/{uuid}": {
-          "get": {
-            "tags": [
-              "Users"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Get user by uuid",
-            "description": "",
-            "operationId": "getuser",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "name": "uuid",
-                "in": "path",
-                "description": "user uuid need to be add in the url request",
-                "required": true,
-                "type": "string",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/getuser"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/user/modify/{uuid}": {
-          "put": {
-            "tags": [
-              "Users"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Edit user by uuid",
-            "description": "",
-            "operationId": "updateuser",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "name": "uuid",
-                "in": "path",
-                "description": "user uuid need to be add in the url request",
-                "required": true,
-                "type": "string",
-                "items": {
-                  "type": "string"
-                }
-              },
-              {
-                "in": "body",
-                "name": "body",
-                "description": "body for your query",
-                "required": true,
-                "schema": {
-                  "$ref": "#/definitions/updateusers"
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/getuser"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/owners": {
-          "get": {
-            "tags": [
-              "Owners"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Get all users owners",
-            "description": "",
-            "operationId": "allusersowners",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/getusersowners"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/owner/{user_uuid}": {
-          "get": {
-            "tags": [
-              "Owners"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Get user owner by uuid owner",
-            "description": "",
-            "operationId": "getuserowner",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "name": "user_uuid",
-                "in": "path",
-                "description": "owner uuid need to be add in the url request",
-                "required": true,
-                "type": "string",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/getuserowner"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/owner/files/upload/{user_uuid}": {
-          "post": {
-            "tags": [
-              "Owners"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Upload Owner Files",
-            "description": "",
-            "operationId": "uploadownerfiles",
-            "produces": [
-              "application/json"
-            ],
-            "consumes":[
-              "multipart/form-data"
-            ],
-            "parameters": [
-              {
-                "name": "user_uuid",
-                "in": "path",
-                "description": "user uuid need to be add in the url request",
-                "required": true,
-                "type": "string",
-                "items": {
-                  "type": "string"
-                }
-              },
-              {
-                "name": "idCardFront",
-                "in": "formData",
-                "description": "Id card or Passport front image (.jpg, .jpeg, .png, .webp)",
-                "required": true,
-                "type": "file"
-              },
-              {
-                "name": "idCardBack",
-                "in": "formData",
-                "description": "Id card or Passport back image (.jpg, .jpeg, .png, .webp)",
-                "required": true,
-                "type": "file"
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/deletecompany"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/riders": {
-          "get": {
-            "tags": [
-              "Riders"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Get all users riders",
-            "description": "",
-            "operationId": "allusersriders",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/getusersriders"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/rider/{user_uuid}": {
-          "get": {
-            "tags": [
-              "Riders"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Get user rider by uuid rider",
-            "description": "",
-            "operationId": "getuserrider",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "name": "user_uuid",
-                "in": "path",
-                "description": "user uuid need to be add in the url request",
-                "required": true,
-                "type": "string",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/getuserrider"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/rider/files/upload/{user_uuid}": {
-          "post": {
-            "tags": [
-              "Riders"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Upload Owner Files",
-            "description": "",
-            "operationId": "uploadriderfiles",
-            "produces": [
-              "application/json"
-            ],
-            "consumes":[
-              "multipart/form-data"
-            ],
-            "parameters": [
-              {
-                "name": "user_uuid",
-                "in": "path",
-                "description": "user uuid need to be add in the url request",
-                "required": true,
-                "type": "string",
-                "items": {
-                  "type": "string"
-                }
-              },
-              {
-                "name": "idCardFront",
-                "in": "formData",
-                "description": "Id card or Passport front image (.jpg, .jpeg, .png, .webp)",
-                "required": true,
-                "type": "file"
-              },
-              {
-                "name": "idCardBack",
-                "in": "formData",
-                "description": "Id card or Passport back image (.jpg, .jpeg, .png, .webp)",
-                "required": true,
-                "type": "file"
-              },
-              {
-                "name": "driverLicenseFront",
-                "in": "formData",
-                "description": "Driver license front image (.jpg, .jpeg, .png, .webp)",
-                "required": true,
-                "type": "file"
-              },
-              {
-                "name": "driverLicenseBack",
-                "in": "formData",
-                "description": "Driver license back image (.jpg, .jpeg, .png, .webp)",
-                "required": true,
-                "type": "file"
-              }
-              ,
-              {
-                "name": "profileImage",
-                "in": "formData",
-                "description": "Rider profil image (.jpg, .jpeg, .png, .webp)",
-                "required": true,
-                "type": "file"
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/deletecompany"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/categories-companies": {
-          "get": {
-            "tags": [
-              "Categories Companies"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Get all categories companies",
-            "description": "",
-            "operationId": "allcompanycategory",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/getcategoriescompanies"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/category-company/{category_uuid}": {
-          "get": {
-            "tags": [
-              "Categories Companies"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Get category company by uuid",
-            "description": "",
-            "operationId": "getcategorycompany",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "name": "category_uuid",
-                "in": "path",
-                "description": "rider uuid need to be add in the url request",
-                "required": true,
-                "type": "string",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/getcategorycompany"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/company/create": {
-          "post": {
-            "tags": [
-              "Companies"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Create new company",
-            "description": "",
-            "operationId": "createcompany",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "in": "body",
-                "name": "body",
-                "description": "body for your query",
-                "required": true,
-                "schema": {
-                  "$ref": "#/definitions/createcompany"
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/getcompany"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/companies": {
-          "get": {
-            "tags": [
-              "Companies"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Get all companies",
-            "description": "",
-            "operationId": "allcoma=oany",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/getcompanies"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/company/{company_uuid}": {
-          "get": {
-            "tags": [
-              "Companies"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Get company by uuid",
-            "description": "",
-            "operationId": "getcompany",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "name": "company_uuid",
-                "in": "path",
-                "description": "company uuid need to be add in the url request",
-                "required": true,
-                "type": "string",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/getcompany"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/company/modify/{company_uuid}": {
-          "put": {
-            "tags": [
-              "Companies"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Update company",
-            "description": "",
-            "operationId": "updatecompany",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "name": "company_uuid",
-                "in": "path",
-                "description": "company uuid need to be add in the url request",
-                "required": true,
-                "type": "string",
-                "items": {
-                  "type": "string"
-                }
-              },
-              {
-                "in": "body",
-                "name": "body",
-                "description": "body for your query",
-                "required": true,
-                "schema": {
-                  "$ref": "#/definitions/updatecompany"
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/getcompany"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/company/delete/{company_uuid}": {
-          "delete": {
-            "tags": [
-              "Companies"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Remove company by uuid",
-            "description": "",
-            "operationId": "deletecompany",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "name": "company_uuid",
-                "in": "path",
-                "description": "company uuid need to be add in the url request",
-                "required": true,
-                "type": "string",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/deletecompany"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/company/files/upload/{company_uuid}": {
-          "post": {
-            "tags": [
-              "Companies"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Upload Company Files",
-            "description": "",
-            "operationId": "uploadcompanyimages",
-            "produces": [
-              "application/json"
-            ],
-            "consumes":[
-              "multipart/form-data"
-            ],
-            "parameters": [
-              {
-                "name": "company_uuid",
-                "in": "path",
-                "description": "company uuid need to be add in the url request",
-                "required": true,
-                "type": "string",
-                "items": {
-                  "type": "string"
-                }
-              },
-              {
-                "name": "image",
-                "in": "formData",
-                "description": "Company cover image (.jpg, .jpeg, .png, .webp)",
-                "required": true,
-                "type": "file"
-              },
-              {
-                "name": "registrationLicense",
-                "in": "formData",
-                "description": "A document for legal company like rccm (.pdf)",
-                "required": true,
-                "type": "file"
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/deletecompany"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/category-product/create": {
-          "post": {
-            "tags": [
-              "Categories Products"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Create new categories product",
-            "description": "",
-            "operationId": "createnewcategorieproduct",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "in": "body",
-                "name": "body",
-                "description": "body for your query",
-                "required": true,
-                "schema": {
-                  "$ref": "#/definitions/createcategoryproduct"
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/getcategorieproduct"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/categories-products/{company_uuid}": {
-          "get": {
-            "tags": [
-              "Categories Products"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Get all categories products by company uuid",
-            "description": "",
-            "operationId": "allcategoriesproducts",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "name": "company_uuid",
-                "in": "path",
-                "description": "company uuid need to be add in the url request",
-                "required": true,
-                "type": "string",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/getcategoriesproducts"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/category-product/{category_uuid}": {
-          "get": {
-            "tags": [
-              "Categories Products"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Get category product by uuid",
-            "description": "",
-            "operationId": "getcategoryproduct",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "name": "category_uuid",
-                "in": "path",
-                "description": "category uuid need to be add in the url request",
-                "required": true,
-                "type": "string",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/getcategoryproduct"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/category-product/modify/{category_uuid}": {
-          "put": {
-            "tags": [
-              "Categories Products"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Update category product",
-            "description": "",
-            "operationId": "updatecategoryproduct",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "name": "category_uuid",
-                "in": "path",
-                "description": "category uuid need to be add in the url request",
-                "required": true,
-                "type": "string",
-                "items": {
-                  "type": "string"
-                }
-              },
-              {
-                "in": "body",
-                "name": "body",
-                "description": "body for your query",
-                "required": true,
-                "schema": {
-                  "$ref": "#/definitions/updatecategoryproduct"
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/getcompany"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/category-product/delete/{category_uuid}/{user_uuid}": {
-          "delete": {
-            "tags": [
-              "Categories Products"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Remove category product by uuid",
-            "description": "",
-            "operationId": "deletecategoryproduct",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "name": "category_uuid",
-                "in": "path",
-                "description": "company uuid need to be add in the url request",
-                "required": true,
-                "type": "string",
-                "items": {
-                  "type": "string"
-                }
-              },
-              {
-                "name": "user_uuid",
-                "in": "path",
-                "description": "user uuid need to be add in the url request",
-                "required": true,
-                "type": "string",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/deletecategoryproduct"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/category-product/images/upload/{category_uuid}": {
-          "post": {
-            "tags": [
-              "Categories Products"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Upload Category Product Cover",
-            "description": "",
-            "operationId": "uploadcatproductimages",
-            "produces": [
-              "application/json"
-            ],
-            "consumes":[
-              "multipart/form-data"
-            ],
-            "parameters": [
-              {
-                "name": "category_uuid",
-                "in": "path",
-                "description": "category uuid need to be add in the url request",
-                "required": true,
-                "type": "string",
-                "items": {
-                  "type": "string"
-                }
-              },
-              {
-                "name": "image",
-                "in": "formData",
-                "description": "upload files parameter",
-                "required": true,
-                "type": "file"
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/deletecompany"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/product/create": {
-          "post": {
-            "tags": [
-              "Products"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Create new product",
-            "description": "",
-            "operationId": "createnewproduct",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "in": "body",
-                "name": "body",
-                "description": "body for your query",
-                "required": true,
-                "schema": {
-                  "$ref": "#/definitions/createproduct"
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/getproduct"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/products/{category_uuid}": {
-          "get": {
-            "tags": [
-              "Products"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Get all products by category uuid",
-            "description": "",
-            "operationId": "allproducts",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "name": "category_uuid",
-                "in": "path",
-                "description": "category uuid need to be add in the url request",
-                "required": true,
-                "type": "string",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/getproducts"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/product/{product_uuid}": {
-          "get": {
-            "tags": [
-              "Products"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Get product by uuid",
-            "description": "",
-            "operationId": "getproduct",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "name": "product_uuid",
-                "in": "path",
-                "description": "product uuid need to be add in the url request",
-                "required": true,
-                "type": "string",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/getproduct"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/product/modify/{product_uuid}": {
-          "put": {
-            "tags": [
-              "Products"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Update product",
-            "description": "",
-            "operationId": "updateproduct",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "in": "body",
-                "name": "body",
-                "description": "body for your query",
-                "required": true,
-                "schema": {
-                  "$ref": "#/definitions/updateproduct"
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/getproduct"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/product/delete/{product_uuid}/{user_uuid}": {
-          "delete": {
-            "tags": [
-              "Products"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Remove product by uuid",
-            "description": "",
-            "operationId": "deleteproduct",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "name": "product_uuid",
-                "in": "path",
-                "description": "product uuid need to be add in the url request",
-                "required": true,
-                "type": "string",
-                "items": {
-                  "type": "string"
-                }
-              },
-              {
-                "name": "user_uuid",
-                "in": "path",
-                "description": "user uuid need to be add in the url request",
-                "required": true,
-                "type": "string",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/deleteproduct"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/product/images/upload/{product_uuid}": {
-          "post": {
-            "tags": [
-              "Products"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Upload Products images",
-            "description": "",
-            "operationId": "uploadproductimages",
-            "produces": [
-              "application/json"
-            ],
-            "consumes":[
-              "multipart/form-data"
-            ],
-            "parameters": [
-              {
-                "name": "product_uuid",
-                "in": "path",
-                "description": "product uuid need to be add in the url request",
-                "required": true,
-                "type": "string",
-                "items": {
-                  "type": "string"
-                }
-              },
-              {
-                "name": "mainImage",
-                "in": "formData",
-                "description": "upload files parameter",
-                "required": true,
-                "type": "file"
-              },
-              {
-                "name": "secondImage",
-                "in": "formData",
-                "description": "upload files parameter",
-                "required": false,
-                "type": "file"
-              },
-              {
-                "name": "thirdImage",
-                "in": "formData",
-                "description": "upload files parameter",
-                "required": false,
-                "type": "file"
-              },
-              {
-                "name": "fourthImage",
-                "in": "formData",
-                "description": "upload files parameter",
-                "required": false,
-                "type": "file"
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/deletecompany"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/cart/addproduct": {
-          "post": {
-            "tags": [
-              "Carts"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Add Product to cart",
-            "description": "",
-            "operationId": "addproducttcart",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "in": "body",
-                "name": "body",
-                "description": "body for your query",
-                "required": true,
-                "schema": {
-                  "$ref": "#/definitions/addproducttocart"
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/getcarts"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/cart/modify/products": {
-          "put": {
-            "tags": [
-              "Carts"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Update Products in cart",
-            "description": "",
-            "operationId": "updateproductstcart",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "in": "body",
-                "name": "body",
-                "description": "body for your query",
-                "required": true,
-                "schema": {
-                  "$ref": "#/definitions/updateproductsincart"
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/deletecategoryproduct"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/cart/{user_uuid}": {
-          "get": {
-            "tags": [
-              "Carts"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Get cart by user uuid",
-            "description": "",
-            "operationId": "getusercart",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "name": "user_uuid",
-                "in": "path",
-                "description": "user uuid need to be add in the url request",
-                "required": true,
-                "type": "string",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/getcart"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/cart/deleteproduct/{user_uuid}/{product_uuid}": {
-          "delete": {
-            "tags": [
-              "Carts"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Remove product from cart by user_uuid and product_uuid",
-            "description": "",
-            "operationId": "removeorderproduct",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "name": "user_uuid",
-                "in": "path",
-                "description": "user uuid need to be add in the url request",
-                "required": true,
-                "type": "string",
-                "items": {
-                  "type": "string"
-                }
-              },
-              {
-                "name": "product_uuid",
-                "in": "path",
-                "description": "product uuid need to be add in the url request",
-                "required": true,
-                "type": "string",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/deletecompany"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/order/create": {
-          "post": {
-            "tags": [
-              "Orders"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Create new order",
-            "description": "",
-            "operationId": "createneworder",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "in": "body",
-                "name": "body",
-                "description": "body for your query",
-                "required": true,
-                "schema": {
-                  "$ref": "#/definitions/createorder"
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/getorder"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/orders/company/{company_uuid}": {
-          "get": {
-            "tags": [
-              "Orders"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Get all company orders by company uuid",
-            "description": "",
-            "operationId": "allcompanyorders",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "name": "company_uuid",
-                "in": "path",
-                "description": "company uuid need to be add in the url request",
-                "required": true,
-                "type": "string",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/getorders"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/orders/rider/{rider_uuid}": {
-          "get": {
-            "tags": [
-              "Orders"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Get all rider orders by rider uuid",
-            "description": "",
-            "operationId": "allcompanyrider",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "name": "rider_uuid",
-                "in": "path",
-                "description": "rider uuid need to be add in the url request",
-                "required": true,
-                "type": "string",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/getorders"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/order/{order_uuid}": {
-          "get": {
-            "tags": [
-              "Orders"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Get order by order uuid",
-            "description": "",
-            "operationId": "getorder",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "name": "order_uuid",
-                "in": "path",
-                "description": "order uuid need to be add in the url request",
-                "required": true,
-                "type": "string",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/getorder"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
-          }
-        },
-        "/order/cancel/{order_uuid}": {
-          "put": {
-            "tags": [
-              "Orders"
-            ],
-            "security": [{
-              "BearerAuth" : []
-            }],
-            "summary": "Cancel order by order uuid",
-            "description": "",
-            "operationId": "cancelorder",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "name": "order_uuid",
-                "in": "path",
-                "description": "order uuid need to be add in the url request",
-                "required": true,
-                "type": "string",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ],
-            "responses": {
-              "201": {
-                "description": "successful operation",
-                "schema": {
-                  "items": {
-                    "$ref": "#/definitions/getorder"
-                  }
-                }
-              },
-              "401": {
-                "description": "Invalid status value"
-              }
-            }
+          "401": {
+            "description": "Invalid status value"
           }
         }
+      }
     },
-
-    "definitions": {
-      "getusers": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "integer",
-            "example": 200
-          },
-          "message": {
-            "type": "string",
-            "example": "success"
-          },
-          "data": {
-            "type": "array",
-            "example":
-            [
-              {
-                "_id": "t7457457t5*****",
-                "firstName": "John",
-                "lastName": "Doe",
-                "address":"Bamako, Nord-ouest, rue 23",
-                "email": "jer*****@gmail.com",
-                "password": "$2b*******",
-                "phone": "070*********",
-                "roles": [
-                  "ROLE_***"
-                ],
-                "referalCode": "***RT",
-                "secretCode": null,
-                "referrer":"445GH",
-                "createdAt": "2022-11-29T14:32:04.681Z",
-                "__v": 0
-              },
-              {
-                "_id": "t7457457t5*****",
-                "firstName": "John",
-                "lastName": "Doe",
-                "address":"Bamako, Nord-ouest, rue 23",
-                "email": "jer*****@gmail.com",
-                "password": "$2b*******",
-                "phone": "070*********",
-                "roles": [
-                  "ROLE_***"
-                ],
-                "referalCode": "***RT",
-                "secretCode": null,
-                "referrer":"445GH",
-                "createdAt": "2022-11-29T14:32:04.681Z",
-                "__v": 0
+    "/user/auth": {
+      "post": {
+        "tags": [
+          "Register & Authentification"
+        ],
+        "summary": "Autenticate user, user can be authenticate by email or phone",
+        "description": "",
+        "operationId": "authuser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "body for your query",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/authuser"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/authResponse"
               }
-            ]
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
           }
         }
-      },
-      "getuser": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "integer",
-            "example": 200
-          },
-          "message": {
-            "type": "string",
-            "example": "success"
-          },
-          "data": {
-            "type": "array",
-            "example":
-              {
-                "_id": "t7457457t5*****",
-                "firstName": "John",
-                "lastName": "Doe",
-                "address":"Bamako, Nord-ouest, rue 23",
-                "email": "jer*****@gmail.com",
-                "password": "$2b*******",
-                "phone": "070*********",
-                "roles": [
-                  "ROLE_***"
-                ],
-                "referalCode": "***RT",
-                "secretCode": null,
-                "referrer":"445GH",
-                "createdAt": "2022-11-29T14:32:04.681Z",
-                "__v": 0
+      }
+    },
+    "/user/2fa/verify": {
+      "post": {
+        "tags": [
+          "Register & Authentification"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "verifiy double factor code for a specific user",
+        "description": "",
+        "operationId": "doublefactor1",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "body for your query",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/2fa-verify"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/2fa-verify-response"
               }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
           }
         }
-      },
-      "createusers": {
-        "type": "object",
-        "properties": {
-          "firstName": {
-            "type": "string",
-            "example": "John"
-          },
-          "lastName": {
-            "type": "string",
-            "example": "Doe"
-          },
-          "address": {
-            "type": "string",
-            "example": "Bamako, rue 22"
-          },
-          "email": {
-            "type": "string",
-            "example": "email@example.com"
-          },
-          "password": {
-            "type": "string",
-            "example": "12345"
-          },
-          "phone": {
-            "type": "string",
-            "example": "+00 0000 000"
-          },
-          "referrer": {
-            "type": "string",
-            "example": "54FG"
+      }
+    },
+    "/user/add/secretcode/{uuid}": {
+      "put": {
+        "tags": [
+          "Register & Authentification"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
           }
-        }
-      },
-      "updateusers": {
-        "type": "object",
-        "properties": {
-          "firstName": {
+        ],
+        "summary": "Modify user secret code",
+        "description": "",
+        "operationId": "userSecretCode",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "description": "user uuid need to be add in the url request",
+            "required": true,
             "type": "string",
-            "example": "John"
+            "items": {
+              "type": "string"
+            }
           },
-          "lastName": {
-            "type": "string",
-            "example": "Doe"
-          },
-          "address": {
-            "type": "string",
-            "example": "Bamako, rue 22"
-          },
-          "email": {
-            "type": "string",
-            "example": "email@example.com"
-          },
-          "phone": {
-            "type": "string",
-            "example": "+00 0000 000"
-          },
-          "referrer": {
-            "type": "string",
-            "example": "54FG"
+          {
+            "in": "body",
+            "name": "body",
+            "description": "body for your query",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/user-secret-code"
+            }
           }
-        }
-      },
-      "updateuserowner": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "example": "canceled, rejected or accepted"
-          }
-        }
-      },
-      "getusersowners": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "integer",
-            "example": 200
-          },
-          "message": {
-            "type": "string",
-            "example": "success"
-          },
-          "data": {
-            "type": "array",
-            "example":
-              [{
-                "_id": "t7457457t5*****",
-                "idCard": "https://file-image-idCard.png",
-                "license": "https://file-document-license.pdf",
-                "status": "pending",
-                "userId": "t7457457t5*****",
-                "createdAt": "2022-11-29T14:32:04.681Z",
-                "updatedAt": "2022-11-29T14:32:04.681Z",
-                "__v": 0
-              }]
-          }
-        }
-      },
-      "getuserowner": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "integer",
-            "example": 200
-          },
-          "message": {
-            "type": "string",
-            "example": "success"
-          },
-          "data": {
-            "type": "object",
-            "example":
-              {
-                "_id": "t7457457t5*****",
-                "firstName":"Jeremy",
-                "lastName": "Niondo",
-                "address": "Bamako, Nord-ouest, rue 23",
-                "idCard": "https://file-image-idCard.png",
-                "license": "https://file-document-license.pdf",
-                "status": "pending",
-                "userId": "t7457457t5*****",
-                "createdAt": "2022-11-29T14:32:04.681Z",
-                "updatedAt": "2022-11-29T14:32:04.681Z",
-                "__v": 0
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/2fa-verify-response"
               }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
           }
         }
-      },
-      "createuserrider": {
-        "type": "object",
-        "properties": {
-          "firstname": {
-            "type": "string",
-            "example": "Jeremy"
-          },
-          "lastname": {
-            "type": "string",
-            "example": "Niondo"
-          },
-          "address": {
-            "type": "string",
-            "example": "Bamako, rue 23"
-          },
-          "userId": {
-            "type": "string",
-            "example": "dfddkhjbjbfjgfg"
+      }
+    },
+    "/user/verify/secretcode/{uuid}": {
+      "post": {
+        "tags": [
+          "Register & Authentification"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
           }
-        }
-      },
-      "updateuserrider": {
-        "type": "object",
-        "properties": {
-          "status": {
+        ],
+        "summary": "Verify user secret code",
+        "description": "",
+        "operationId": "userVerifySecretCode",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "description": "user uuid need to be add in the url request",
+            "required": true,
             "type": "string",
-            "example": "canceled, rejected or accepted"
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "body for your query",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/user-secret-code"
+            }
           }
-        }
-      },
-      "getusersriders": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "integer",
-            "example": 200
-          },
-          "message": {
-            "type": "string",
-            "example": "success"
-          },
-          "data": {
-            "type": "array",
-            "example":
-              [              {
-                "_id": "t7457457t5*****",
-                "address": "Bamako, Nord-ouest, rue 23",
-                "idCard": "https://file-image-idCard.png",
-                "driverLicense": "https://file-document-license.pdf",
-                "profilImage": "https://file-image-profilImage.png",
-                "cvFile": "https://file-document-cvFile.pdf",
-                "letterFile": "https://file-document-letter.pdf",
-                "status": "pending",
-                "userId": "t7457457t5*****",
-                "createdAt": "2022-11-29T14:32:04.681Z",
-                "updatedAt": "2022-11-29T14:32:04.681Z",
-                "__v": 0
-              }]
-          }
-        }
-      },
-      "getuserrider": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "integer",
-            "example": 200
-          },
-          "message": {
-            "type": "string",
-            "example": "success"
-          },
-          "data": {
-            "type": "object",
-            "example":
-              {
-                "_id": "t7457457t5*****",
-                "address": "Bamako, Nord-ouest, rue 23",
-                "idCard": "https://file-image-idCard.png",
-                "driverLicense": "https://file-document-license.pdf",
-                "profilImage": "https://file-image-profilImage.png",
-                "cvFile": "https://file-document-cvFile.pdf",
-                "letterFile": "https://file-document-letter.pdf",
-                "status": "pending",
-                "userId": "t7457457t5*****",
-                "createdAt": "2022-11-29T14:32:04.681Z",
-                "updatedAt": "2022-11-29T14:32:04.681Z",
-                "__v": 0
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/2fa-verify-response"
               }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
           }
         }
-      },
-      "deleteuserrider": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "integer",
-            "example": 200
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Get all users",
+        "description": "",
+        "operationId": "allusers",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/getusers"
+              }
+            }
           },
-          "message": {
-            "type": "string",
-            "example": "success"
-          },
-          "data": null
-        }
-      },
-      "createcompany": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "example": "Lafia boutik"
-          },
-          "location": {
-            "type": "string",
-            "example": "Bamako, rue 22"
-          },
-          "country": {
-            "type": "string",
-            "example": "Mali"
-          },
-          "city": {
-            "type": "string",
-            "example": "Bamako"
-          },
-          "departement": {
-            "type": "string",
-            "example": "ville basse"
-          },
-          "categoryCompanyId": {
-            "type": "string",
-            "example": "233jdhfbjdfhbhhje*******"
-          },
-          "userId": {
-            "type":"string",
-            "example": "12ehj990********"
+          "401": {
+            "description": "Invalid status value"
           }
         }
-      },
-      "getcompanies": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "integer",
-            "example": 200
-          },
-          "message": {
+      }
+    },
+    "/user/{uuid}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Get user by uuid",
+        "description": "",
+        "operationId": "getuser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "description": "user uuid need to be add in the url request",
+            "required": true,
             "type": "string",
-            "example": "success"
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/getuser"
+              }
+            }
           },
-          "data": {
-            "type": "array",
-            "example":
-              [{
-                "_id": "t7457457t5*****",
-                "name":"Lafia boutik",
-                "location": "Bamako rue 22",
-                "country": "Mali",
-                "city": "Bamako",
-                "departement": "ville basse",
-                "categoryCompanyId": "t7457457t5*****",
-                "status": "pending",
-                "createdAt": "2022-11-29T14:32:04.681Z",
-                "updatedAt": "2022-11-29T14:32:04.681Z",
-                "__v": 0
-              }]
+          "401": {
+            "description": "Invalid status value"
           }
         }
-      },
-      "getcompany": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "integer",
-            "example": 200
-          },
-          "message": {
+      }
+    },
+    "/user/modify/{uuid}": {
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Edit user by uuid",
+        "description": "",
+        "operationId": "updateuser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "description": "user uuid need to be add in the url request",
+            "required": true,
             "type": "string",
-            "example": "success"
+            "items": {
+              "type": "string"
+            }
           },
-          "data": {
-            "type": "object",
-            "example":
+          {
+            "in": "body",
+            "name": "body",
+            "description": "body for your query",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/updateusers"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/getuser"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/owners": {
+      "get": {
+        "tags": [
+          "Owners"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Get all users owners",
+        "description": "",
+        "operationId": "allusersowners",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/getusersowners"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/owner/{user_uuid}": {
+      "get": {
+        "tags": [
+          "Owners"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Get user owner by uuid owner",
+        "description": "",
+        "operationId": "getuserowner",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "user_uuid",
+            "in": "path",
+            "description": "owner uuid need to be add in the url request",
+            "required": true,
+            "type": "string",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/getuserowner"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/owner/files/upload/{user_uuid}": {
+      "post": {
+        "tags": [
+          "Owners"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Upload Owner Files",
+        "description": "",
+        "operationId": "uploadownerfiles",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "user_uuid",
+            "in": "path",
+            "description": "user uuid need to be add in the url request",
+            "required": true,
+            "type": "string",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "idCardFront",
+            "in": "formData",
+            "description": "Id card or Passport front image (.jpg, .jpeg, .png, .webp)",
+            "required": true,
+            "type": "file"
+          },
+          {
+            "name": "idCardBack",
+            "in": "formData",
+            "description": "Id card or Passport back image (.jpg, .jpeg, .png, .webp)",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/deletecompany"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/riders": {
+      "get": {
+        "tags": [
+          "Riders"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Get all users riders",
+        "description": "",
+        "operationId": "allusersriders",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/getusersriders"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/rider/{user_uuid}": {
+      "get": {
+        "tags": [
+          "Riders"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Get user rider by uuid rider",
+        "description": "",
+        "operationId": "getuserrider",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "user_uuid",
+            "in": "path",
+            "description": "user uuid need to be add in the url request",
+            "required": true,
+            "type": "string",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/getuserrider"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/rider/files/upload/{user_uuid}": {
+      "post": {
+        "tags": [
+          "Riders"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Upload Owner Files",
+        "description": "",
+        "operationId": "uploadriderfiles",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "user_uuid",
+            "in": "path",
+            "description": "user uuid need to be add in the url request",
+            "required": true,
+            "type": "string",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "idCardFront",
+            "in": "formData",
+            "description": "Id card or Passport front image (.jpg, .jpeg, .png, .webp)",
+            "required": true,
+            "type": "file"
+          },
+          {
+            "name": "idCardBack",
+            "in": "formData",
+            "description": "Id card or Passport back image (.jpg, .jpeg, .png, .webp)",
+            "required": true,
+            "type": "file"
+          },
+          {
+            "name": "driverLicenseFront",
+            "in": "formData",
+            "description": "Driver license front image (.jpg, .jpeg, .png, .webp)",
+            "required": true,
+            "type": "file"
+          },
+          {
+            "name": "driverLicenseBack",
+            "in": "formData",
+            "description": "Driver license back image (.jpg, .jpeg, .png, .webp)",
+            "required": true,
+            "type": "file"
+          },
+          {
+            "name": "profileImage",
+            "in": "formData",
+            "description": "Rider profil image (.jpg, .jpeg, .png, .webp)",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/deletecompany"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/categories-companies": {
+      "get": {
+        "tags": [
+          "Categories Companies"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Get all categories companies",
+        "description": "",
+        "operationId": "allcompanycategory",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/getcategoriescompanies"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/category-company/{category_uuid}": {
+      "get": {
+        "tags": [
+          "Categories Companies"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Get category company by uuid",
+        "description": "",
+        "operationId": "getcategorycompany",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "category_uuid",
+            "in": "path",
+            "description": "rider uuid need to be add in the url request",
+            "required": true,
+            "type": "string",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/getcategorycompany"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/company/create": {
+      "post": {
+        "tags": [
+          "Companies"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Create new company",
+        "description": "",
+        "operationId": "createcompany",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "body for your query",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/createcompany"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/getcompany"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/companies": {
+      "get": {
+        "tags": [
+          "Companies"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Get all companies",
+        "description": "",
+        "operationId": "allcoma=oany",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/getcompanies"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/company/{company_uuid}": {
+      "get": {
+        "tags": [
+          "Companies"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Get company by uuid",
+        "description": "",
+        "operationId": "getcompany",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "company_uuid",
+            "in": "path",
+            "description": "company uuid need to be add in the url request",
+            "required": true,
+            "type": "string",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/getcompany"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/company/modify/{company_uuid}": {
+      "put": {
+        "tags": [
+          "Companies"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Update company",
+        "description": "",
+        "operationId": "updatecompany",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "company_uuid",
+            "in": "path",
+            "description": "company uuid need to be add in the url request",
+            "required": true,
+            "type": "string",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "body for your query",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/updatecompany"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/getcompany"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/company/delete/{company_uuid}": {
+      "delete": {
+        "tags": [
+          "Companies"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Remove company by uuid",
+        "description": "",
+        "operationId": "deletecompany",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "company_uuid",
+            "in": "path",
+            "description": "company uuid need to be add in the url request",
+            "required": true,
+            "type": "string",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/deletecompany"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/company/files/upload/{company_uuid}": {
+      "post": {
+        "tags": [
+          "Companies"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Upload Company Files",
+        "description": "",
+        "operationId": "uploadcompanyimages",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "company_uuid",
+            "in": "path",
+            "description": "company uuid need to be add in the url request",
+            "required": true,
+            "type": "string",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "image",
+            "in": "formData",
+            "description": "Company cover image (.jpg, .jpeg, .png, .webp)",
+            "required": true,
+            "type": "file"
+          },
+          {
+            "name": "registrationLicense",
+            "in": "formData",
+            "description": "A document for legal company like rccm (.pdf)",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/deletecompany"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/category-product/create": {
+      "post": {
+        "tags": [
+          "Categories Products"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Create new categories product",
+        "description": "",
+        "operationId": "createnewcategorieproduct",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "body for your query",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/createcategoryproduct"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/getcategorieproduct"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/categories-products/{company_uuid}": {
+      "get": {
+        "tags": [
+          "Categories Products"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Get all categories products by company uuid",
+        "description": "",
+        "operationId": "allcategoriesproducts",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "company_uuid",
+            "in": "path",
+            "description": "company uuid need to be add in the url request",
+            "required": true,
+            "type": "string",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/getcategoriesproducts"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/category-product/{category_uuid}": {
+      "get": {
+        "tags": [
+          "Categories Products"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Get category product by uuid",
+        "description": "",
+        "operationId": "getcategoryproduct",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "category_uuid",
+            "in": "path",
+            "description": "category uuid need to be add in the url request",
+            "required": true,
+            "type": "string",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/getcategoryproduct"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/category-product/modify/{category_uuid}": {
+      "put": {
+        "tags": [
+          "Categories Products"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Update category product",
+        "description": "",
+        "operationId": "updatecategoryproduct",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "category_uuid",
+            "in": "path",
+            "description": "category uuid need to be add in the url request",
+            "required": true,
+            "type": "string",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "body for your query",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/updatecategoryproduct"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/getcompany"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/category-product/delete/{category_uuid}/{user_uuid}": {
+      "delete": {
+        "tags": [
+          "Categories Products"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Remove category product by uuid",
+        "description": "",
+        "operationId": "deletecategoryproduct",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "category_uuid",
+            "in": "path",
+            "description": "company uuid need to be add in the url request",
+            "required": true,
+            "type": "string",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user_uuid",
+            "in": "path",
+            "description": "user uuid need to be add in the url request",
+            "required": true,
+            "type": "string",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/deletecategoryproduct"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/category-product/images/upload/{category_uuid}": {
+      "post": {
+        "tags": [
+          "Categories Products"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Upload Category Product Cover",
+        "description": "",
+        "operationId": "uploadcatproductimages",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "category_uuid",
+            "in": "path",
+            "description": "category uuid need to be add in the url request",
+            "required": true,
+            "type": "string",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "image",
+            "in": "formData",
+            "description": "upload files parameter",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/deletecompany"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/product/create": {
+      "post": {
+        "tags": [
+          "Products"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Create new product",
+        "description": "",
+        "operationId": "createnewproduct",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "body for your query",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/createproduct"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/getproduct"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/products/{category_uuid}": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Get all products by category uuid",
+        "description": "",
+        "operationId": "allproducts",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "category_uuid",
+            "in": "path",
+            "description": "category uuid need to be add in the url request",
+            "required": true,
+            "type": "string",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/getproducts"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/product/{product_uuid}": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Get product by uuid",
+        "description": "",
+        "operationId": "getproduct",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "product_uuid",
+            "in": "path",
+            "description": "product uuid need to be add in the url request",
+            "required": true,
+            "type": "string",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/getproduct"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/product/modify/{product_uuid}": {
+      "put": {
+        "tags": [
+          "Products"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Update product",
+        "description": "",
+        "operationId": "updateproduct",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "body for your query",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/updateproduct"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/getproduct"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/product/delete/{product_uuid}/{user_uuid}": {
+      "delete": {
+        "tags": [
+          "Products"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Remove product by uuid",
+        "description": "",
+        "operationId": "deleteproduct",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "product_uuid",
+            "in": "path",
+            "description": "product uuid need to be add in the url request",
+            "required": true,
+            "type": "string",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user_uuid",
+            "in": "path",
+            "description": "user uuid need to be add in the url request",
+            "required": true,
+            "type": "string",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/deleteproduct"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/product/images/upload/{product_uuid}": {
+      "post": {
+        "tags": [
+          "Products"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Upload Products images",
+        "description": "",
+        "operationId": "uploadproductimages",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "product_uuid",
+            "in": "path",
+            "description": "product uuid need to be add in the url request",
+            "required": true,
+            "type": "string",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "mainImage",
+            "in": "formData",
+            "description": "upload files parameter",
+            "required": true,
+            "type": "file"
+          },
+          {
+            "name": "secondImage",
+            "in": "formData",
+            "description": "upload files parameter",
+            "required": false,
+            "type": "file"
+          },
+          {
+            "name": "thirdImage",
+            "in": "formData",
+            "description": "upload files parameter",
+            "required": false,
+            "type": "file"
+          },
+          {
+            "name": "fourthImage",
+            "in": "formData",
+            "description": "upload files parameter",
+            "required": false,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/deletecompany"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/cart/addproduct": {
+      "post": {
+        "tags": [
+          "Carts"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Add Product to cart",
+        "description": "",
+        "operationId": "addproducttcart",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "body for your query",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/addproducttocart"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/getcarts"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/cart/modify/products": {
+      "put": {
+        "tags": [
+          "Carts"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Update Products in cart",
+        "description": "",
+        "operationId": "updateproductstcart",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "body for your query",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/updateproductsincart"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/deletecategoryproduct"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/cart/{user_uuid}": {
+      "get": {
+        "tags": [
+          "Carts"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Get cart by user uuid",
+        "description": "",
+        "operationId": "getusercart",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "user_uuid",
+            "in": "path",
+            "description": "user uuid need to be add in the url request",
+            "required": true,
+            "type": "string",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/getcart"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/cart/deleteproduct/{user_uuid}/{product_uuid}": {
+      "delete": {
+        "tags": [
+          "Carts"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Remove product from cart by user_uuid and product_uuid",
+        "description": "",
+        "operationId": "removeorderproduct",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "user_uuid",
+            "in": "path",
+            "description": "user uuid need to be add in the url request",
+            "required": true,
+            "type": "string",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "product_uuid",
+            "in": "path",
+            "description": "product uuid need to be add in the url request",
+            "required": true,
+            "type": "string",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/deletecompany"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/order/create": {
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Create new order",
+        "description": "",
+        "operationId": "createneworder",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "body for your query",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/createorder"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/getorder"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/orders/company/{company_uuid}": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Get all company orders by company uuid",
+        "description": "",
+        "operationId": "allcompanyorders",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "company_uuid",
+            "in": "path",
+            "description": "company uuid need to be add in the url request",
+            "required": true,
+            "type": "string",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/getorders"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/orders/rider/{rider_uuid}": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Get all rider orders by rider uuid",
+        "description": "",
+        "operationId": "allcompanyrider",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "rider_uuid",
+            "in": "path",
+            "description": "rider uuid need to be add in the url request",
+            "required": true,
+            "type": "string",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/getorders"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/order/{order_uuid}": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Get order by order uuid",
+        "description": "",
+        "operationId": "getorder",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "order_uuid",
+            "in": "path",
+            "description": "order uuid need to be add in the url request",
+            "required": true,
+            "type": "string",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/getorder"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/order/cancel/{order_uuid}": {
+      "put": {
+        "tags": [
+          "Orders"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Cancel order by order uuid",
+        "description": "",
+        "operationId": "cancelorder",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "order_uuid",
+            "in": "path",
+            "description": "order uuid need to be add in the url request",
+            "required": true,
+            "type": "string",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/getorder"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "getusers": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": 200
+        },
+        "message": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": {
+          "type": "array",
+          "example": [
             {
               "_id": "t7457457t5*****",
-              "name":"Lafia boutik",
+              "firstName": "John",
+              "lastName": "Doe",
+              "address": "Bamako, Nord-ouest, rue 23",
+              "email": "jer*****@gmail.com",
+              "password": "$2b*******",
+              "phone": "070*********",
+              "role": "user",
+              "referalCode": "***RT",
+              "secretCode": null,
+              "referrer": "445GH",
+              "createdAt": "2022-11-29T14:32:04.681Z",
+              "__v": 0
+            },
+            {
+              "_id": "t7457457t5*****",
+              "firstName": "John",
+              "lastName": "Doe",
+              "address": "Bamako, Nord-ouest, rue 23",
+              "email": "jer*****@gmail.com",
+              "password": "$2b*******",
+              "phone": "070*********",
+              "roles": [
+                "ROLE_***"
+              ],
+              "referalCode": "***RT",
+              "secretCode": null,
+              "referrer": "445GH",
+              "createdAt": "2022-11-29T14:32:04.681Z",
+              "__v": 0
+            }
+          ]
+        }
+      }
+    },
+    "getuser": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": 200
+        },
+        "message": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": {
+          "type": "array",
+          "example": {
+            "_id": "t7457457t5*****",
+            "firstName": "John",
+            "lastName": "Doe",
+            "address": "Bamako, Nord-ouest, rue 23",
+            "email": "jer*****@gmail.com",
+            "password": "$2b*******",
+            "phone": "070*********",
+            "role": "user",
+            "referalCode": "***RT",
+            "secretCode": null,
+            "referrer": "445GH",
+            "createdAt": "2022-11-29T14:32:04.681Z",
+            "__v": 0
+          }
+        }
+      }
+    },
+    "createusers": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "example": "John"
+        },
+        "lastName": {
+          "type": "string",
+          "example": "Doe"
+        },
+        "address": {
+          "type": "string",
+          "example": "Bamako, rue 22"
+        },
+        "email": {
+          "type": "string",
+          "example": "email@example.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "12345"
+        },
+        "phone": {
+          "type": "string",
+          "example": "+00 0000 000"
+        },
+        "referrer": {
+          "type": "string",
+          "example": "54FG"
+        }
+      }
+    },
+    "updateusers": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "example": "John"
+        },
+        "lastName": {
+          "type": "string",
+          "example": "Doe"
+        },
+        "address": {
+          "type": "string",
+          "example": "Bamako, rue 22"
+        },
+        "email": {
+          "type": "string",
+          "example": "email@example.com"
+        },
+        "phone": {
+          "type": "string",
+          "example": "+00 0000 000"
+        },
+        "referrer": {
+          "type": "string",
+          "example": "54FG"
+        }
+      }
+    },
+    "updateuserowner": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "canceled, rejected or accepted"
+        }
+      }
+    },
+    "getusersowners": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": 200
+        },
+        "message": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": {
+          "type": "array",
+          "example": [
+            {
+              "_id": "t7457457t5*****",
+              "idCard": "https://file-image-idCard.png",
+              "license": "https://file-document-license.pdf",
+              "status": "pending",
+              "userId": "t7457457t5*****",
+              "createdAt": "2022-11-29T14:32:04.681Z",
+              "updatedAt": "2022-11-29T14:32:04.681Z",
+              "__v": 0
+            }
+          ]
+        }
+      }
+    },
+    "getuserowner": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": 200
+        },
+        "message": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": {
+          "type": "object",
+          "example": {
+            "_id": "t7457457t5*****",
+            "firstName": "Jeremy",
+            "lastName": "Niondo",
+            "address": "Bamako, Nord-ouest, rue 23",
+            "idCard": "https://file-image-idCard.png",
+            "license": "https://file-document-license.pdf",
+            "status": "pending",
+            "userId": "t7457457t5*****",
+            "createdAt": "2022-11-29T14:32:04.681Z",
+            "updatedAt": "2022-11-29T14:32:04.681Z",
+            "__v": 0
+          }
+        }
+      }
+    },
+    "createuserrider": {
+      "type": "object",
+      "properties": {
+        "firstname": {
+          "type": "string",
+          "example": "Jeremy"
+        },
+        "lastname": {
+          "type": "string",
+          "example": "Niondo"
+        },
+        "address": {
+          "type": "string",
+          "example": "Bamako, rue 23"
+        },
+        "userId": {
+          "type": "string",
+          "example": "dfddkhjbjbfjgfg"
+        }
+      }
+    },
+    "updateuserrider": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "canceled, rejected or accepted"
+        }
+      }
+    },
+    "getusersriders": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": 200
+        },
+        "message": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": {
+          "type": "array",
+          "example": [
+            {
+              "_id": "t7457457t5*****",
+              "address": "Bamako, Nord-ouest, rue 23",
+              "idCard": "https://file-image-idCard.png",
+              "driverLicense": "https://file-document-license.pdf",
+              "profilImage": "https://file-image-profilImage.png",
+              "cvFile": "https://file-document-cvFile.pdf",
+              "letterFile": "https://file-document-letter.pdf",
+              "status": "pending",
+              "userId": "t7457457t5*****",
+              "createdAt": "2022-11-29T14:32:04.681Z",
+              "updatedAt": "2022-11-29T14:32:04.681Z",
+              "__v": 0
+            }
+          ]
+        }
+      }
+    },
+    "getuserrider": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": 200
+        },
+        "message": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": {
+          "type": "object",
+          "example": {
+            "_id": "t7457457t5*****",
+            "address": "Bamako, Nord-ouest, rue 23",
+            "idCard": "https://file-image-idCard.png",
+            "driverLicense": "https://file-document-license.pdf",
+            "profilImage": "https://file-image-profilImage.png",
+            "cvFile": "https://file-document-cvFile.pdf",
+            "letterFile": "https://file-document-letter.pdf",
+            "status": "pending",
+            "userId": "t7457457t5*****",
+            "createdAt": "2022-11-29T14:32:04.681Z",
+            "updatedAt": "2022-11-29T14:32:04.681Z",
+            "__v": 0
+          }
+        }
+      }
+    },
+    "deleteuserrider": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": 200
+        },
+        "message": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": null
+      }
+    },
+    "createcompany": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Lafia boutik"
+        },
+        "location": {
+          "type": "string",
+          "example": "Bamako, rue 22"
+        },
+        "country": {
+          "type": "string",
+          "example": "Mali"
+        },
+        "city": {
+          "type": "string",
+          "example": "Bamako"
+        },
+        "departement": {
+          "type": "string",
+          "example": "ville basse"
+        },
+        "categoryCompanyId": {
+          "type": "string",
+          "example": "233jdhfbjdfhbhhje*******"
+        },
+        "userId": {
+          "type": "string",
+          "example": "12ehj990********"
+        }
+      }
+    },
+    "getcompanies": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": 200
+        },
+        "message": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": {
+          "type": "array",
+          "example": [
+            {
+              "_id": "t7457457t5*****",
+              "name": "Lafia boutik",
               "location": "Bamako rue 22",
               "country": "Mali",
               "city": "Bamako",
@@ -2326,618 +2360,718 @@
               "updatedAt": "2022-11-29T14:32:04.681Z",
               "__v": 0
             }
+          ]
+        }
+      }
+    },
+    "getcompany": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": 200
+        },
+        "message": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": {
+          "type": "object",
+          "example": {
+            "_id": "t7457457t5*****",
+            "name": "Lafia boutik",
+            "location": "Bamako rue 22",
+            "country": "Mali",
+            "city": "Bamako",
+            "departement": "ville basse",
+            "categoryCompanyId": "t7457457t5*****",
+            "status": "pending",
+            "createdAt": "2022-11-29T14:32:04.681Z",
+            "updatedAt": "2022-11-29T14:32:04.681Z",
+            "__v": 0
           }
         }
-      },
-      "updatecompany": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "example": "Lafia boutik"
-          },
-          "location": {
-            "type": "string",
-            "example": "Bamako, rue 22"
-          },
-          "country": {
-            "type": "string",
-            "example": "Mali"
-          },
-          "city": {
-            "type": "string",
-            "example": "Bamako"
-          },
-          "departement": {
-            "type": "string",
-            "example": "ville basse"
-          },
-          "status":{
-            "type": "string",
-            "example": "pending"
-          },
-          "categoryCompanyId": {
-            "type": "string",
-            "example": "233jdhfbjdfhbhhje*******"
-          }
+      }
+    },
+    "updatecompany": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Lafia boutik"
+        },
+        "location": {
+          "type": "string",
+          "example": "Bamako, rue 22"
+        },
+        "country": {
+          "type": "string",
+          "example": "Mali"
+        },
+        "city": {
+          "type": "string",
+          "example": "Bamako"
+        },
+        "departement": {
+          "type": "string",
+          "example": "ville basse"
+        },
+        "status": {
+          "type": "string",
+          "example": "pending"
+        },
+        "categoryCompanyId": {
+          "type": "string",
+          "example": "233jdhfbjdfhbhhje*******"
         }
-      },
-      "deletecompany": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "integer",
-            "example": 200
-          },
-          "message": {
-            "type": "string",
-            "example": "success"
-          },
-          "data": null
+      }
+    },
+    "deletecompany": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": 200
+        },
+        "message": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": null
+      }
+    },
+    "createcategorycompany": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Food Factory"
+        },
+        "description": {
+          "type": "string",
+          "example": "food activity in the world"
+        },
+        "userId": {
+          "type": "string",
+          "example": "12ehj990********"
         }
-      },
-      "createcategorycompany": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "example": "Food Factory"
-          },
-          "description": {
-            "type": "string",
-            "example": "food activity in the world"
-          },
-          "userId": {
-            "type": "string",
-            "example": "12ehj990********"
-          }
+      }
+    },
+    "updatecategorycompany": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Food Factory"
+        },
+        "description": {
+          "type": "string",
+          "example": "food activity in the world"
+        },
+        "userId": {
+          "type": "string",
+          "example": "12ehj990********"
         }
-      },
-      "updatecategorycompany": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "example": "Food Factory"
-          },
-          "description": {
-            "type": "string",
-            "example": "food activity in the world"
-          },
-          "userId": {
-            "type": "string",
-            "example": "12ehj990********"
-          }
-        }
-      },
-      "getcategoriescompanies": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "integer",
-            "example": 200
-          },
-          "message": {
-            "type": "string",
-            "example": "success"
-          },
-          "data": {
-            "type": "array",
-            "example":
-              [{
-                "_id": "t7457457t5*****",
-                "name":"Food Factory",
-                "description": "is category companies",
-                "image": "https://image-cover.png",
-                "createdAt": "2022-11-29T14:32:04.681Z",
-                "updatedAt": "2022-11-29T14:32:04.681Z",
-                "__v": 0
-              }]
-          }
-        }
-      },
-      "getcategorycompany": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "integer",
-            "example": 200
-          },
-          "message": {
-            "type": "string",
-            "example": "success"
-          },
-          "data": {
-            "type": "object",
-            "example":
+      }
+    },
+    "getcategoriescompanies": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": 200
+        },
+        "message": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": {
+          "type": "array",
+          "example": [
             {
-              "category": {
-                "_id": "63bd9a7a3dbbd70a6b131f55",
-                "name": "T-shirt",
-                "description": "Men clothes",
-                "companyId": "63bc353ceb248d846835d669",
-                "createdAt": "2023-01-10T17:03:54.224Z",
+              "_id": "t7457457t5*****",
+              "name": "Food Factory",
+              "description": "is category companies",
+              "image": "https://image-cover.png",
+              "createdAt": "2022-11-29T14:32:04.681Z",
+              "updatedAt": "2022-11-29T14:32:04.681Z",
+              "__v": 0
+            }
+          ]
+        }
+      }
+    },
+    "getcategorycompany": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": 200
+        },
+        "message": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": {
+          "type": "object",
+          "example": {
+            "category": {
+              "_id": "63bd9a7a3dbbd70a6b131f55",
+              "name": "T-shirt",
+              "description": "Men clothes",
+              "companyId": "63bc353ceb248d846835d669",
+              "createdAt": "2023-01-10T17:03:54.224Z",
+              "__v": 0
+            },
+            "products": [
+              {
+                "_id": "63bd9c0fb52009388c4bf3b5",
+                "name": "Essentials XL",
+                "description": "Men T-shirt size XL, color bleu",
+                "images": [
+                  "https://image-01-product-001.png",
+                  "https://image-02-product-001.png"
+                ],
+                "price": 10000,
+                "categoryProductId": "63bd9a7a3dbbd70a6b131f55",
+                "createdAt": "2023-01-10T17:10:39.111Z",
                 "__v": 0
-              },
-              "products": [
-                {
-                  "_id": "63bd9c0fb52009388c4bf3b5",
-                  "name": "Essentials XL",
-                  "description": "Men T-shirt size XL, color bleu",
-                  "images": [
-                    "https://image-01-product-001.png",
-                    "https://image-02-product-001.png"
-                  ],
-                  "price": 10000,
-                  "categoryProductId": "63bd9a7a3dbbd70a6b131f55",
-                  "createdAt": "2023-01-10T17:10:39.111Z",
-                  "__v": 0
-                }
-              ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    "createproduct": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Essentials size xl"
+        },
+        "description": {
+          "type": "string",
+          "example": "This is T-shirt for men"
+        },
+        "price": {
+          "type": "number",
+          "example": "1000"
+        },
+        "deliveryCost": {
+          "type": "number",
+          "example": "1000"
+        },
+        "makingTime": {
+          "type": "string",
+          "example": "1h30"
+        },
+        "categoryProductId": {
+          "type": "string",
+          "example": "12ehj990********"
+        },
+        "userId": {
+          "type": "string",
+          "example": "12ehj990********"
+        }
+      }
+    },
+    "getproducts": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": 200
+        },
+        "message": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": {
+          "type": "array",
+          "example": [
+            {
+              "_id": "63bd9a7a3dbbd70a6b131f55",
+              "name": "T-shirt",
+              "description": "Men clothes",
+              "images": [
+                "https://image-01-product-001.png"
+              ],
+              "deliveryCost": 1000,
+              "makingTime": "1h30",
+              "categoryProductId": "63bc353ceb248d846835d669",
+              "createdAt": "2023-01-10T17:03:54.224Z",
+              "__v": 0
+            },
+            {
+              "_id": "63bd9a7a3dbbd70a6b131f55",
+              "name": "T-shirt",
+              "description": "Men clothes",
+              "images": [
+                "https://image-01-product-001.png"
+              ],
+              "deliveryCost": 1000,
+              "makingTime": "1h30",
+              "categoryProductId": "63bc353ceb248d846835d669",
+              "createdAt": "2023-01-10T17:03:54.224Z",
+              "__v": 0
+            }
+          ]
+        }
+      }
+    },
+    "getproduct": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": 200
+        },
+        "message": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": {
+          "type": "object",
+          "example": {
+            "_id": "63bd9a7a3dbbd70a6b131f55",
+            "name": "T-shirt",
+            "description": "Men clothes",
+            "images": [
+              "https://image-01-product-001.png"
+            ],
+            "deliveryCost": 1000,
+            "makingTime": "1h30",
+            "categoryProductId": "63bc353ceb248d846835d669",
+            "createdAt": "2023-01-10T17:03:54.224Z",
+            "__v": 0
+          }
+        }
+      }
+    },
+    "updateproduct": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Essentials size xl"
+        },
+        "description": {
+          "type": "string",
+          "example": "This is T-shirt for men"
+        },
+        "price": {
+          "type": "number",
+          "example": "1000"
+        },
+        "deliveryCost": {
+          "type": "number",
+          "example": "1000"
+        },
+        "makingTime": {
+          "type": "string",
+          "example": "1h30"
+        },
+        "categoryProductId": {
+          "type": "string",
+          "example": "12ehj990********"
+        },
+        "userId": {
+          "type": "string",
+          "example": "12ehj990********"
+        }
+      }
+    },
+    "createcategoryproduct": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Food Factory"
+        },
+        "description": {
+          "type": "string",
+          "example": "food activity in the world"
+        },
+        "companyId": {
+          "type": "string",
+          "example": "12ehj990********"
+        },
+        "userId": {
+          "type": "string",
+          "example": "12ehj990********"
+        }
+      }
+    },
+    "getcategoriesproducts": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": 200
+        },
+        "message": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": {
+          "type": "array",
+          "example": [
+            {
+              "_id": "63bd9a7a3dbbd70a6b131f55",
+              "name": "T-shirt",
+              "description": "Men clothes",
+              "image": "https://image-cover.png",
+              "companyId": "63bc353ceb248d846835d669",
+              "createdAt": "2023-01-10T17:03:54.224Z",
+              "__v": 0
+            },
+            {
+              "_id": "63bd9a7a3dbbd70a6b131f55",
+              "name": "T-shirt",
+              "description": "Men clothes",
+              "image": "https://image-cover.png",
+              "companyId": "63bc353ceb248d846835d669",
+              "createdAt": "2023-01-10T17:03:54.224Z",
+              "__v": 0
+            }
+          ]
+        }
+      }
+    },
+    "getcategoryproduct": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": 200
+        },
+        "message": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": {
+          "type": "object",
+          "example": {
+            "_id": "63bd9a7a3dbbd70a6b131f55",
+            "name": "T-shirt",
+            "description": "Men clothes",
+            "image": "https://image-cover.png",
+            "companyId": "63bc353ceb248d846835d669",
+            "createdAt": "2023-01-10T17:03:54.224Z",
+            "__v": 0
+          }
+        }
+      }
+    },
+    "updatecategoryproduct": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Men Clothes"
+        },
+        "description": {
+          "type": "string",
+          "example": "food activity in the world"
+        },
+        "userId": {
+          "type": "string",
+          "example": "12ehj990********"
+        }
+      }
+    },
+    "deletecategoryproduct": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": 200
+        },
+        "message": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": null
+      }
+    },
+    "authuser": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "email@example.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "12345"
+        },
+        "phone": {
+          "type": "string",
+          "example": "+00 0000 000"
+        }
+      }
+    },
+    "authResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": 201
+        },
+        "message": {
+          "type": "string",
+          "example": "successfully"
+        },
+        "data": {
+          "type": "object",
+          "example": {
+            "users": {
+              "email": "user@example.com",
+              "password": "sbjdhbfjdjfhgvdjhdbiuhrigf",
+              "phone": "000000000000",
+              "roles": [
+                "ROLE_USER"
+              ],
+              "referalCode": "dhbdf3",
+              "referrer": "54FG",
+              "createdAt": "2022-11-16T11:16:04.641Z"
+            },
+            "token": "1djnfkjfbjhbjfhbgjhbjhbjbjbh"
+          }
+        }
+      }
+    },
+    "2fa-verify-response": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": 201
+        },
+        "message": {
+          "type": "string",
+          "example": "successfully"
+        },
+        "data": {
+          "type": "object",
+          "example": {
+            "users": {
+              "email": "user@example.com",
+              "password": "sbjdhbfjdjfhgvdjhdbiuhrigf",
+              "phone": "000000000000",
+              "roles": [
+                "ROLE_USER"
+              ],
+              "referalCode": "dhbdf3",
+              "secretCode": null,
+              "referrer": "445GH",
+              "createdAt": "2022-11-16T11:16:04.641Z"
             }
           }
         }
-      },
-      "createproduct": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "example": "Essentials size xl"
-          },
-          "description": {
-            "type": "string",
-            "example": "This is T-shirt for men"
-          },
-          "price": {
-            "type": "number",
-            "example": "1000"
-          },
-          "deliveryCost": {
-            "type": "number",
-            "example": "1000"
-          },
-          "makingTime": {
-            "type": "string",
-            "example": "1h30"
-          },
-          "categoryProductId": {
-            "type": "string",
-            "example": "12ehj990********"
-          },
-          "userId": {
-            "type": "string",
-            "example": "12ehj990********"
-          }
+      }
+    },
+    "2fa-verify": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "example": "bdgvjfijhfbjgvfjgh"
+        },
+        "doubleFactorCode": {
+          "type": "integer",
+          "example": 1234
         }
-      },
-      "getproducts": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "integer",
-            "example": 200
-          },
-          "message": {
-            "type": "string",
-            "example": "success"
-          },
-          "data": {
-            "type": "array",
-            "example":
-              [{
-                "_id": "63bd9a7a3dbbd70a6b131f55",
-                "name": "T-shirt",
-                "description": "Men clothes",
+      }
+    },
+    "user-secret-code": {
+      "type": "object",
+      "properties": {
+        "secret_code": {
+          "type": "integer",
+          "example": 3453
+        }
+      }
+    },
+    "addproducttocart": {
+      "type": "object",
+      "properties": {
+        "product_uuid": {
+          "type": "string",
+          "example": "12ehj990********"
+        },
+        "user_uuid": {
+          "type": "string",
+          "example": "12ehj990********"
+        },
+        "quantity": {
+          "type": "number",
+          "example": 2
+        }
+      }
+    },
+    "getcarts": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": 200
+        },
+        "message": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": {
+          "type": "array",
+          "example": [
+            {
+              "_id": "63c58af96f182c5783170b2a",
+              "productId": "63bd9c0fb52009388c4bf3b5",
+              "product": {
+                "_id": "63bd9c0fb52009388c4bf3b5",
+                "name": "Essentials XL",
+                "description": "Men T-shirt size XL, color bleu",
                 "images": [
-                  "https://image-01-product-001.png"
+                  "https://lafia-server.texi.ci/files/images/products/product-image-5eeec2ba-49d2-4dbf-937c-e9c66257e423.jpeg",
+                  "https://lafia-server.texi.ci/files/images/products/product-image-880cdb5f-a107-476a-ba82-9a063f18be6f.png",
+                  "https://lafia-server.texi.ci/files/images/products/product-image-d0d22f35-895f-4e70-bd1f-38c04f9a671c.jpg"
                 ],
-                "deliveryCost": 1000,
-                "makingTime": "1h30",
-                "categoryProductId": "63bc353ceb248d846835d669",
-                "createdAt": "2023-01-10T17:03:54.224Z",
+                "price": 10000,
+                "categoryProductId": "63bd9a7a3dbbd70a6b131f55",
+                "createdAt": "2023-01-10T17:10:39.111Z",
                 "__v": 0
               },
-              {
-                "_id": "63bd9a7a3dbbd70a6b131f55",
-                "name": "T-shirt",
-                "description": "Men clothes",
+              "quantity": 2,
+              "cartId": "63c58adc9876c6ede7ffaeb8",
+              "__v": 0
+            },
+            {
+              "_id": "63c58af96f182c5783170b2a",
+              "productId": "63bd9c0fb52009388c4bf3b5",
+              "product": {
+                "_id": "63bd9c0fb52009388c4bf3b5",
+                "name": "Essentials XL",
+                "description": "Men T-shirt size XL, color bleu",
                 "images": [
-                  "https://image-01-product-001.png"
+                  "https://lafia-server.texi.ci/files/images/products/product-image-5eeec2ba-49d2-4dbf-937c-e9c66257e423.jpeg",
+                  "https://lafia-server.texi.ci/files/images/products/product-image-880cdb5f-a107-476a-ba82-9a063f18be6f.png",
+                  "https://lafia-server.texi.ci/files/images/products/product-image-d0d22f35-895f-4e70-bd1f-38c04f9a671c.jpg"
                 ],
-                "deliveryCost": 1000,
-                "makingTime": "1h30",
-                "categoryProductId": "63bc353ceb248d846835d669",
-                "createdAt": "2023-01-10T17:03:54.224Z",
-                "__v": 0
-              }]
-          }
-        }
-      },
-      "getproduct": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "integer",
-            "example": 200
-          },
-          "message": {
-            "type": "string",
-            "example": "success"
-          },
-          "data": {
-            "type": "object",
-            "example":
-              {
-                "_id": "63bd9a7a3dbbd70a6b131f55",
-                "name": "T-shirt",
-                "description": "Men clothes",
-                "images": [
-                  "https://image-01-product-001.png"
-                ],
-                "deliveryCost": 1000,
-                "makingTime": "1h30",
-                "categoryProductId": "63bc353ceb248d846835d669",
-                "createdAt": "2023-01-10T17:03:54.224Z",
-                "__v": 0
-              }
-          }
-        }
-      },
-      "updateproduct": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "example": "Essentials size xl"
-          },
-          "description": {
-            "type": "string",
-            "example": "This is T-shirt for men"
-          },
-          "price": {
-            "type": "number",
-            "example": "1000"
-          },
-          "deliveryCost": {
-            "type": "number",
-            "example": "1000"
-          },
-          "makingTime": {
-            "type": "string",
-            "example": "1h30"
-          },
-          "categoryProductId": {
-            "type": "string",
-            "example": "12ehj990********"
-          },
-          "userId": {
-            "type": "string",
-            "example": "12ehj990********"
-          }
-        }
-      },
-      "createcategoryproduct": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "example": "Food Factory"
-          },
-          "description": {
-            "type": "string",
-            "example": "food activity in the world"
-          },
-          "companyId": {
-            "type": "string",
-            "example": "12ehj990********"
-          },
-          "userId": {
-            "type": "string",
-            "example": "12ehj990********"
-          }
-        }
-      },
-      "getcategoriesproducts": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "integer",
-            "example": 200
-          },
-          "message": {
-            "type": "string",
-            "example": "success"
-          },
-          "data": {
-            "type": "array",
-            "example":
-              [{
-                "_id": "63bd9a7a3dbbd70a6b131f55",
-                "name": "T-shirt",
-                "description": "Men clothes",
-                "image": "https://image-cover.png",
-                "companyId": "63bc353ceb248d846835d669",
-                "createdAt": "2023-01-10T17:03:54.224Z",
+                "price": 10000,
+                "categoryProductId": "63bd9a7a3dbbd70a6b131f55",
+                "createdAt": "2023-01-10T17:10:39.111Z",
                 "__v": 0
               },
-              {
-                "_id": "63bd9a7a3dbbd70a6b131f55",
-                "name": "T-shirt",
-                "description": "Men clothes",
-                "image": "https://image-cover.png",
-                "companyId": "63bc353ceb248d846835d669",
-                "createdAt": "2023-01-10T17:03:54.224Z",
-                "__v": 0
-              }]
-          }
-        }
-      },
-      "getcategoryproduct": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "integer",
-            "example": 200
-          },
-          "message": {
-            "type": "string",
-            "example": "success"
-          },
-          "data": {
-            "type": "object",
-            "example":
-              {
-                "_id": "63bd9a7a3dbbd70a6b131f55",
-                "name": "T-shirt",
-                "description": "Men clothes",
-                "image": "https://image-cover.png",
-                "companyId": "63bc353ceb248d846835d669",
-                "createdAt": "2023-01-10T17:03:54.224Z",
-                "__v": 0
-              }
-          }
-        }
-      },
-      "updatecategoryproduct": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "example": "Men Clothes"
-          },
-          "description": {
-            "type": "string",
-            "example": "food activity in the world"
-          },
-          "userId": {
-            "type": "string",
-            "example": "12ehj990********"
-          }
-        }
-      },
-      "deletecategoryproduct": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "integer",
-            "example": 200
-          },
-          "message": {
-            "type": "string",
-            "example": "success"
-          },
-          "data": null
-        }
-      },
-      "authuser": {
-        "type": "object",
-        "properties": {
-          "email": {
-            "type": "string",
-            "example": "email@example.com"
-          },
-          "password": {
-            "type": "string",
-            "example": "12345"
-          },
-          "phone": {
-            "type": "string",
-            "example": "+00 0000 000"
-          }
-        }
-      },
-      "authResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "integer",
-            "example": 201
-          },
-          "message":{
-            "type": "string",
-            "example" : "successfully"
-          },
-          "data": {
-            "type" : "object",
-            "example" : {
-              "users": {
-                  "email" : "user@example.com",
-                  "password" : "sbjdhbfjdjfhgvdjhdbiuhrigf",
-                  "phone" : "000000000000",
-                  "roles" : ["ROLE_USER"],
-                  "referalCode" : "dhbdf3",
-                  "referrer": "54FG",
-                  "createdAt" : "2022-11-16T11:16:04.641Z"
-              },
-              "token": "1djnfkjfbjhbjfhbgjhbjhbjbjbh"
+              "quantity": 2,
+              "cartId": "63c58adc9876c6ede7ffaeb8",
+              "__v": 0
             }
-          }
+          ]
         }
-      },
-      "2fa-verify-response": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "integer",
-            "example": 201
-          },
-          "message":{
-            "type": "string",
-            "example" : "successfully"
-          },
-          "data": {
-            "type" : "object",
-            "example" : {
-              "users": {
-                  "email" : "user@example.com",
-                  "password" : "sbjdhbfjdjfhgvdjhdbiuhrigf",
-                  "phone" : "000000000000",
-                  "roles" : ["ROLE_USER"],
-                  "referalCode" : "dhbdf3",
-                  "secretCode": null,
-                  "referrer":"445GH",
-                  "createdAt" : "2022-11-16T11:16:04.641Z"
-              }
-            }
-          }
-        }
-      },
-      "2fa-verify": {
-        "type": "object",
-        "properties": {
-          "uuid": {
-            "type": "string",
-            "example": "bdgvjfijhfbjgvfjgh"
-          },
-          "doubleFactorCode": {
-            "type": "integer",
-            "example": 1234
-          }
-        }
-      },
-      "user-secret-code": {
-        "type": "object",
-        "properties": {
-          "secret_code": {
-            "type": "integer",
-            "example": 3453
-          }
-        }
-      },
-      "addproducttocart": {
-        "type": "object",
-        "properties": {
-          "product_uuid": {
-            "type": "string",
-            "example": "12ehj990********"
-          },
-          "user_uuid": {
-            "type": "string",
-            "example": "12ehj990********"
-          },
-          "quantity": {
-            "type": "number",
-            "example": 2
-          }
-        }
-      },
-      "getcarts": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "integer",
-            "example": 200
-          },
-          "message": {
-            "type": "string",
-            "example": "success"
-          },
-          "data": {
-            "type": "array",
-            "example":
-              [
-                {
-                  "_id": "63c58af96f182c5783170b2a",
-                  "productId": "63bd9c0fb52009388c4bf3b5",
-                  "product": {
-                    "_id": "63bd9c0fb52009388c4bf3b5",
-                    "name": "Essentials XL",
-                    "description": "Men T-shirt size XL, color bleu",
-                    "images": [
-                      "https://lafia-server.texi.ci/files/images/products/product-image-5eeec2ba-49d2-4dbf-937c-e9c66257e423.jpeg",
-                      "https://lafia-server.texi.ci/files/images/products/product-image-880cdb5f-a107-476a-ba82-9a063f18be6f.png",
-                      "https://lafia-server.texi.ci/files/images/products/product-image-d0d22f35-895f-4e70-bd1f-38c04f9a671c.jpg"
-                    ],
-                    "price": 10000,
-                    "categoryProductId": "63bd9a7a3dbbd70a6b131f55",
-                    "createdAt": "2023-01-10T17:10:39.111Z",
-                    "__v": 0
-                  },
-                  "quantity": 2,
-                  "cartId": "63c58adc9876c6ede7ffaeb8",
-                  "__v": 0
-                },
-                {
-                  "_id": "63c58af96f182c5783170b2a",
-                  "productId": "63bd9c0fb52009388c4bf3b5",
-                  "product": {
-                    "_id": "63bd9c0fb52009388c4bf3b5",
-                    "name": "Essentials XL",
-                    "description": "Men T-shirt size XL, color bleu",
-                    "images": [
-                      "https://lafia-server.texi.ci/files/images/products/product-image-5eeec2ba-49d2-4dbf-937c-e9c66257e423.jpeg",
-                      "https://lafia-server.texi.ci/files/images/products/product-image-880cdb5f-a107-476a-ba82-9a063f18be6f.png",
-                      "https://lafia-server.texi.ci/files/images/products/product-image-d0d22f35-895f-4e70-bd1f-38c04f9a671c.jpg"
-                    ],
-                    "price": 10000,
-                    "categoryProductId": "63bd9a7a3dbbd70a6b131f55",
-                    "createdAt": "2023-01-10T17:10:39.111Z",
-                    "__v": 0
-                  },
-                  "quantity": 2,
-                  "cartId": "63c58adc9876c6ede7ffaeb8",
-                  "__v": 0
-                }]
-          }
-        }
-      },
-      "updateproductsincart": {
-        "type": "object",
-        "properties": {
-          "user_uuid": {
-            "type": "string",
-            "example": "12ehj990********"
-          },
-          "products": {
-            "type": "array",
-            "example": [{
+      }
+    },
+    "updateproductsincart": {
+      "type": "object",
+      "properties": {
+        "user_uuid": {
+          "type": "string",
+          "example": "12ehj990********"
+        },
+        "products": {
+          "type": "array",
+          "example": [
+            {
               "productId": "63bd9c0fb52009388c4bf3b5",
               "quantity": 6
             },
             {
               "productId": "63bd9c0fb52009388c4bf3b5",
               "quantity": 6
-            }]
+            }
+          ]
+        }
+      }
+    },
+    "getcart": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": 200
+        },
+        "message": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": {
+          "type": "object",
+          "example": {
+            "_id": "63c58af96f182c5783170b2a",
+            "productId": "63bd9c0fb52009388c4bf3b5",
+            "product": {
+              "_id": "63bd9c0fb52009388c4bf3b5",
+              "name": "Essentials XL",
+              "description": "Men T-shirt size XL, color bleu",
+              "images": [
+                "https://lafia-server.texi.ci/files/images/products/product-image-5eeec2ba-49d2-4dbf-937c-e9c66257e423.jpeg",
+                "https://lafia-server.texi.ci/files/images/products/product-image-880cdb5f-a107-476a-ba82-9a063f18be6f.png",
+                "https://lafia-server.texi.ci/files/images/products/product-image-d0d22f35-895f-4e70-bd1f-38c04f9a671c.jpg"
+              ],
+              "price": 10000,
+              "categoryProductId": "63bd9a7a3dbbd70a6b131f55",
+              "createdAt": "2023-01-10T17:10:39.111Z",
+              "__v": 0
+            },
+            "quantity": 2,
+            "cartId": "63c58adc9876c6ede7ffaeb8",
+            "__v": 0
           }
         }
-      },
-      "getcart": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "integer",
-            "example": 200
-          },
-          "message": {
-            "type": "string",
-            "example": "success"
-          },
-          "data": {
-            "type": "object",
-            "example":
+      }
+    },
+    "createorder": {
+      "type": "object",
+      "properties": {
+        "orderPromoCode": {
+          "type": "string",
+          "example": "DECUT44"
+        },
+        "deliveryLocation": {
+          "type": "string",
+          "example": "Bamako, rue 22"
+        },
+        "companyId": {
+          "type": "string",
+          "example": "12ehj990********"
+        },
+        "userId": {
+          "type": "string",
+          "example": "12ehj990********"
+        }
+      }
+    },
+    "getorder": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": 200
+        },
+        "message": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": {
+          "type": "object",
+          "example": {
+            "status": 201,
+            "message": "Order created successfully !",
+            "data": {
+              "orderRef": "CM-0-TKAW",
+              "customerId": "63bc063529688e02b5ed629c",
+              "products": [
                 {
-                  "_id": "63c58af96f182c5783170b2a",
+                  "_id": "63c5a7a7708a529a926b0829",
                   "productId": "63bd9c0fb52009388c4bf3b5",
                   "product": {
                     "_id": "63bd9c0fb52009388c4bf3b5",
@@ -2957,104 +3091,38 @@
                   "cartId": "63c58adc9876c6ede7ffaeb8",
                   "__v": 0
                 }
-          }
-        }
-      },
-      "createorder": {
-        "type": "object",
-        "properties": {
-          "orderPromoCode": {
-            "type": "string",
-            "example": "DECUT44"
-          },
-          "deliveryLocation": {
-            "type": "string",
-            "example": "Bamako, rue 22"
-          },
-          "companyId": {
-            "type": "string",
-            "example": "12ehj990********"
-          },
-          "userId": {
-            "type": "string",
-            "example": "12ehj990********"
-          }
-        }
-      },
-      "getorder": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "integer",
-            "example": 200
-          },
-          "message": {
-            "type": "string",
-            "example": "success"
-          },
-          "data": {
-            "type": "object",
-            "example":
-            {
-              "status": 201,
-              "message": "Order created successfully !",
-              "data": {
-                "orderRef": "CM-0-TKAW",
-                "customerId": "63bc063529688e02b5ed629c",
-                "products": [
-                  {
-                    "_id": "63c5a7a7708a529a926b0829",
-                    "productId": "63bd9c0fb52009388c4bf3b5",
-                    "product": {
-                      "_id": "63bd9c0fb52009388c4bf3b5",
-                      "name": "Essentials XL",
-                      "description": "Men T-shirt size XL, color bleu",
-                      "images": [
-                        "https://lafia-server.texi.ci/files/images/products/product-image-5eeec2ba-49d2-4dbf-937c-e9c66257e423.jpeg",
-                        "https://lafia-server.texi.ci/files/images/products/product-image-880cdb5f-a107-476a-ba82-9a063f18be6f.png",
-                        "https://lafia-server.texi.ci/files/images/products/product-image-d0d22f35-895f-4e70-bd1f-38c04f9a671c.jpg"
-                      ],
-                      "price": 10000,
-                      "categoryProductId": "63bd9a7a3dbbd70a6b131f55",
-                      "createdAt": "2023-01-10T17:10:39.111Z",
-                      "__v": 0
-                    },
-                    "quantity": 2,
-                    "cartId": "63c58adc9876c6ede7ffaeb8",
-                    "__v": 0
-                  }
-                ],
-                "amount": 20000,
-                "orderPromoCode": null,
-                "deliveryCode": "DL-0-I9HG",
-                "deliveryLocation": "Bamako, rue 22",
-                "deliveryMark": null,
-                "status": "pending",
-                "companyId": "63bc353ceb248d846835d669",
-                "riderId": null,
-                "createdAt": "2023-01-16T20:01:50.844Z",
-                "_id": "63c5ad2ecbc95918c1407784",
-                "__v": 0
-              }
+              ],
+              "amount": 20000,
+              "orderPromoCode": null,
+              "deliveryCode": "DL-0-I9HG",
+              "deliveryLocation": "Bamako, rue 22",
+              "deliveryMark": null,
+              "status": "pending",
+              "companyId": "63bc353ceb248d846835d669",
+              "riderId": null,
+              "createdAt": "2023-01-16T20:01:50.844Z",
+              "_id": "63c5ad2ecbc95918c1407784",
+              "__v": 0
             }
           }
         }
-      },
-      "getorders": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "integer",
-            "example": 200
-          },
-          "message": {
-            "type": "string",
-            "example": "success"
-          },
-          "data": {
-            "type": "array",
-            "example":
-            [{
+      }
+    },
+    "getorders": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": 200
+        },
+        "message": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": {
+          "type": "array",
+          "example": [
+            {
               "status": 201,
               "message": "Order created successfully !",
               "data": {
@@ -3139,13 +3207,12 @@
               }
             }
           ]
-          }
         }
       }
-    },
-
-    "externalDocs": {
-        "description": "Find out more about information about this api",
-        "url": "#"
-      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about information about this api",
+    "url": "#"
+  }
 }

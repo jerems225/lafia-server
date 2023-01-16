@@ -1,5 +1,4 @@
 const cartModel = require("../../models/cart-model");
-const categoryProductModel = require("../../models/category-product-model");
 const companyModel = require("../../models/company-model");
 const orderModel = require("../../models/order-model");
 const orderProductModel = require("../../models/order-product-model");
