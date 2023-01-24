@@ -13,6 +13,10 @@ const ownerSchema = new mongoose.Schema({
         type:String,
         require:true
     },
+    ownerDeviceTokens: {
+        type:Array,
+        require: false
+    },
     createdAt:{
         type:Date,
         require:true

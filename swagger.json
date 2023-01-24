@@ -1982,6 +1982,132 @@
           }
         }
       }
+    },
+    "/user/registerdevices": {
+      "post": {
+        "tags": [
+          "Push Notifications"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Register new user device for receiving  push notification",
+        "description": "",
+        "operationId": "userregisterdevices",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "body for your query",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/registerdevices"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/deletecompany"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/owner/registerdevices": {
+      "post": {
+        "tags": [
+          "Push Notifications"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Register new owner device for receiving  push notification",
+        "description": "",
+        "operationId": "ownerregisterdevices",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "body for your query",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/registerdevices"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/deletecompany"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/rider/registerdevices": {
+      "post": {
+        "tags": [
+          "Push Notifications"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Register new rider device for receiving  push notification",
+        "description": "",
+        "operationId": "userregisterdevices",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "body for your query",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/registerdevices"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/deletecompany"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1990,7 +2116,7 @@
       "properties": {
         "status": {
           "type": "integer",
-          "example": 200
+          "example": 201
         },
         "message": {
           "type": "string",
@@ -2040,7 +2166,7 @@
       "properties": {
         "status": {
           "type": "integer",
-          "example": 200
+          "example": 201
         },
         "message": {
           "type": "string",
@@ -2142,7 +2268,7 @@
       "properties": {
         "status": {
           "type": "integer",
-          "example": 200
+          "example": 201
         },
         "message": {
           "type": "string",
@@ -2170,7 +2296,7 @@
       "properties": {
         "status": {
           "type": "integer",
-          "example": 200
+          "example": 201
         },
         "message": {
           "type": "string",
@@ -2229,7 +2355,7 @@
       "properties": {
         "status": {
           "type": "integer",
-          "example": 200
+          "example": 201
         },
         "message": {
           "type": "string",
@@ -2261,7 +2387,7 @@
       "properties": {
         "status": {
           "type": "integer",
-          "example": 200
+          "example": 201
         },
         "message": {
           "type": "string",
@@ -2291,7 +2417,7 @@
       "properties": {
         "status": {
           "type": "integer",
-          "example": 200
+          "example": 201
         },
         "message": {
           "type": "string",
@@ -2338,7 +2464,7 @@
       "properties": {
         "status": {
           "type": "integer",
-          "example": 200
+          "example": 201
         },
         "message": {
           "type": "string",
@@ -2369,7 +2495,7 @@
       "properties": {
         "status": {
           "type": "integer",
-          "example": 200
+          "example": 201
         },
         "message": {
           "type": "string",
@@ -2431,7 +2557,7 @@
       "properties": {
         "status": {
           "type": "integer",
-          "example": 200
+          "example": 201
         },
         "message": {
           "type": "string",
@@ -2479,7 +2605,7 @@
       "properties": {
         "status": {
           "type": "integer",
-          "example": 200
+          "example": 201
         },
         "message": {
           "type": "string",
@@ -2506,7 +2632,7 @@
       "properties": {
         "status": {
           "type": "integer",
-          "example": 200
+          "example": 201
         },
         "message": {
           "type": "string",
@@ -2525,7 +2651,7 @@
             },
             "products": [
               {
-                "_id": "63bd9c0fb52009388c4bf3b5",
+                "_id": "63bd9c0fb52019388c4bf3b5",
                 "name": "Essentials XL",
                 "description": "Men T-shirt size XL, color bleu",
                 "images": [
@@ -2580,7 +2706,7 @@
       "properties": {
         "status": {
           "type": "integer",
-          "example": 200
+          "example": 201
         },
         "message": {
           "type": "string",
@@ -2624,7 +2750,7 @@
       "properties": {
         "status": {
           "type": "integer",
-          "example": 200
+          "example": 201
         },
         "message": {
           "type": "string",
@@ -2707,7 +2833,7 @@
       "properties": {
         "status": {
           "type": "integer",
-          "example": 200
+          "example": 201
         },
         "message": {
           "type": "string",
@@ -2743,7 +2869,7 @@
       "properties": {
         "status": {
           "type": "integer",
-          "example": 200
+          "example": 201
         },
         "message": {
           "type": "string",
@@ -2785,7 +2911,7 @@
       "properties": {
         "status": {
           "type": "integer",
-          "example": 200
+          "example": 201
         },
         "message": {
           "type": "string",
@@ -2915,7 +3041,7 @@
       "properties": {
         "status": {
           "type": "integer",
-          "example": 200
+          "example": 201
         },
         "message": {
           "type": "string",
@@ -2926,9 +3052,9 @@
           "example": [
             {
               "_id": "63c58af96f182c5783170b2a",
-              "productId": "63bd9c0fb52009388c4bf3b5",
+              "productId": "63bd9c0fb52019388c4bf3b5",
               "product": {
-                "_id": "63bd9c0fb52009388c4bf3b5",
+                "_id": "63bd9c0fb52019388c4bf3b5",
                 "name": "Essentials XL",
                 "description": "Men T-shirt size XL, color bleu",
                 "images": [
@@ -2947,9 +3073,9 @@
             },
             {
               "_id": "63c58af96f182c5783170b2a",
-              "productId": "63bd9c0fb52009388c4bf3b5",
+              "productId": "63bd9c0fb52019388c4bf3b5",
               "product": {
-                "_id": "63bd9c0fb52009388c4bf3b5",
+                "_id": "63bd9c0fb52019388c4bf3b5",
                 "name": "Essentials XL",
                 "description": "Men T-shirt size XL, color bleu",
                 "images": [
@@ -2981,11 +3107,11 @@
           "type": "array",
           "example": [
             {
-              "productId": "63bd9c0fb52009388c4bf3b5",
+              "productId": "63bd9c0fb52019388c4bf3b5",
               "quantity": 6
             },
             {
-              "productId": "63bd9c0fb52009388c4bf3b5",
+              "productId": "63bd9c0fb52019388c4bf3b5",
               "quantity": 6
             }
           ]
@@ -2997,7 +3123,7 @@
       "properties": {
         "status": {
           "type": "integer",
-          "example": 200
+          "example": 201
         },
         "message": {
           "type": "string",
@@ -3007,9 +3133,9 @@
           "type": "object",
           "example": {
             "_id": "63c58af96f182c5783170b2a",
-            "productId": "63bd9c0fb52009388c4bf3b5",
+            "productId": "63bd9c0fb52019388c4bf3b5",
             "product": {
-              "_id": "63bd9c0fb52009388c4bf3b5",
+              "_id": "63bd9c0fb52019388c4bf3b5",
               "name": "Essentials XL",
               "description": "Men T-shirt size XL, color bleu",
               "images": [
@@ -3055,7 +3181,7 @@
       "properties": {
         "status": {
           "type": "integer",
-          "example": 200
+          "example": 201
         },
         "message": {
           "type": "string",
@@ -3072,9 +3198,9 @@
               "products": [
                 {
                   "_id": "63c5a7a7708a529a926b0829",
-                  "productId": "63bd9c0fb52009388c4bf3b5",
+                  "productId": "63bd9c0fb52019388c4bf3b5",
                   "product": {
-                    "_id": "63bd9c0fb52009388c4bf3b5",
+                    "_id": "63bd9c0fb52019388c4bf3b5",
                     "name": "Essentials XL",
                     "description": "Men T-shirt size XL, color bleu",
                     "images": [
@@ -3092,7 +3218,7 @@
                   "__v": 0
                 }
               ],
-              "amount": 20000,
+              "amount": 20100,
               "orderPromoCode": null,
               "deliveryCode": "DL-0-I9HG",
               "deliveryLocation": "Bamako, rue 22",
@@ -3113,7 +3239,7 @@
       "properties": {
         "status": {
           "type": "integer",
-          "example": 200
+          "example": 201
         },
         "message": {
           "type": "string",
@@ -3131,9 +3257,9 @@
                 "products": [
                   {
                     "_id": "63c5a7a7708a529a926b0829",
-                    "productId": "63bd9c0fb52009388c4bf3b5",
+                    "productId": "63bd9c0fb52019388c4bf3b5",
                     "product": {
-                      "_id": "63bd9c0fb52009388c4bf3b5",
+                      "_id": "63bd9c0fb52019388c4bf3b5",
                       "name": "Essentials XL",
                       "description": "Men T-shirt size XL, color bleu",
                       "images": [
@@ -3151,7 +3277,7 @@
                     "__v": 0
                   }
                 ],
-                "amount": 20000,
+                "amount": 20100,
                 "orderPromoCode": null,
                 "deliveryCode": "DL-0-I9HG",
                 "deliveryLocation": "Bamako, rue 22",
@@ -3173,9 +3299,9 @@
                 "products": [
                   {
                     "_id": "63c5a7a7708a529a926b0829",
-                    "productId": "63bd9c0fb52009388c4bf3b5",
+                    "productId": "63bd9c0fb52019388c4bf3b5",
                     "product": {
-                      "_id": "63bd9c0fb52009388c4bf3b5",
+                      "_id": "63bd9c0fb52019388c4bf3b5",
                       "name": "Essentials XL",
                       "description": "Men T-shirt size XL, color bleu",
                       "images": [
@@ -3193,7 +3319,7 @@
                     "__v": 0
                   }
                 ],
-                "amount": 20000,
+                "amount": 20100,
                 "orderPromoCode": null,
                 "deliveryCode": "DL-0-I9HG",
                 "deliveryLocation": "Bamako, rue 22",
@@ -3207,6 +3333,19 @@
               }
             }
           ]
+        }
+      }
+    },
+    "registerdevices": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string",
+          "example": "djhbd-fieiurye-rnsma********"
+        },
+        "user_uuid": {
+          "type": "string",
+          "example": "12ehj990********"
         }
       }
     }

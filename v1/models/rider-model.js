@@ -29,6 +29,10 @@ const riderSchema = new mongoose.Schema({
         type:String,
         require:true
     },
+    riderDeviceTokens: {
+        type:Array,
+        require: false
+    },
     createdAt:{
         type:Date,
         require:true

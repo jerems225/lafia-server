@@ -46,6 +46,10 @@ const userSchema = new mongoose.Schema(
             type:String,
             require:false
         },
+        userDeviceTokens: {
+            type:Array,
+            require: false
+        },
         createdAt:{
             type:Date,
             require:true

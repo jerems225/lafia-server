@@ -19,15 +19,15 @@
     "express": "^4.18.2",
     "express-fileupload": "^1.4.0",
     "express-validator": "^6.14.2",
+    "fcm-notification": "^2.0.0",
+    "firebase-admin": "^11.5.0",
     "jsonwebtoken": "^9.0.0",
     "lodash": "^4.17.21",
-    "mongoose": "^6.7.2",
+    "mongoose": "^6.8.3",
     "morgan": "^1.10.0",
     "nodemailer": "^6.8.0",
+    "nodemon": "^2.0.20",
     "swagger-ui-express": "^4.6.0",
     "uuid": "^9.0.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.20"
   }
 }
