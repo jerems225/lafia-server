@@ -241,6 +241,117 @@
         }
       }
     },
+    "/user/password-reset/verify-user": {
+      "post": {
+        "tags": [
+          "Reset User Password"
+        ],
+        "summary": "Verify user email or phone",
+        "description": "",
+        "operationId": "userVerifyUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "body for your query",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/user-verify"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/deletecompany"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/user/password-reset/verify-code": {
+      "post": {
+        "tags": [
+          "Reset User Password"
+        ],
+        "summary": "Verify reset password code",
+        "description": "",
+        "operationId": "userVerifyCode",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "body for your query",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/user-verify-code"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/deletecompany"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/user/password-reset": {
+      "put": {
+        "tags": [
+          "Reset User Password"
+        ],
+        "summary": "Update User Password",
+        "description": "",
+        "operationId": "updateUserPassword",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "body for your query",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/update-user-password"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/getuser"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
     "/users": {
       "get": {
         "tags": [
@@ -642,6 +753,46 @@
             "description": "Rider profil image (.jpg, .jpeg, .png, .webp)",
             "required": true,
             "type": "file"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/deletecompany"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/rider/modify/online-status": {
+      "put": {
+        "tags": [
+          "Riders"
+        ],
+        "security": [{
+          "BearerAuth" : []
+        }],
+        "summary": "Modify user rider online status by rider uuid",
+        "description": "",
+        "operationId": "updateuserrider",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "body for your query",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/updateonlinerider"
+            }
           }
         ],
         "responses": {
@@ -3163,8 +3314,12 @@
           "example": "DECUT44"
         },
         "deliveryLocation": {
-          "type": "string",
-          "example": "Bamako, rue 22"
+          "type": "object",
+          "example": {
+            "address":"Bamako, Nord-ouest, rue 23",
+            "lat": 3.45666565,
+            "lnt": -5.4656777
+          }
         },
         "companyId": {
           "type": "string",
@@ -3221,7 +3376,11 @@
               "amount": 20100,
               "orderPromoCode": null,
               "deliveryCode": "DL-0-I9HG",
-              "deliveryLocation": "Bamako, rue 22",
+              "deliveryLocation": {
+                "address":"Bamako, Nord-ouest, rue 23",
+                "lat": 3.45666565,
+                "lnt": -5.4656777
+              },
               "deliveryMark": null,
               "status": "pending",
               "companyId": "63bc353ceb248d846835d669",
@@ -3280,7 +3439,11 @@
                 "amount": 20100,
                 "orderPromoCode": null,
                 "deliveryCode": "DL-0-I9HG",
-                "deliveryLocation": "Bamako, rue 22",
+                "deliveryLocation": {
+                  "address":"Bamako, Nord-ouest, rue 23",
+                  "lat": 3.45666565,
+                  "lnt": -5.4656777
+                },
                 "deliveryMark": null,
                 "status": "pending",
                 "companyId": "63bc353ceb248d846835d669",
@@ -3322,7 +3485,11 @@
                 "amount": 20100,
                 "orderPromoCode": null,
                 "deliveryCode": "DL-0-I9HG",
-                "deliveryLocation": "Bamako, rue 22",
+                "deliveryLocation": {
+                  "address":"Bamako, Nord-ouest, rue 23",
+                  "lat": 3.45666565,
+                  "lnt": -5.4656777
+                },
                 "deliveryMark": null,
                 "status": "pending",
                 "companyId": "63bc353ceb248d846835d669",
@@ -3346,6 +3513,54 @@
         "user_uuid": {
           "type": "string",
           "example": "12ehj990********"
+        }
+      }
+    },
+    "user-verify": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "email@example.com"
+        },
+        "phone": {
+          "type": "string",
+          "example": "+2244555999"
+        }
+      }
+    },
+    "user-verify-code": {
+      "type": "object",
+      "properties": {
+        "reset_code": {
+          "type": "string",
+          "example": "3452"
+        }
+      }
+    },
+    "update-user-password": {
+      "type": "object",
+      "properties": {
+        "user_uuid": {
+          "type": "string",
+          "example": "bdgvjfijhfbjgvfjgh********"
+        },
+        "new_password": {
+          "type": "string",
+          "example": "3454t"
+        }
+      }
+    },
+    "updateonlinerider": {
+      "type": "object",
+      "properties": {
+        "user_uuid": {
+          "type": "string",
+          "example": "bdgvjfijhfbjgvfjgh********"
+        },
+        "isOnline": {
+          "type": "boolean",
+          "example": true
         }
       }
     }

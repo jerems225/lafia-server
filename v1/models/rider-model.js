@@ -33,6 +33,11 @@ const riderSchema = new mongoose.Schema({
         type:Array,
         require: false
     },
+    isOnline: {
+        type: Boolean,
+        default: false,
+        require:true
+    },
     createdAt:{
         type:Date,
         require:true

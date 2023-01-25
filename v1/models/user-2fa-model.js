@@ -6,21 +6,14 @@ const UserDoubleFactorSchema = new mongoose.Schema(
             type:Number,
             require:true
         },
-        dateExpired:{
-            type:Date,
-            require:true
-        },
         userId:{
             type:String,
             require:true
         },
         createdAt:{
             type:Date,
-            require:true
-        },
-        updatedAt:{
-            type:Date,
-            require:false
+            require:true,
+            expires: 60
         }
     }
 );

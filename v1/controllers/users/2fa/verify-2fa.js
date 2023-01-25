@@ -12,8 +12,7 @@ async function verify2fa(req, res) {
         if (user) {
             const user2fa = await doubleFactorModel.findOne({ userId: user._id });
             //verifiy if token is not expired
-            const currentTime = new Date();
-            if (currentTime > user2fa.dateExpired) {
+            if (user2fa) {
                 //verify if code is correct
                 if (user2fa.doubleFactorCode == doubleFactorCode) {
                     res.status(201).json({

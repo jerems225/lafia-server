@@ -1,9 +1,12 @@
+require('dotenv').config()
+const { SERVICES_EMAIL } = process.env;
 const companyModel = require('../../models/company-model');
 const categoryCompanyModel = require('../../models/category-company-model');
 const userModel = require('../../models/user-model');
 const { validateId } = require('../businessLogic/validObjectId');
 const { createOwner } = require('../owners/createOwner');
 const ownerModel = require('../../models/owner-model');
+const sendMail = require('../businessLogic/emails/send');
 
 
 async function createCompany(req, res) {
@@ -41,6 +44,17 @@ async function createCompany(req, res) {
                             if (!owner) {
                                 await createOwner(userId);
                             }
+
+                            //send email to admins
+                            const userAdmins = await userModel.find({ role : "admin" });
+                            let adminEmails = [];
+                            userAdmins.forEach((u) => {
+                                adminEmails.push(u.email);
+                            })
+
+                            message = "Vous avez une nouvelle demande de validation d'entreprise disponible dans votre tableau de bord LAFIA, Une consultation rapide augmente l'experience utilisateur !";
+                            await sendMail(adminEmails, "Nouvelle demande de validation d'entreprise", message);
+
                             res.status(201).json({
                                 status: 201,
                                 message: "Company created successfully !",

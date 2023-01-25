@@ -13,14 +13,14 @@ async function send2fa(uuid) {
             const doubleFactor_code = generate2FACode(1000, 9999);
             if (user.email) {
                 //send with email
-                const subject = "Your verification Code !";
-                const content = `Your verification code : ${doubleFactor_code}`;
+                const subject = "Verification de connexion!";
+                const content = `Votre code de Vérification de la connexion: ${doubleFactor_code}`;
                 sendMail(user.email, subject, content);
             }
 
             if (user.phone) {
                 const phone = "2250701959933";
-                const content = `Your verification code : ${doubleFactor_code}`;
+                const content = `Votre code de Vérification de la connexion : ${doubleFactor_code}`;
                 //await sendSms(phone,content);
             }
 

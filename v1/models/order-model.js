@@ -26,7 +26,7 @@ const orderSchema = new mongoose.Schema({
         require:true
     },
     deliveryLocation:{
-        type:String,
+        type:Object,
         require:true
     },
     deliveryMark:{

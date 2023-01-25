@@ -1,5 +1,6 @@
 const riderModel = require("../../models/rider-model");
 const userModel = require("../../models/user-model");
+const sendMail = require("../businessLogic/emails/send");
 const { validateId } = require("../businessLogic/validObjectId");
 
 async function createRider(userId) {
@@ -22,9 +23,20 @@ async function createRider(userId) {
                     })
                 }
                 else {
-                    await userModel.updateOne({ _id : userId}, {$set : {
-                        role : "rider"
-                    }})
+                    await userModel.updateOne({ _id: userId }, {
+                        $set: {
+                            role: "rider"
+                        }
+                    })
+                    //send email to admins
+                    const userAdmins = await userModel.find({ role: "admin" });
+                    let adminEmails = [];
+                    userAdmins.forEach((u) => {
+                        adminEmails.push(u.email);
+                    })
+
+                    message = "Vous avez une nouvelle demande de validation de livreur disponible dans votre tableau de bord LAFIA, Une consultation rapide augmente l'experience utilisateur !";
+                    await sendMail(adminEmails, "Nouvelle demande de validation de livreur", message);
                     return true;
                 }
             })

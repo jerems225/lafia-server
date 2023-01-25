@@ -75,7 +75,6 @@ async function createOrder(req, res)
                             await ownerSendPushNotification("Nouvelle commande - LAFIA", "Hello vous avez une nouvelle commande dans vorte boutique, Merci d'intervenir assez rapidement !", order, company.ownerId);
                             //Find andnotify the driver by short current map position
 
-
                             //set status of cart
                             await cartModel.updateOne({_id : cart._id}, {$set : {
                                 isValidated : true

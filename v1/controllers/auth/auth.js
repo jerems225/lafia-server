@@ -86,6 +86,7 @@ async function loginUser(req, res) {
 
             //return token
             await send2fa(user._id);//send 2fa code
+
             res.status(201).json({
                 status: 201,
                 message: "User authenticate successfully",
