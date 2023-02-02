@@ -6,15 +6,16 @@ const path = require('path');
 const productModel = require('../../models/product-model');
 
 async function uploadImages(req, res) {
-    const product_uuid = req.params.product_uuid;
-    const validIdProduct = validateId(product_uuid);
-    if (validIdProduct) {
-        const product = await productModel.findById(product_uuid);
-        if (product) {
-            const images = req.files;
-            if (images) {
+    try {
+        const product_uuid = req.params.product_uuid;
+        const validIdProduct = validateId(product_uuid);
+        if (validIdProduct) {
+            const product = await productModel.findById(product_uuid);
+            if (product) {
+                const images = req.files;
+                if (images) {
                     const imagesValues = Object.values(images)
-                    imagesValues.forEach( async (image) => {
+                    imagesValues.forEach(async (image) => {
                         const extension = path.extname(image.name);
                         const mimetype = image.mimetype
                         if (mimetype == "image/png" || mimetype == "image/jpg" || mimetype == "image/jpeg" || mimetype == "html/webp") {
@@ -34,11 +35,13 @@ async function uploadImages(req, res) {
                                     const productImages = product.images;
                                     productImages.push(BASE_URL + savePath + image.name);
                                     const updateProduct = await productModel.updateOne({
-                                        _id: product_uuid}, {$set: {
+                                        _id: product_uuid
+                                    }, {
+                                        $set: {
                                             images: productImages
                                         }
                                     });
-    
+
                                     if (updateProduct) {
                                         res.status(201).json({
                                             status: 201,
@@ -52,7 +55,7 @@ async function uploadImages(req, res) {
                                             data: null
                                         })
                                     }
-    
+
                                 }
                             });
                         }
@@ -64,29 +67,37 @@ async function uploadImages(req, res) {
                             })
                         }
                     })
+                }
+                else {
+                    res.status(401).json({
+                        status: 401,
+                        message: "No file uploaded",
+                        data: null
+                    });
+                }
             }
             else {
                 res.status(401).json({
                     status: 401,
-                    message: "No file uploaded",
+                    message: "Product not found !",
                     data: null
                 });
             }
         }
         else {
-            res.status(401).json({
-                status: 401,
-                message: "Product not found !",
+            res.status(500).json({
+                status: 500,
+                message: "Invalid ID",
                 data: null
             });
         }
     }
-    else {
+    catch (e) {
         res.status(500).json({
             status: 500,
-            message: "Invalid ID",
-            data: null
-        });
+            message: "An error server try occurred, Please again or check the message error !",
+            data: e.message
+        })
     }
 }
 

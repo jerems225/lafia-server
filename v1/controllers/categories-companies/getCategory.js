@@ -12,37 +12,46 @@ async function getCategories(req, res) {
 }
 
 async function getCategory(req, res) {
-    const category_uuid = req.params.category_uuid;
-    console.log(category_uuid)
-    const validId = validateId(category_uuid);
-    if (validId) {
-        const category = await categoryCompanyModel.findById(category_uuid);
-        if (category) {
-            const companies = await companyModel.find({ categoryCompanyId: category_uuid });
-            res.status(201).json({
-                status: 201,
-                message: "Category found successfully !",
-                data: {
-                    category: category,
-                    companies: companies
-                }
-            });
+    try {
+        const category_uuid = req.params.category_uuid;
+        const validId = validateId(category_uuid);
+        if (validId) {
+            const category = await categoryCompanyModel.findById(category_uuid);
+            if (category) {
+                const companies = await companyModel.find({ categoryCompanyId: category_uuid });
+                res.status(201).json({
+                    status: 201,
+                    message: "Category found successfully !",
+                    data: {
+                        category: category,
+                        companies: companies
+                    }
+                });
+            }
+            else {
+                res.status(401).json({
+                    status: 401,
+                    message: "Category not found !",
+                    data: null
+                });
+            }
         }
         else {
-            res.status(401).json({
-                status: 401,
-                message: "Category not found !",
+            res.status(500).json({
+                status: 500,
+                message: "Invalid ID",
                 data: null
             });
         }
     }
-    else {
+    catch (e) {
         res.status(500).json({
             status: 500,
-            message: "Invalid ID",
-            data: null
-        });
+            message: "An error server try occurred, Please again or check the message error !",
+            data: e.message
+        })
     }
+
 }
 
 module.exports = {

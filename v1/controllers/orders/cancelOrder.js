@@ -3,53 +3,61 @@ const { validateId } = require("../businessLogic/validObjectId");
 
 async function cancelOrder(req, res)
 {
-    const order_uuid = req.params.order_uuid;
-    const validId = validateId(order_uuid);
-    if(validId)
-    {
-        const order = await orderModel.findById(order_uuid);
-        if(order)
+    try{
+        const order_uuid = req.params.order_uuid;
+        const validId = validateId(order_uuid);
+        if(validId)
         {
-            const canceledOrder = await orderModel.updateOne({_id : order_uuid}, {$set: {
-                status : "canceled"
-            }});
-
-            if(canceledOrder)
+            const order = await orderModel.findById(order_uuid);
+            if(order)
             {
-                res.status(201).json({
-                    status: 201,
-                    message: "Order canceled successfully",
-                    data: await orderModel.findById(order_uuid)
-                });
+                const canceledOrder = await orderModel.updateOne({_id : order_uuid}, {$set: {
+                    status : "canceled"
+                }});
+    
+                if(canceledOrder)
+                {
+                    res.status(201).json({
+                        status: 201,
+                        message: "Order canceled successfully",
+                        data: await orderModel.findById(order_uuid)
+                    });
+                }
+                else
+                {
+                    res.status(401).json({
+                        status: 401,
+                        message: "Something wrong with the request!",
+                        data: null
+                    });
+                }
             }
             else
             {
                 res.status(401).json({
                     status: 401,
-                    message: "Something wrong with the request!",
+                    message: "Order not found !",
                     data: null
                 });
             }
         }
         else
         {
-            res.status(401).json({
-                status: 401,
-                message: "Order not found !",
+            res.status(500).json({
+                status: 500,
+                message: "Invalid ID",
                 data: null
             });
         }
     }
-    else
+    catch(e)
     {
         res.status(500).json({
             status: 500,
-            message: "Invalid ID",
-            data: null
-        });
+            message: "An error server try occurred, Please again or check the message error !",
+            data: e.message
+        })
     }
-
-
 }
 
 module.exports = {

@@ -11,32 +11,41 @@ async function getUsers(req, res) {
 }
 
 async function getUser(req, res) {
-    const uuid = req.params.uuid;
-    const validId = validateId(uuid);
-    if (validId) {
-        const user = await userModel.findById(uuid);
-        if (user) {
-            res.status(201).json({
-                status: 201,
-                message: "User found !",
-                data: user
-            });
+    try{
+        const uuid = req.params.uuid;
+        const validId = validateId(uuid);
+        if (validId) {
+            const user = await userModel.findById(uuid);
+            if (user) {
+                res.status(201).json({
+                    status: 201,
+                    message: "User found !",
+                    data: user
+                });
+            }
+            else {
+                res.status(401).json({
+                    status: 401,
+                    message: "User not found !",
+                    data: null
+                });
+            }
         }
         else {
-            res.status(401).json({
-                status: 401,
-                message: "User not found !",
+            res.status(500).json({
+                status: 500,
+                message: "Invalid ID",
                 data: null
             });
         }
     }
-    else {
+    catch (e) {
         res.status(500).json({
             status: 500,
-            message: "Invalid ID",
-            data: null
-        });
-    }
+            message: "An error server try occurred, Please again or check the message error !",
+            data: e.message
+        })
+    }  
 }
 
 module.exports = {

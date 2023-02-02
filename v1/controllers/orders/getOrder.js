@@ -3,110 +3,135 @@ const orderModel = require("../../models/order-model");
 const riderModel = require("../../models/rider-model");
 const { validateId } = require("../businessLogic/validObjectId");
 
-async function getOrdersByCompany(req, res)
-{
-    const company_uuid = req.params.company_uuid;
-    const validId = validateId(company_uuid);
-    if(validId)
-    {
-        const company = await companyModel.findById(company_uuid);
-        if(company)
-        {
-            res.status(201).json({
-                status: 201,
-                message: "Company Orders found successfully !",
-                data: await orderModel.find({ companyId : company_uuid })
-            });
+async function getOrdersByCompany(req, res) {
+    try{
+        const company_uuid = req.params.company_uuid;
+        const validId = validateId(company_uuid);
+        if (validId) {
+            const company = await companyModel.findById(company_uuid);
+            if (company) {
+                res.status(201).json({
+                    status: 201,
+                    message: "Company Orders found successfully !",
+                    data: await orderModel.find({ companyId: company_uuid })
+                });
+            }
+            else {
+                res.status(401).json({
+                    status: 401,
+                    message: "Company not found !",
+                    data: null
+                });
+            }
         }
-        else
-        {
-            res.status(401).json({
-                status: 401,
-                message: "Company not found !",
+        else {
+            res.status(500).json({
+                status: 500,
+                message: "Invalid ID",
                 data: null
             });
         }
     }
-    else
+    catch(e)
     {
         res.status(500).json({
             status: 500,
-            message: "Invalid ID",
-            data: null
-        });
+            message: "An error server try occurred, Please again or check the message error !",
+            data: e.message
+        })
+    }
+
+}
+
+async function getOrdersByRider(req, res) {
+    try {
+        const rider_uuid = req.params.rider_uuid;
+        const validId = validateId(rider_uuid);
+        if (validId) {
+            const rider = await riderModel.findById(rider_uuid);
+            if (rider) {
+                res.status(201).json({
+                    status: 201,
+                    message: "Rider Orders found successfully !",
+                    data: await orderModel.find({ riderId: rider_uuid })
+                });
+            }
+            else {
+                res.status(401).json({
+                    status: 401,
+                    message: "rider not found !",
+                    data: null
+                });
+            }
+        }
+        else {
+            res.status(500).json({
+                status: 500,
+                message: "Invalid ID",
+                data: null
+            });
+        }
+    }
+    catch (e) {
+        res.status(500).json({
+            status: 500,
+            message: "An error server try occurred, Please again or check the message error !",
+            data: e.message
+        })
     }
 }
 
-async function getOrdersByRider(req, res)
-{
-    const rider_uuid = req.params.rider_uuid;
-    const validId = validateId(rider_uuid);
-    if(validId)
-    {
-        const rider = await riderModel.findById(rider_uuid);
-        if(rider)
-        {
-            res.status(201).json({
-                status: 201,
-                message: "Rider Orders found successfully !",
-                data: await orderModel.find({ riderId : rider_uuid })
-            });
-        }
-        else
-        {
-            res.status(401).json({
-                status: 401,
-                message: "rider not found !",
-                data: null
-            });
-        }
-    }
-    else
-    {
-        res.status(500).json({
-            status: 500,
-            message: "Invalid ID",
-            data: null
-        });
-    }
+async function getOrdersByStatus(req, res) {
+    const status = req.query.status;
+    res.status(201).json({
+        status: 201,
+        message: `All ${status} Orders has been found successfully!`,
+        data: await orderModel.find({ status: status })
+    });
 }
 
-async function getOrder(req, res)
-{
-    const order_uuid = req.params.order_uuid;
-    const validId = validateId(order_uuid);
-    if(validId)
-    {
-        const order = await orderModel.findById(order_uuid);
-        if(order)
-        {
-            res.status(201).json({
-                status: 201,
-                message: "Order found successfully !",
-                data: order
-            });
+async function getOrder(req, res) {
+    try {
+        const order_uuid = req.params.order_uuid;
+        const validId = validateId(order_uuid);
+        if (validId) {
+            const order = await orderModel.findById(order_uuid);
+            if (order) {
+                res.status(201).json({
+                    status: 201,
+                    message: "Order found successfully !",
+                    data: order
+                });
+            }
+            else {
+                res.status(401).json({
+                    status: 401,
+                    message: "Order not found !",
+                    data: null
+                });
+            }
         }
-        else
-        {
-            res.status(401).json({
-                status: 401,
-                message: "Order not found !",
+        else {
+            res.status(500).json({
+                status: 500,
+                message: "Invalid ID",
                 data: null
             });
         }
     }
-    else
-    {
+    catch (e) {
         res.status(500).json({
             status: 500,
-            message: "Invalid ID",
-            data: null
-        });
+            message: "An error server try occurred, Please again or check the message error !",
+            data: e.message
+        })
     }
+
 }
 
 module.exports = {
-    getOrdersByCompany : getOrdersByCompany,
-    getOrdersByRider : getOrdersByRider,
-    getOrder : getOrder
+    getOrdersByCompany: getOrdersByCompany,
+    getOrdersByRider: getOrdersByRider,
+    getOrdersByStatus: getOrdersByStatus,
+    getOrder: getOrder
 }

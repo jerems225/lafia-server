@@ -12,35 +12,44 @@ async function getOwners(req, res) {
 }
 
 async function getOwner(req, res) {
-    const user_uuid = req.params.user_uuid;
-    const validId = validateId(user_uuid);
-    if (validId) {
-        const owner = await ownerModel.findOne({ userId: user_uuid });
-        if (owner) {
-            const user = await userModel.findById(owner.userId);
-            res.status(201).json({
-                status: 201,
-                message: "Owner found successfully !",
-                data: {
-                    owner: owner,
-                    user: user
-                }
-            })
+    try {
+        const user_uuid = req.params.user_uuid;
+        const validId = validateId(user_uuid);
+        if (validId) {
+            const owner = await ownerModel.findOne({ userId: user_uuid });
+            if (owner) {
+                const user = await userModel.findById(owner.userId);
+                res.status(201).json({
+                    status: 201,
+                    message: "Owner found successfully !",
+                    data: {
+                        owner: owner,
+                        user: user
+                    }
+                })
+            }
+            else {
+                res.status(401).json({
+                    status: 401,
+                    message: "This user is not a Owner!",
+                    data: null
+                })
+            }
         }
         else {
-            res.status(401).json({
-                status: 401,
-                message: "This user is not a Owner!",
+            res.status(500).json({
+                status: 500,
+                message: "Invalid ID",
                 data: null
-            })
+            });
         }
     }
-    else {
+    catch (e) {
         res.status(500).json({
             status: 500,
-            message: "Invalid ID",
-            data: null
-        });
+            message: "An error server try occurred, Please again or check the message error !",
+            data: e.message
+        })
     }
 
 }

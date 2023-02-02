@@ -7,123 +7,128 @@ const userModel = require("../../models/user-model");
 const { totalAmount, generateOrderRef, generateDeliveryCode } = require("../businessLogic/order");
 const { ownerSendPushNotification } = require("../businessLogic/push-notifications/owner/pushNotificationsController");
 const { validateId } = require("../businessLogic/validObjectId");
+const { createCart } = require("../carts/createCart");
 
-async function createOrder(req, res)
-{
-    let { orderPromoCode, deliveryLocation, companyId, userId } = req.body;
-    const validIdCompany = validateId(companyId);
-    const validIdUser = validateId(userId);
-    if(validIdCompany && validIdUser)
-    {
-        const user = await userModel.findById(userId);
-        if(user)
-        {
-            const company = await companyModel.findById(companyId);
-            if(company)
-            {
-                const cart = await cartModel.findOne({ customerId : userId, isValidated : false });
-                if(cart)
-                {
-                    if(orderPromoCode)
-                    {
-                        const promoCode = await promoCodeModel.findOne({ code : orderPromoCode });
-                        if(!promoCode)
-                        {
-                            res.status(401).json({
-                                status: 401,
-                                message: "Invalid Promo Code !",
-                                data: null
-                            });
+async function createOrder(req, res) {
+    try {
+        let { orderPromoCode, deliveryLocation, companyId, userId } = req.body;
+        const validIdCompany = validateId(companyId);
+        const validIdUser = validateId(userId);
+        if (validIdCompany && validIdUser) {
+            const user = await userModel.findById(userId);
+            if (user) {
+                const company = await companyModel.findById(companyId);
+                if (company) {
+                    const cart = await cartModel.findOne({ customerId: userId, isValidated: false });
+                    if (cart) {
+                        if (orderPromoCode) {
+                            const promoCode = await promoCodeModel.findOne({ code: orderPromoCode });
+                            if (!promoCode) {
+                                res.status(401).json({
+                                    status: 401,
+                                    message: "Invalid Promo Code !",
+                                    data: null
+                                });
+                            }
                         }
-                    }
-                    else
-                    {
-                        orderPromoCode = null;
-                    }
-
-
-                    const orderProducts = await orderProductModel.find({ cartId : cart._id });
-                    //create order
-                    const orderObject = {
-                        orderRef: await generateOrderRef(4),
-                        customerId: userId,
-                        amount: await totalAmount(orderProducts, orderPromoCode),
-                        products: orderProducts,
-                        orderPromoCode: orderPromoCode,
-                        deliveryLocation: deliveryLocation,
-                        deliveryCode: await generateDeliveryCode(4),
-                        deliveryMark: null,
-                        status: "pending",
-                        companyId: companyId,
-                        riderId: null,
-                        createdAt: new Date()
-                    }
-
-                    const order = new orderModel(orderObject);
-                    order.save(async (err, result) => {
-                        if(err)
-                        {
-                            res.status(500).json({
-                                status: 500,
-                                message: "Somethings wrong, try again or check the error message",
-                                data: err.message
-                            })
+                        else {
+                            orderPromoCode = null;
                         }
-                        else
-                        {
-                            //notify the company
-                            await ownerSendPushNotification("Nouvelle commande - LAFIA", "Hello vous avez une nouvelle commande dans vorte boutique, Merci d'intervenir assez rapidement !", order, company.ownerId);
-                            //Find andnotify the driver by short current map position
 
-                            //set status of cart
-                            await cartModel.updateOne({_id : cart._id}, {$set : {
-                                isValidated : true
-                            }})
-                            res.status(201).json({
-                                status: 201,
-                                message: "Order created successfully !",
-                                data: result
-                            })
+
+                        const orderProducts = await orderProductModel.find({ cartId: cart._id });
+                        //create order
+                        const orderObject = {
+                            orderRef: await generateOrderRef(4),
+                            customerId: userId,
+                            amount: await totalAmount(orderProducts, orderPromoCode),
+                            products: orderProducts,
+                            orderPromoCode: orderPromoCode,
+                            deliveryLocation: deliveryLocation,
+                            deliveryCode: await generateDeliveryCode(4),
+                            deliveryMark: null,
+                            status: "pending",
+                            companyId: companyId,
+                            riderId: null,
+                            createdAt: new Date()
                         }
-                    });
+
+                        const order = new orderModel(orderObject);
+                        order.save(async (err, result) => {
+                            if (err) {
+                                res.status(500).json({
+                                    status: 500,
+                                    message: "Somethings wrong, try again or check the error message",
+                                    data: err.message
+                                })
+                            }
+                            else {
+                                //notify the company
+                                await ownerSendPushNotification("Nouvelle commande - LAFIA", "Hello vous avez une nouvelle commande dans vorte boutique, Merci d'intervenir assez rapidement !", order, company.ownerId);
+                                //Find andnotify the driver by short current map position
+
+                                //set status of cart
+                                await cartModel.updateOne({ _id: cart._id }, {
+                                    $set: {
+                                        isValidated: true
+                                    }
+                                });
+
+                                //create new cart
+                                await createCart(userId);
+
+                                res.status(201).json({
+                                    status: 201,
+                                    message: "Order created successfully !",
+                                    data: result
+                                })
+
+
+                            }
+                        });
+                    }
+                    else {
+                        res.status(401).json({
+                            status: 401,
+                            message: "This user doesn't have a cart !",
+                            data: null
+                        });
+                    }
                 }
-                else
-                {
+                else {
                     res.status(401).json({
                         status: 401,
-                        message: "This user doesn't have a cart !",
+                        message: "Company not found !",
                         data: null
                     });
                 }
             }
-            else
-            {
+            else {
                 res.status(401).json({
                     status: 401,
-                    message: "Company not found !",
+                    message: "User not found !",
                     data: null
                 });
             }
         }
-        else
-        {
-            res.status(401).json({
-                status: 401,
-                message: "User not found !",
+        else {
+            res.status(500).json({
+                status: 500,
+                message: "Invalid ID",
                 data: null
             });
         }
     }
-    else
-    {
+    catch (e) {
         res.status(500).json({
             status: 500,
-            message: "Invalid ID",
-            data: null
-        });
+            message: "An error server try occurred, Please again or check the message error !",
+            data: e.message
+        })
     }
+
 }
 
 module.exports = {
-    createOrder : createOrder
+    createOrder: createOrder
 }
