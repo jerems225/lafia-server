@@ -85,7 +85,7 @@ async function loginUser(req, res) {
             const jwt = await generateJWT(user);
 
             //return token
-            await send2fa(user._id);//send 2fa code
+            //await send2fa(user._id);//send 2fa code
 
             res.status(201).json({
                 status: 201,

@@ -34,6 +34,12 @@ async function onlineRider(req, res)
                     message: message
                 })
             }
+        }).catch(e => {
+            res.status(500).json({
+                status: 500,
+                message: "Somethings Wrong with the rider update status !",
+                data: e
+            });
         })
     }
     else

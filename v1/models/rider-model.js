@@ -38,6 +38,10 @@ const riderSchema = new mongoose.Schema({
         default: false,
         require:true
     },
+    currentPosition:{
+        type: Object,
+        require: false
+    },
     createdAt:{
         type:Date,
         require:true

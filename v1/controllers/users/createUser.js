@@ -21,7 +21,7 @@ async function createUser(req, res) {
             email: email,
             password: await generatePassword(password),
             phone: phone,
-            roles: "user",
+            role: "user",
             referalCode: await generateReferalCode(),
             secretCode: null,
             referrer: referrer,
