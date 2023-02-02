@@ -11,7 +11,7 @@ async function getUsers(req, res) {
 }
 
 async function getUser(req, res) {
-    try{
+    try {
         const uuid = req.params.uuid;
         const validId = validateId(uuid);
         if (validId) {
@@ -45,7 +45,7 @@ async function getUser(req, res) {
             message: "An error server try occurred, Please again or check the message error !",
             data: e.message
         })
-    }  
+    }
 }
 
 module.exports = {
