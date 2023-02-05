@@ -1,6 +1,6 @@
 const express = require('express');
 const { requireAuth } = require('../controllers/businessLogic/requireAuth');
-const { getCompanies, getCompany } = require('../controllers/companies/getCompany');
+const { getCompanies, getCompany} = require('../controllers/companies/getCompany');
 const { createCompany } = require('../controllers/companies/createCompany');
 const { updateComapny } = require('../controllers/companies/updateCompany');
 const { deleteCompany } = require('../controllers/companies/deleteCompany');

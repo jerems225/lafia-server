@@ -35,7 +35,7 @@ async function sendPushNotification(title, message, order, ownerId) {
         firebase.messaging().sendToDevice(owner.ownerDeviceTokens, payload, options)
     }
     catch (e) {
-        res.status(500).json({
+        console.log({
             status: 500,
             message: "An error server try occurred, Please again or check the message error !",
             data: e.message

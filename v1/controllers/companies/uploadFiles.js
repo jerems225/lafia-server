@@ -17,8 +17,7 @@ async function uploadFiles(req, res) {
                     const image = files.image
                     if (image) {
                         const extension = path.extname(image.name);
-                        let mimetype = image.mimetype
-                        if (mimetype == "image/png" || mimetype == "image/jpg" || mimetype == "image/jpeg" || mimetype == "html/webp") {
+                        if (extension == ".png" || extension == ".jpg" || extension == ".jpeg") {
                             const newFileName = "company-image-" + uuidv4() + extension;
                             image.name = newFileName;
                             const savePath = '/files/images/companies/';
@@ -38,8 +37,8 @@ async function uploadFiles(req, res) {
                         else {
                             res.status(401).json({
                                 status: 401,
-                                message: "Bad Files Extension, only .png .jpg .jpeg and .webp are available !",
-                                data: image.mimetype
+                                message: "Bad Files Extension, only .png .jpg and .jpeg  are available !",
+                                data: extension
                             })
                         }
                     }
@@ -49,8 +48,7 @@ async function uploadFiles(req, res) {
                     mimetype = registrationLicense.mimetype
                     if (registrationLicense) {
                         const extension = path.extname(registrationLicense.name);
-                        const mimetype = registrationLicense.mimetype
-                        if (mimetype == 'application/pdf') {
+                        if (extension == '.pdf' || extension == '.docx') {
                             const newFileName = "company-docs-" + uuidv4() + extension;
                             registrationLicense.name = newFileName;
                             const savePath = '/files/documents/companies/';
@@ -69,8 +67,8 @@ async function uploadFiles(req, res) {
                         else {
                             res.status(401).json({
                                 status: 401,
-                                message: "Bad Files Extension, only .pdf is available !",
-                                data: registrationLicense.mimetype
+                                message: "Bad Files Extension, only .png .jpg and .jpeg are available !",
+                                data: extension
                             })
                         }
                     }

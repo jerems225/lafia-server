@@ -18,8 +18,7 @@ async function uploadFiles(req, res) {
                     const idCardFront = files.idCardFront
                     if (idCardFront) {
                         const extension = path.extname(idCardFront.name);
-                        let mimetype = idCardFront.mimetype
-                        if (mimetype == "image/png" || mimetype == "image/jpg" || mimetype == "image/jpeg" || mimetype == "html/webp") {
+                        if (extension == ".png" || extension == ".jpg" || extension == ".jpeg") {
                             const newFileName = "owner-idcardfront-image-" + uuidv4() + extension;
                             idCardFront.name = newFileName;
                             const savePath = '/files/documents/owners/';
@@ -39,8 +38,8 @@ async function uploadFiles(req, res) {
                         else {
                             res.status(401).json({
                                 status: 401,
-                                message: "Bad Files Extension, only .png .jpg .jpeg and .webp are available !",
-                                data: idCardFront.mimetype
+                                message: "Bad Files Extension, only .png .jpg and .jpeg are available !",
+                                data: extension
                             })
                         }
                     }
@@ -48,8 +47,7 @@ async function uploadFiles(req, res) {
                     mimetype = idCardBack.mimetype
                     if (idCardBack) {
                         const extension = path.extname(idCardBack.name);
-                        const mimetype = idCardBack.mimetype
-                        if (mimetype == "image/png" || mimetype == "image/jpg" || mimetype == "image/jpeg" || mimetype == "html/webp") {
+                        if (extension == ".png" || extension == ".jpg" || extension == ".jpeg") {
                             const newFileName = "owner-idcardback-image-" + uuidv4() + extension;
                             idCardBack.name = newFileName;
                             const savePath = '/files/documents/owners/';
@@ -68,8 +66,8 @@ async function uploadFiles(req, res) {
                         else {
                             res.status(401).json({
                                 status: 401,
-                                message: "Bad Files Extension, only .pdf is available !",
-                                data: idCardBack.mimetype
+                                message: "Bad Files Extension, only .png .jpg and .jpeg are available !",
+                                data: extension
                             })
                         }
                     }

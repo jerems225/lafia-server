@@ -13,11 +13,12 @@ async function uploadImages(req, res) {
             const category = await categoryCompanyModel.findById(category_uuid);
             if (category) {
                 const files = req.files;
+                // process.exit()
                 if (files) {
                     const image = files.image
+                    console.log(image);
                     const extension = path.extname(image.name);
-                    const mimetype = image.mimetype
-                    if (mimetype == "image/png" || mimetype == "image/jpg" || mimetype == "image/jpeg" || mimetype == "html/webp") {
+                    if (extension == ".png" || extension == ".jpg" || extension == ".jpeg") {
                         const newFileName = "category-company-image-" + uuidv4() + extension;
                         image.name = newFileName;
                         const savePath = '/files/images/categories-companies/';
@@ -60,7 +61,7 @@ async function uploadImages(req, res) {
                         res.status(401).json({
                             status: 401,
                             message: "Bad Files Extension, only png/jpg/jpeg/webp are available !",
-                            data: image.mimetype
+                            data: extension
                         })
                     }
                 }

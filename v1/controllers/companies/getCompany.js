@@ -2,13 +2,17 @@ const companyModel = require("../../models/company-model");
 const { validateId } = require("../businessLogic/validObjectId");
 
 async function getCompanies(req, res) {
-    const companies = await companyModel.find({ status: "accepted" });
+    const status = req.query.status;
+    const companies = await companyModel.find({ status: status?status:'accepted' });
     res.status(201).json({
         status: 201,
-        message: "Successfull get all companies",
+        message: `Successfull get all ${status} companies`,
         data: companies
     });
 }
+
+
+
 
 async function getCompany(req, res) {
     try {

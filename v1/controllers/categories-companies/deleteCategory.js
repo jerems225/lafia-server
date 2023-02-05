@@ -8,7 +8,7 @@ async function deleteCategory(req, res) {
         const user_uuid = req.params.user_uuid;
         const validId = validateId(category_uuid);
         if (validId) {
-            const category = await companyModel.findById(category_uuid);
+            const category = await categoryCompanyModel.findById(category_uuid);
             if (category) {
                 const user = await userModel.findById(user_uuid);
                 const deleteCategoryCompany = await categoryCompanyModel.deleteOne({ _id: category_uuid });
@@ -16,29 +16,26 @@ async function deleteCategory(req, res) {
                     res.status(201).json({
                         status: 201,
                         message: "Category Company delete successfully !",
-                        data: null
                     });
                 }
                 else {
-                    res.status(401).json({
+                    res.status(500).json({
                         status: 401,
-                        message: "Category Company not found !",
-                        data: null
+                        message: "Somethings Wrong on the server side, try again!",
                     })
                 }
             }
             else {
                 res.status(401).json({
                     status: 401,
-                    message: "This user cannot perform this endpoint!",
-                    data: null
+                    message: "Category not found !",
                 })
             }
         }
         else {
-            res.status(401).json({
+            res.status(500).json({
                 status: 401,
-                message: "Category Company not found !",
+                message: "Invalid ID",
                 data: null
             })
         }

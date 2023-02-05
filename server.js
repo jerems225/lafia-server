@@ -1,6 +1,7 @@
 require('dotenv').config();
 const { PROD_CONNECTION_STRING, LOCAL_CONNECTION_STRING, MONGODB_ENV } = process.env;
 const express = require('express');
+const path = require('path');
 const fileUpload = require('express-fileupload');
 const cors = require('cors');
 const bodyParser = require('body-parser');

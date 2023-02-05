@@ -4,7 +4,7 @@ const orderModel = require("../../models/order-model");
 const orderProductModel = require("../../models/order-product-model");
 const promoCodeModel = require("../../models/promo-code-model");
 const userModel = require("../../models/user-model");
-const { totalAmount, generateOrderRef, generateDeliveryCode } = require("../businessLogic/order");
+const { totalAmount, generateOrderRef, generateDeliveryCode, totalDeliveriesAmount } = require("../businessLogic/order");
 const { ownerSendPushNotification } = require("../businessLogic/push-notifications/owner/pushNotificationsController");
 const { validateId } = require("../businessLogic/validObjectId");
 const { createCart } = require("../carts/createCart");
@@ -42,6 +42,7 @@ async function createOrder(req, res) {
                             orderRef: await generateOrderRef(4),
                             customerId: userId,
                             amount: await totalAmount(orderProducts, orderPromoCode),
+                            deliveriesAmount: await totalDeliveriesAmount(orderProducts),
                             products: orderProducts,
                             orderPromoCode: orderPromoCode,
                             deliveryLocation: deliveryLocation,
@@ -64,7 +65,7 @@ async function createOrder(req, res) {
                             }
                             else {
                                 //notify the company
-                                await ownerSendPushNotification("Nouvelle commande - LAFIA", "Hello vous avez une nouvelle commande dans vorte boutique, Merci d'intervenir assez rapidement !", order, company.ownerId);
+                                //await ownerSendPushNotification("Nouvelle commande - LAFIA", "Hello vous avez une nouvelle commande dans vorte boutique, Merci d'intervenir assez rapidement !", order, company.ownerId);
                                 //Find andnotify the driver by short current map position
 
                                 //set status of cart

@@ -17,6 +17,10 @@ const orderSchema = new mongoose.Schema({
         type: Number,
         require: true
     },
+    deliveriesAmount: {
+        type: Number,
+        require: true
+    },
     orderPromoCode: {
         type: String,
         require: true

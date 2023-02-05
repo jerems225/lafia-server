@@ -19,8 +19,7 @@ async function uploadFiles(req, res) {
                     const idCardFront = files.idCardFront
                     if (idCardFront) {
                         const extension = path.extname(idCardFront.name);
-                        let mimetype = idCardFront.mimetype
-                        if (mimetype == "image/png" || mimetype == "image/jpg" || mimetype == "image/jpeg" || mimetype == "html/webp") {
+                        if (extension == ".png" || extension == ".jpg" || extension == ".jpeg") {
                             const newFileName = "rider-idcardfront-image-" + uuidv4() + extension;
                             idCardFront.name = newFileName;
                             const savePath = '/files/documents/riders/';
@@ -40,16 +39,15 @@ async function uploadFiles(req, res) {
                         else {
                             res.status(401).json({
                                 status: 401,
-                                message: "Bad Files Extension, only .png .jpg .jpeg and .webp are available !",
-                                data: idCardFront.mimetype
+                                message: "Bad Files Extension, only .png .jpg and .jpeg are available !",
+                                data: extension
                             })
                         }
                     }
                     const idCardBack = files.idCardBack
                     if (idCardBack) {
                         const extension = path.extname(idCardBack.name);
-                        const mimetype = idCardBack.mimetype
-                        if (mimetype == "image/png" || mimetype == "image/jpg" || mimetype == "image/jpeg" || mimetype == "html/webp") {
+                        if (extension == ".png" || extension == ".jpg" || extension == ".jpeg") {
                             const newFileName = "rider-idcardback-image-" + uuidv4() + extension;
                             idCardBack.name = newFileName;
                             const savePath = '/files/documents/riders/';
@@ -68,8 +66,8 @@ async function uploadFiles(req, res) {
                         else {
                             res.status(401).json({
                                 status: 401,
-                                message: "Bad Files Extension, only .pdf is available !",
-                                data: idCardBack.mimetype
+                                message: "Bad Files Extension, only .png .jpg and .jpeg are is available !",
+                                data: extension
                             })
                         }
                     }
@@ -77,8 +75,7 @@ async function uploadFiles(req, res) {
                     const driverLicenseFront = files.driverLicenseFront
                     if (driverLicenseFront) {
                         const extension = path.extname(driverLicenseFront.name);
-                        const mimetype = driverLicenseFront.mimetype
-                        if (mimetype == "image/png" || mimetype == "image/jpg" || mimetype == "image/jpeg" || mimetype == "html/webp") {
+                        if (extension == ".png" || extension == ".jpg" || extension == ".jpeg") {
                             const newFileName = "rider-driverlicensefront-image-" + uuidv4() + extension;
                             driverLicenseFront.name = newFileName;
                             const savePath = '/files/documents/riders/';
@@ -97,8 +94,8 @@ async function uploadFiles(req, res) {
                         else {
                             res.status(401).json({
                                 status: 401,
-                                message: "Bad Files Extension, only .pdf is available !",
-                                data: driverLicenseFront.mimetype
+                                message: "Bad Files Extension, only  .png .jpg and .jpeg are available !",
+                                data: extension
                             })
                         }
                     }
@@ -106,8 +103,7 @@ async function uploadFiles(req, res) {
                     const driverLicenseBack = files.driverLicenseBack
                     if (driverLicenseBack) {
                         const extension = path.extname(driverLicenseBack.name);
-                        const mimetype = driverLicenseBack.mimetype
-                        if (mimetype == "image/png" || mimetype == "image/jpg" || mimetype == "image/jpeg" || mimetype == "html/webp") {
+                        if (extension == ".png" || extension == ".jpg" || extension == ".jpeg") {
                             const newFileName = "rider-driverlicenseback-image-" + uuidv4() + extension;
                             driverLicenseBack.name = newFileName;
                             const savePath = '/files/documents/riders/';
@@ -126,8 +122,8 @@ async function uploadFiles(req, res) {
                         else {
                             res.status(401).json({
                                 status: 401,
-                                message: "Bad Files Extension, only .pdf is available !",
-                                data: driverLicenseBack.mimetype
+                                message: "Bad Files Extension, only .png .jpg and .jpeg are available !",
+                                data: extension
                             })
                         }
                     }
@@ -135,8 +131,7 @@ async function uploadFiles(req, res) {
                     const profileImage = files.profileImage
                     if (profileImage) {
                         const extension = path.extname(profileImage.name);
-                        const mimetype = profileImage.mimetype
-                        if (mimetype == "image/png" || mimetype == "image/jpg" || mimetype == "image/jpeg" || mimetype == "html/webp") {
+                        if (extension == ".png" || extension == ".jpg" || extension == ".jpeg") {
                             const newFileName = "rider-profile-image-" + uuidv4() + extension;
                             profileImage.name = newFileName;
                             const savePath = '/files/documents/riders/';
@@ -155,8 +150,8 @@ async function uploadFiles(req, res) {
                         else {
                             res.status(401).json({
                                 status: 401,
-                                message: "Bad Files Extension, only .pdf is available !",
-                                data: profileImage.mimetype
+                                message: "Bad Files Extension, only .png .jpg and .jpeg are available !",
+                                data: extension
                             })
                         }
                     }

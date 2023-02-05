@@ -7,6 +7,7 @@ const { deleteCategory } = require('../controllers/categories-companies/deleteCa
 const { uploadImages } = require('../controllers/categories-companies/uploadImages');
 const router = express.Router();
 
+
 router.get('/categories-companies', requireAuth, getCategories); //get all category companies
 router.get('/category-company/:category_uuid', requireAuth, getCategory); //get category company
 router.post('/category-company/create', requireAuth, createCategory); //create new category company

@@ -16,8 +16,7 @@ async function uploadImages(req, res) {
                 if (files) {
                     const image = files.image
                     const extension = path.extname(image.name);
-                    const mimetype = image.mimetype
-                    if (mimetype == "image/png" || mimetype == "image/jpg" || mimetype == "image/jpeg" || mimetype == "html/webp") {
+                    if (extension == ".png" || extension == ".jpg" || extension == ".jpeg"){
                         const newFileName = "category-product-image-" + uuidv4() + extension;
                         image.name = newFileName;
                         const savePath = '/files/images/categories-products/';

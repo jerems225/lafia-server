@@ -17,8 +17,7 @@ async function uploadImages(req, res) {
                     const imagesValues = Object.values(images)
                     imagesValues.forEach(async (image) => {
                         const extension = path.extname(image.name);
-                        const mimetype = image.mimetype
-                        if (mimetype == "image/png" || mimetype == "image/jpg" || mimetype == "image/jpeg" || mimetype == "html/webp") {
+                        if (extension == ".png" || extension == ".jpg" || extension == ".jpeg") {
                             const newFileName = "product-image-" + uuidv4() + extension;
                             image.name = newFileName;
                             const savePath = '/files/images/products/';
@@ -62,8 +61,8 @@ async function uploadImages(req, res) {
                         else {
                             res.status(401).json({
                                 status: 401,
-                                message: "Bad Files Extension, only png/jpg/jpeg/webp are available !",
-                                data: mainImage.mimetype
+                                message: "Bad Files Extension, only png/jpg/jpeg are available !",
+                                data: extension
                             })
                         }
                     })

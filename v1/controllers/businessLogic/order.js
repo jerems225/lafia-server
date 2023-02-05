@@ -40,6 +40,18 @@ async function totalAmount(orderProducts, orderPromoCode)
     return totalAmount;
 }
 
+async function totalDeliveriesAmount(orderProducts)
+{
+    let totalAmount = 0;
+    orderProducts.forEach((orderProduct) => {
+        let product = orderProduct.product;
+
+        totalAmount =  totalAmount + product.deliveryCost;
+    });
+
+    return totalAmount;
+}
+
 async function generateDeliveryCode(length)
 {
     // declare all characters
@@ -58,5 +70,6 @@ async function generateDeliveryCode(length)
 module.exports = {
     generateOrderRef : generateOrderRef,
     totalAmount : totalAmount,
-    generateDeliveryCode : generateDeliveryCode
+    generateDeliveryCode : generateDeliveryCode,
+    totalDeliveriesAmount : totalDeliveriesAmount
 }

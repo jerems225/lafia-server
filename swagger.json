@@ -842,6 +842,99 @@
         }
       }
     },
+    "/category-company/images/upload/{category_uuid}": {
+      "post": {
+        "tags": [
+          "Categories Companies"
+        ],
+        "security": [{
+          "BearerAuth" : []
+        }],
+        "summary": "Upload Category Company Cover",
+        "description": "",
+        "operationId": "uploadcatcompanyimages",
+        "produces": [
+          "application/json"
+        ],
+        "consumes":[
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "category_uuid",
+            "in": "path",
+            "description": "category uuid need to be add in the url request",
+            "required": true,
+            "type": "string",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "image",
+            "in": "formData",
+            "description": "upload files parameter",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/deletecompany"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/category-company/create": {
+      "post": {
+          "tags": [
+              "Categories Companies"
+          ],
+          "security": [
+              {
+                  "BearerAuth": []
+              }
+          ],
+          "summary": "Create new category company",
+          "description": "",
+          "operationId": "createcategorycompany",
+          "produces": [
+              "application/json"
+          ],
+          "parameters": [
+              {
+                  "in": "body",
+                  "name": "body",
+                  "description": "body for your query",
+                  "required": true,
+                  "schema": {
+                      "$ref": "#/definitions/createcategorycompany"
+                  }
+              }
+          ],
+          "responses": {
+              "201": {
+                  "description": "successful operation",
+                  "schema": {
+                      "items": {
+                          "$ref": "#/definitions/getcompany"
+                      }
+                  }
+              },
+              "401": {
+                  "description": "Invalid status value"
+              }
+          }
+      }
+  },
     "/category-company/{category_uuid}": {
       "get": {
         "tags": [
@@ -3364,6 +3457,7 @@
                       "https://lafia-server.texi.ci/files/images/products/product-image-d0d22f35-895f-4e70-bd1f-38c04f9a671c.jpg"
                     ],
                     "price": 10000,
+                    "deliveryCost": 1000,
                     "categoryProductId": "63bd9a7a3dbbd70a6b131f55",
                     "createdAt": "2023-01-10T17:10:39.111Z",
                     "__v": 0
@@ -3374,6 +3468,7 @@
                 }
               ],
               "amount": 20100,
+              "deliveriesAmount": 2000,
               "orderPromoCode": null,
               "deliveryCode": "DL-0-I9HG",
               "deliveryLocation": {
@@ -3427,6 +3522,7 @@
                         "https://lafia-server.texi.ci/files/images/products/product-image-d0d22f35-895f-4e70-bd1f-38c04f9a671c.jpg"
                       ],
                       "price": 10000,
+                      "deliveryCost": 1000,
                       "categoryProductId": "63bd9a7a3dbbd70a6b131f55",
                       "createdAt": "2023-01-10T17:10:39.111Z",
                       "__v": 0
@@ -3437,6 +3533,7 @@
                   }
                 ],
                 "amount": 20100,
+                "deliveriesAmount":2000,
                 "orderPromoCode": null,
                 "deliveryCode": "DL-0-I9HG",
                 "deliveryLocation": {
@@ -3473,6 +3570,7 @@
                         "https://lafia-server.texi.ci/files/images/products/product-image-d0d22f35-895f-4e70-bd1f-38c04f9a671c.jpg"
                       ],
                       "price": 10000,
+                      "deliveryCost": 1000,
                       "categoryProductId": "63bd9a7a3dbbd70a6b131f55",
                       "createdAt": "2023-01-10T17:10:39.111Z",
                       "__v": 0
@@ -3483,6 +3581,7 @@
                   }
                 ],
                 "amount": 20100,
+                "deliveriesAmount":2000,
                 "orderPromoCode": null,
                 "deliveryCode": "DL-0-I9HG",
                 "deliveryLocation": {
