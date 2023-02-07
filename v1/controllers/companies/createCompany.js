@@ -1,5 +1,4 @@
 require('dotenv').config()
-const { SERVICES_EMAIL } = process.env;
 const companyModel = require('../../models/company-model');
 const categoryCompanyModel = require('../../models/category-company-model');
 const userModel = require('../../models/user-model');
@@ -11,7 +10,7 @@ const sendMail = require('../businessLogic/emails/send');
 
 async function createCompany(req, res) {
     try {
-        const { name, location, country, city, department, userId, categoryCompanyId } = req.body;
+        const { name, description, email, phone, location, country, city, department, userId, categoryCompanyId, website, facebook, instagram, twitter, linkedin } = req.body;
         const validId = validateId(userId);
         if (validId) {
             const user = await userModel.findById(userId);
@@ -22,13 +21,23 @@ async function createCompany(req, res) {
                     if (!company) {
                         const companyObjet = {
                             name: name,
+                            description: description,
+                            email: email,
+                            phone: phone,
                             location: location,
                             country: country,
                             city: city,
                             department: department,
                             ownerId: userId,
                             categoryCompanyId: categoryCompanyId,
+                            registrationLicense: "",
                             status: "pending",
+                            image: "https://cdn.pixabay.com/photo/2013/07/13/11/31/shop-158317_960_720.png",
+                            website: website? website : "",
+                            facebook: facebook? facebook : "",
+                            instagram: instagram? instagram : "",
+                            twitter: twitter? twitter : "",
+                            linkedin: linkedin? linkedin : "",
                             createdAt: new Date(),
                         };
                         const data = new companyModel(companyObjet);

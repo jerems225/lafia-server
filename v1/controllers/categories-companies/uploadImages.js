@@ -16,7 +16,6 @@ async function uploadImages(req, res) {
                 // process.exit()
                 if (files) {
                     const image = files.image
-                    console.log(image);
                     const extension = path.extname(image.name);
                     if (extension == ".png" || extension == ".jpg" || extension == ".jpeg") {
                         const newFileName = "category-company-image-" + uuidv4() + extension;

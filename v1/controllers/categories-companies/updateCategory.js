@@ -1,8 +1,6 @@
 const categoryCompanyModel = require('../../models/category-company-model');
 const userModel = require('../../models/user-model');
 const { validateId } = require('../businessLogic/validObjectId');
-
-
 async function updateCategory(req, res) {
     try {
         const category_uuid = req.params.category_uuid;
@@ -14,7 +12,7 @@ async function updateCategory(req, res) {
                 const categoryCompany = await categoryCompanyModel.findById(category_uuid);
                 if (categoryCompany) {
                     const updateCategory = await categoryCompanyModel.updateOne({
-                        _id: company_uuid
+                        _id: category_uuid
                     }, {
                         $set: {
                             name: name,
@@ -63,7 +61,7 @@ async function updateCategory(req, res) {
             });
         }
     }
-    catch (e) {
+    catch(e) {
         res.status(500).json({
             status: 500,
             message: "An error server try occurred, Please again or check the message error !",

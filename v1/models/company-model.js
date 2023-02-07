@@ -5,6 +5,18 @@ const CompanySchema = new mongoose.Schema({
         type:String,
         require:true
     },
+    description: {
+        type: String,
+        require:true
+    },
+    email: {
+        type: String,
+        require: true
+    },
+    phone: {
+        type: String,
+        require: true
+    },
     location:{
         type:String,
         require:true
@@ -28,6 +40,26 @@ const CompanySchema = new mongoose.Schema({
     registrationLicense:{
         type:String,
         require:false
+    },
+    website: {
+        type: String,
+        require: false
+    },
+    facebook: {
+        type: String,
+        require: false
+    },
+    instagram: {
+        type: String,
+        require: false
+    },
+    twitter: {
+        type: String,
+        require: false
+    },
+    linkedin: {
+        type: String,
+        require: false
     },
     status:{
         type:String,

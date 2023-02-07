@@ -10,6 +10,8 @@ async function createOwner(userId) {
             if (user) {
                 const ownerObjet = {
                     status: "pending",
+                    idCardFront: "",
+                    idCardBack: "",
                     userId: userId,
                     createdAt: new Date()
                 };

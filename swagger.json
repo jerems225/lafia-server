@@ -2677,6 +2677,18 @@
           "type": "string",
           "example": "Lafia boutik"
         },
+        "description": {
+          "type":"string",
+          "example":"Description ..."
+        },
+        "email":{
+          "type":"string",
+          "example":"email@example.com"
+        },
+        "phone":{
+          "type":"string",
+          "example":"+00 0000 000"
+        },
         "location": {
           "type": "string",
           "example": "Bamako, rue 22"
@@ -2692,6 +2704,26 @@
         "departement": {
           "type": "string",
           "example": "ville basse"
+        },
+        "website":{
+          "type":"string",
+          "example":"www.me.com"
+        },
+        "facebook":{
+          "type":"string",
+          "example":"www.me.com"
+        },
+        "instagram":{
+          "type":"string",
+          "example":"www.me.com"
+        },
+        "twitter":{
+          "type":"string",
+          "example":"www.me.com"
+        },
+        "linkedin":{
+          "type":"string",
+          "example":"www.me.com"
         },
         "categoryCompanyId": {
           "type": "string",
@@ -2720,12 +2752,20 @@
             {
               "_id": "t7457457t5*****",
               "name": "Lafia boutik",
+              "description": "Description ...",
+              "email":"jer*****@gmail.com",
+              "phone":"000000000000",
               "location": "Bamako rue 22",
               "country": "Mali",
               "city": "Bamako",
               "departement": "ville basse",
               "categoryCompanyId": "t7457457t5*****",
               "status": "pending",
+              "website":"www.me.com",
+              "facebook":"www.me.com",
+              "instagram":"www.me.com",
+              "twitter":"www.me.com",
+              "linkedin":"www.me.com",
               "createdAt": "2022-11-29T14:32:04.681Z",
               "updatedAt": "2022-11-29T14:32:04.681Z",
               "__v": 0
@@ -2750,12 +2790,20 @@
           "example": {
             "_id": "t7457457t5*****",
             "name": "Lafia boutik",
+            "description": "Description ...",
+            "email":"jer*****@gmail.com",
+            "phone":"000000000000",
             "location": "Bamako rue 22",
             "country": "Mali",
             "city": "Bamako",
             "departement": "ville basse",
             "categoryCompanyId": "t7457457t5*****",
             "status": "pending",
+            "website":"www.me.com",
+            "facebook":"www.me.com",
+            "instagram":"www.me.com",
+            "twitter":"www.me.com",
+            "linkedin":"www.me.com",
             "createdAt": "2022-11-29T14:32:04.681Z",
             "updatedAt": "2022-11-29T14:32:04.681Z",
             "__v": 0
@@ -2769,6 +2817,18 @@
         "name": {
           "type": "string",
           "example": "Lafia boutik"
+        },
+        "description": {
+          "type":"string",
+          "example":"Description ..."
+        },
+        "email":{
+          "type":"string",
+          "example":"email@example.com"
+        },
+        "phone":{
+          "type":"string",
+          "example":"+00 0000 000"
         },
         "location": {
           "type": "string",
@@ -2789,6 +2849,26 @@
         "status": {
           "type": "string",
           "example": "pending"
+        },
+        "website":{
+          "type":"string",
+          "example":"www.me.com"
+        },
+        "facebook":{
+          "type":"string",
+          "example":"www.me.com"
+        },
+        "instagram":{
+          "type":"string",
+          "example":"www.me.com"
+        },
+        "twitter":{
+          "type":"string",
+          "example":"www.me.com"
+        },
+        "linkedin":{
+          "type":"string",
+          "example":"www.me.com"
         },
         "categoryCompanyId": {
           "type": "string",

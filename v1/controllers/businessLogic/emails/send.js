@@ -25,7 +25,7 @@ async function sendMail(email, subject, content) {
         return info;
     }
     catch (e) {
-        res.status(500).json({
+        console.log({
             status: 500,
             message: "An error server try occurred, Please again or check the message error !",
             data: e.message

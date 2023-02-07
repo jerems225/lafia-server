@@ -18,7 +18,7 @@ async function getCategory(req, res) {
         if (validId) {
             const category = await categoryCompanyModel.findById(category_uuid);
             if (category) {
-                const companies = await companyModel.find({ categoryCompanyId: category_uuid });
+                const companies = await companyModel.find({ categoryCompanyId: category_uuid, $or: [{ status: 'accepted' }, { status: 'desactivated' }]  });
                 res.status(201).json({
                     status: 201,
                     message: "Category found successfully !",

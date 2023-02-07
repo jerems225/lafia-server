@@ -4,7 +4,7 @@ const { validateId } = require("../businessLogic/validObjectId");
 async function updateUser(req, res) {
     try {
         const uuid = req.params.uuid;
-        const { email, phone, referalCode, secretCode, referrer } = req.body;
+        const { lastName, firstName, email, phone, referalCode, secretCode, referrer } = req.body;
         const validId = validateId(uuid);
         if (validId) {
             const user = await userModel.findById(uuid);
@@ -13,6 +13,8 @@ async function updateUser(req, res) {
                     _id: uuid
                 }, {
                     $set: {
+                        lastName: lastName,
+                        firstName: firstName,
                         email: email,
                         phone: phone,
                         referalCode: referalCode,
