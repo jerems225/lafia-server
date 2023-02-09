@@ -1,13 +1,94 @@
 const riderModel = require("../../models/rider-model");
+const userModel = require("../../models/user-model");
 const { validateId } = require("../businessLogic/validObjectId");
 
-async function getRiders(req, res) {
-    const rider = await riderModel.find();
-    res.status(201).json({
-        status: 201,
-        message: "Successfull get all Rider",
-        data: rider
+async function getRidersByStatus(req, res) {
+    let status = req.query.status
+    status = status ? status : 'accepted';
+    const riders = await riderModel.find({ status: status });
+    var count = 0;
+    var new_riders = [];
+    riders.forEach((rider) => {
+        userModel.findById(rider.userId).then((result, err) => {
+            new_riders.push({
+                rider: rider,
+                user: result
+            });
+
+            count++;
+            if( count == riders.length)
+            {
+                res.status(201).json({
+                    status: 201,
+                    message: `${status} riders found successfully !`,
+                    data: new_riders
+                });
+            }
+        })
     });
+
+    if(riders.length == 0)
+    {
+        res.status(201).json({
+            status: 201,
+            message: `${status} riders found successfully !`,
+            data: riders
+        });
+    }
+
+}
+
+function rangeByStatus(riders, status)
+{
+    var rangeRiders = [];
+    riders.map((r) => {
+        if(r.rider.status == status)
+        {
+            rangeRiders.push(r);
+        }
+    });
+
+    return rangeRiders;
+}
+
+async function getRiders(req, res) {
+    const riders = await riderModel.find();
+
+    var count = 0;
+    var new_riders = [];
+    riders.forEach((rider) => {
+        userModel.findById(rider.userId).then((result, err) => {
+            new_riders.push({
+                rider: rider,
+                user: result
+            });
+
+            count++;
+            if( count == riders.length)
+            {
+                res.status(201).json({
+                    status: 201,
+                    message: `All riders found successfully !`,
+                    data: {
+                        pendingRiders : rangeByStatus(new_riders, "pending"),
+                        rejectedRiders: rangeByStatus(new_riders, "rejected"),
+                        activatedRiders: rangeByStatus(new_riders, "accepted"),
+                        desactivatedRiders: rangeByStatus(new_riders, "desactivated")
+                    }
+                });
+            }
+        })
+    });
+
+    if(riders.length == 0)
+    {
+        res.status(201).json({
+            status: 201,
+            message: `All riders found successfully !`,
+            data: riders
+        });
+    }
+
 }
 
 async function getRider(req, res) {
@@ -20,7 +101,10 @@ async function getRider(req, res) {
                 res.status(201).json({
                     status: 201,
                     message: "Rider found successfully !",
-                    data: rider
+                    data: {
+                        rider : rider,
+                        user : await userModel.findById(user_uuid)
+                    }
                 })
             }
             else {
@@ -42,7 +126,7 @@ async function getRider(req, res) {
     catch (e) {
         res.status(500).json({
             status: 500,
-            message: "An error server try occurred, Please again or check the message error !",
+            message: `An error server try occurred, Please again or check the message error : ${e.message} !`,
             data: e.message
         })
     }
@@ -51,6 +135,7 @@ async function getRider(req, res) {
 }
 
 module.exports = {
-    getRiders: getRiders,
+    getRiders : getRiders,
+    getRidersByStatus: getRidersByStatus,
     getRider: getRider
 }

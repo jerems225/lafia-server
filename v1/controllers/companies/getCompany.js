@@ -12,8 +12,6 @@ async function getCompanies(req, res) {
 }
 
 
-
-
 async function getCompany(req, res) {
     try {
         const company_uuid = req.params.company_uuid;

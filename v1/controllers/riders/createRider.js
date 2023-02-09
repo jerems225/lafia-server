@@ -11,6 +11,11 @@ async function createRider(userId) {
             if (user) {
                 const riderObjet = {
                     status: "pending",
+                    idCardFront: "",
+                    idCardBack : "",
+                    driverLicenseFront : "",
+                    driverLicenseBack : "",
+                    profileImage: "https://media.istockphoto.com/id/1130884625/vector/user-member-vector-icon-for-ui-user-interface-or-profile-face-avatar-app-in-circle-design.jpg?s=612x612&w=0&k=20&c=1ky-gNHiS2iyLsUPQkxAtPBWH1BZt0PKBB1WBtxQJRE=",
                     userId: userId,
                     createdAt: new Date()
                 };
@@ -61,7 +66,7 @@ async function createRider(userId) {
     catch (e) {
         res.status(500).json({
             status: 500,
-            message: "An error server try occurred, Please again or check the message error !",
+            message: `An error server try occurred, Please again or check the message error : ${e.message} !`,
             data: e.message
         })
     }

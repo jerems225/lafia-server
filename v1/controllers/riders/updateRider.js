@@ -10,7 +10,7 @@ async function updateRider(req, res) {
             const rider = await riderModel.findOne({ userId: user_uuid });
             if (rider) {
                 const updateRider = await riderModel.updateOne({
-                    _id: rider_uuid}, {$set: {
+                    _id: rider._id}, {$set: {
                         status: status,
                         updatedAt: new Date()
                     }
@@ -50,7 +50,7 @@ async function updateRider(req, res) {
     catch (e) {
         res.status(500).json({
             status: 500,
-            message: "An error server try occurred, Please again or check the message error !",
+            message: `An error server try occurred, Please again or check the message error : ${e.message} !`,
             data: e.message
         })
     }

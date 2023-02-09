@@ -47,7 +47,7 @@ async function deleteRider(req, res) {
     catch (e) {
         res.status(500).json({
             status: 500,
-            message: "An error server try occurred, Please again or check the message error !",
+            message: `An error server try occurred, Please again or check the message error : ${e.message} !`,
             data: e.message
         })
     }
