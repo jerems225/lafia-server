@@ -5,7 +5,7 @@ const { validateId } = require("../businessLogic/validObjectId")
 
 async function createProduct(req, res) {
     try {
-        const { name, description, price, deliveryCost, makingTime, categoryProductId, userId } = req.body
+        const { name, description, price, deliveryCost, makingTime, categoryProductId, isAvalaible, userId } = req.body
         const validId = validateId(categoryProductId);
         if (validId) {
             const category = await categoryProductModel.findById(categoryProductId);
@@ -19,6 +19,7 @@ async function createProduct(req, res) {
                         deliveryCost: deliveryCost,
                         makingTime: makingTime,
                         categoryProductId: categoryProductId,
+                        isAvalaible: isAvalaible,
                         createdAt: new Date()
                     }
 

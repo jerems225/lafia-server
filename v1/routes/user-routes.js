@@ -11,8 +11,8 @@ const { verifyCode } = require('../controllers/users/resetPassowrd/verifyCode');
 const { updatePassword } = require('../controllers/users/resetPassowrd/updatePassword');
 const router = express.Router();
 
-router.get('/users', requireAuth, getUsers);
-router.get('/user/:uuid', requireAuth, getUser);
+router.get('/users',  getUsers);
+router.get('/user/:uuid',  getUser);
 router.put('/user/modify/:uuid', requireAuth, updateUser);
 router.post('/user/register', createUser);
 

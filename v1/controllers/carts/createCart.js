@@ -49,7 +49,7 @@ async function addProductToCart(req, res) {
                         res.status(201).json({
                             status: 201,
                             message: "Product Add successfully in your cart !",
-                            data: await orderProductModel.find({ cartId: cart._id, productId: product_uuid })
+                            data: await orderProductModel.find({ cartId: cart._id })
                         })
                     }
                     else {
@@ -80,7 +80,7 @@ async function addProductToCart(req, res) {
                             res.status(201).json({
                                 status: 201,
                                 message: "Product Add successfully in your cart !",
-                                data: await orderProductModel.find({ cartId: cart._id, productId: product_uuid })
+                                data: await orderProductModel.find({ cartId: cart._id })
                             })
                         }
                     });

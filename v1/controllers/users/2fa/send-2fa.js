@@ -2,7 +2,7 @@ const userModel = require('../../../models/user-model');
 const doubleFactorModel = require('../../../models/user-2fa-model');
 const { generate2FACode, saveUser2Fa, updateUser2Fa } = require('../../businessLogic/2fa');
 const sendMail = require('../../businessLogic/emails/send');
-const sendSms = require('../../businessLogic/sms/send');
+// const sendSms = require('../../businessLogic/sms/send');
 const { validateId } = require('../../businessLogic/validObjectId');
 
 async function send2fa(uuid) {

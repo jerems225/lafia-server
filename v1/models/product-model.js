@@ -29,6 +29,10 @@ const productSchema = new mongoose.Schema({
         type:String,
         require:true
     },
+    isAvailable: {
+        type: Boolean,
+        required: true
+    },
     createdAt:{
         type:Date,
         require:true

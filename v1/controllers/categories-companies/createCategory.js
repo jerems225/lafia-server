@@ -15,6 +15,7 @@ async function createCategory(req, res) {
                     const categoryObjet = {
                         name: name,
                         description: description,
+                        image: "https://retailvisie-1.cdn.prod.mas.media-artists.nl/image/2ca70656-7a11-41fa-bb57-d4e6326d13a8/b2665398-b88c-11e6-86a8-e38d1ad8ed1e/1200x800/category.jpg?rev=1512992443",
                         createdAt: new Date(),
                     };
                     const data = new categoryCompanyModel(categoryObjet);

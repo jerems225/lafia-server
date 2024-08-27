@@ -1,7 +1,7 @@
 const userModel = require("../../../models/user-model");
 const userResetPassword = require("../../../models/user-reset-password");
 const sendMail = require("../../businessLogic/emails/send");
-const sendSms = require("../../businessLogic/sms/send");
+// const sendSms = require("../../businessLogic/sms/send");
 
 function randomNumber(min, max) {
 

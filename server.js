@@ -67,6 +67,8 @@ const productRoutes = require('./v1/routes/product-routes');
 const cartRoutes = require('./v1/routes/cart-routes');
 const orderRoutes = require('./v1/routes/order-routes');
 const registerDevicesRoutes = require('./v1/routes/push-notification-routes');
+const promoCodeRoutes = require('./v1/routes/promo-code-routes');
+const adminRoutes = require('./v1/routes/admin-routes');
 
 //register documentation endpoint
 app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
@@ -104,5 +106,11 @@ app.use('/api/v1/', orderRoutes);
 //register devices routes
 app.use('/api/v1/', registerDevicesRoutes);
 
-const port = 5000;
+//promo code routes
+app.use('/api/v1/', promoCodeRoutes);
+
+//Admin routes
+app.use('/api/v1/', adminRoutes);
+
+const port = 7000;
 app.listen(port, () => console.log(`Lafia Server is listening on port ${port}.`));
